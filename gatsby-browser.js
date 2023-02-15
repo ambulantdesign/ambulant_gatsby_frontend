@@ -4,4 +4,21 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
+require("./src/assets/css/global.css")
+
+// exports.shouldUpdateScroll = ({
+//   routerProps: { location },
+//   getSavedScrollPosition,
+// }) => {
+//   const currentPosition = getSavedScrollPosition(location)
+//   const queriedPosition = getSavedScrollPosition({
+//     pathname: `/artists/marisca-voskamp`,
+//   })
+
+//   console.log("currentPosition result:", currentPosition)
+//   console.log("queriedPosition result:", queriedPosition)
+
+//   //window.scrollTo(...(queriedPosition || [0, 0]))
+
+//   return false
+// }

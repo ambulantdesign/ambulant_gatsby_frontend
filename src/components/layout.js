@@ -7,50 +7,117 @@
 
 import * as React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { Script, withPrefix } from "gatsby"
+import styled from "styled-components"
+import useLocalStorageState from "use-local-storage-state"
 
-import Header from "./header"
-import "./layout.css"
+import { useSiteMetadata } from "../hooks/use-site-metadata"
+import Header from "./Header"
+import MainNav from "./MainNav"
+import "../assets/css/layout.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const initialState = {
+  keywordNav: false,
+  artistNav: false,
+  offCanvas: false,
+}
+
+const Layout = ({ id = "", children }) => {
+  const { title, author, city } = useSiteMetadata()
+  const [sideNav, setSideNav] = useLocalStorageState("sideNav", {
+    ssr: true,
+    defaultValue: initialState,
+  })
+  // const toggleNavState = navName => {
+  //   setSideNav({ ...sideNav, [navName]: !sideNav[navName] })
+  // }
+  const showMetaNavLinks = navName => {
+    setSideNav({
+      ...sideNav,
+      keywordNav: false,
+      artistNav: false,
+      [navName]: !sideNav[navName],
+    })
+  }
+  const openMobileNav = () => {
+    setSideNav({ ...sideNav, offCanvas: true })
+  }
+  const closeMobileNav = () => {
+    setSideNav({ ...sideNav, offCanvas: false })
+  }
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <Wrapper className="site-container" id={id}>
+        <Header
+          siteTitle={title || `ambulant design`}
+          author={author || `Gabriele Franziska Götz`}
+          city={city || `Amsterdam`}
+          openMobileNav={openMobileNav}
+        />
+        {children}
+        <MainNav
+          sideNav={sideNav}
+          toggleNav={showMetaNavLinks}
+          closeMobileNav={closeMobileNav}
+        />
+      </Wrapper>
+      <Script src={withPrefix("/js/functions.js")} type="text/javascript" />
+      <Script
+        src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js"
+        type="text/javascript"
+        async
+      />
     </>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  id: PropTypes.string,
 }
+
+const Wrapper = styled.div`
+  .menu-icon {
+    display: none;
+  }
+  .menu-icon a svg {
+    transition: all 0.4s ease;
+  }
+  .menu-icon a:hover svg,
+  .menu-icon a:focus svg {
+    fill: var(--clr-grey-3);
+    color: var(--clr-grey-3);
+  }
+  @media screen and (max-width: 900px) {
+    .menu-icon {
+      display: block;
+    }
+    main {
+      margin-right: 0;
+      width: 100%;
+    }
+
+    .slide-out {
+      -webkit-transform: translate3d(var(--nav-lg-width), 0, 0);
+      -moz-transform: translate3d(var(--nav-lg-width), 0, 0);
+      -ms-transform: translate3d(var(--nav-lg-width), 0, 0);
+      -o-transform: translate3d(var(--nav-lg-width), 0, 0);
+      transform: translate3d(var(--nav-lg-width), 0, 0);
+    }
+    .slide-in {
+      -webkit-transform: translate3d(-var(--nav-lg-width), 0, 0);
+      -moz-transform: translate3d(-var(--nav-lg-width), 0, 0);
+      -ms-transform: translate3d(-var(--nav-lg-width), 0, 0);
+      -o-transform: translate3d(-var(--nav-lg-width), 0, 0);
+      transform: translate3d(-var(--nav-lg-width), 0, 0);
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .grid > .col-6 {
+      grid-column: span 12;
+    }
+  }
+`
 
 export default Layout
