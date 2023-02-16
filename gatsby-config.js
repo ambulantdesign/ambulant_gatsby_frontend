@@ -6,16 +6,14 @@
 
 // Initialize dotenv
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`, // or '.env'
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 // And then you can use the config in gatsby-config.js
 const config = require("gatsby-plugin-config")
 
 const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL || `http://localhost:1337`,
-  accessToken: process.env.STRAPI_TOKEN,
-  apiURL: process.env.STRAPI_API_URL,
+  apiUrl: process.env.STRAPI_API_URL || `http://localhost:1337`,
   accessToken: process.env.STRAPI_TOKEN,
   collectionTypes: [
     {
@@ -63,55 +61,15 @@ const strapiConfig = {
     {
       singularName: "imprint",
       queryParams: {
-        MarginalColumn: { populate: "*" },
-        streamingVideo: { populate: "*" },
-        marginalTxt: { populate: "*" },
-        seo: { populate: "*" },
+        populate: {
+          MarginalColumn: { populate: "*" },
+          streamingVideo: { populate: "*" },
+          marginalTxt: { populate: "*" },
+          seo: { populate: "*" },
+        },
       },
     },
   ],
-  // collectionTypes: [`work`],
-  // singleTypes: [
-  //   {
-  //     singularName: `hero`,
-  //     queryParams: {
-  //       populate: {
-  //         hero_image: "*",
-  //         card_image: "*",
-  //       },
-  //     },
-  //   },
-  //   {
-  //     singularName: `contact`,
-  //     queryParams: {
-  //       populate: {
-  //         portfolio: { populate: "*" },
-  //         twitter: { populate: "*" },
-  //         hero_image: "*",
-  //       },
-  //     },
-  //   },
-  //   {
-  //     singularName: `about`,
-  //     queryParams: {
-  //       populate: {
-  //         stack: { populate: "*" },
-  //         twitter: { populate: "*" },
-  //         hero_image: "*",
-  //       },
-  //     },
-  //   },
-  //   {
-  //     singularName: `imprint`,
-  //     queryParams: {
-  //       populate: {
-  //         twitter: { populate: "*" },
-  //         hero_image: "*",
-  //       },
-  //     },
-  //   },
-  //   ``,
-  // ],
   queryLimit: 1000,
 }
 
@@ -127,23 +85,18 @@ module.exports = {
     email: `info@ambulantdesign.nl`,
   },
   plugins: [
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-react-leaflet`,
+    `gatsby-plugin-gatsby-cloud`,
     `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-source-strapi`,
+      options: strapiConfig,
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/assets/images`,
       },
-    },
-    {
-      resolve: `gatsby-source-strapi`,
-      options: strapiConfig,
     },
     {
       resolve: "gatsby-plugin-web-font-loader",
@@ -181,5 +134,11 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-react-leaflet`,
   ],
 }
