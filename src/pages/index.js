@@ -70,24 +70,23 @@ export const query = graphql`
         Gallery {
           id: strapi_id
           caption
-          localFile {
-            childImageSharp {
-              fluid {
-                src
-              }
-              gatsbyImageData(
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                height: 300
-              )
-            }
-          }
         }
       }
     }
   }
 `
-
+// localFile {
+//             childImageSharp {
+//               fluid {
+//                 src
+//               }
+//               gatsbyImageData(
+//                 layout: CONSTRAINED
+//                 placeholder: BLURRED
+//                 height: 300
+//               )
+//             }
+//           }
 /**
  * Head export to define metadata for the page
  *

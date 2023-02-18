@@ -63,23 +63,24 @@ export const query = graphql`
         Gallery {
           id
           caption
-          localFile {
-            childImageSharp {
-              fluid {
-                src
-              }
-              gatsbyImageData(
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                height: 300
-              )
-            }
-          }
         }
       }
     }
   }
 `
+
+// localFile {
+//             childImageSharp {
+//               fluid {
+//                 src
+//               }
+//               gatsbyImageData(
+//                 layout: CONSTRAINED
+//                 placeholder: BLURRED
+//                 height: 300
+//               )
+//             }
+//           }
 
 export const Head = ({ data, pageContext }) => {
   const seoTitle = `Artist: ${pageContext.title}`
