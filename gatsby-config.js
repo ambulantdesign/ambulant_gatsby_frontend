@@ -98,10 +98,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: `gatsby-plugin-web-font-loader`,
       options: {
         google: {
-          families: ["Karla:300,400,700"],
+          families: [`Karla:300,400,700`],
         },
       },
     },
@@ -110,7 +110,7 @@ module.exports = {
       options: {
         gatsbyRemarkPlugins: [
           {
-            resolve: "gatsby-remark-embed-video",
+            resolve: `gatsby-remark-embed-video`,
             options: {
               width: 800,
               ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
@@ -129,7 +129,7 @@ module.exports = {
               sandbox: "allow-same-origin allow-scripts allow-presentation", // Optional: iframe sandbox options - Default: undefined
             },
           },
-          "gatsby-remark-responsive-iframe", //Optional: Must be loaded after gatsby-remark-embed-video
+          `gatsby-remark-responsive-iframe`, //Optional: Must be loaded after gatsby-remark-embed-video
         ],
       },
     },
