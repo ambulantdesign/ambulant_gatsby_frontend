@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql, withPrefix } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
 import * as styles from "../assets/css/index.module.css"

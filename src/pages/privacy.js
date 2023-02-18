@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql, Script, withPrefix } from "gatsby"
 import styled from "styled-components"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"
 import Seo from "../components/Seo"
 import RichTextContent from "../components/RichTextContent"

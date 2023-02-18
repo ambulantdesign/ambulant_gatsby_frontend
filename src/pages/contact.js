@@ -7,7 +7,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { FaPhoneAlt } from "react-icons/fa"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"
 import Seo from "../components/Seo"
 import RichTextContent from "../components/RichTextContent"

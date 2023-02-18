@@ -4,7 +4,7 @@ import { Link, Script, withPrefix } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"
 import VideoEmbed from "../components/VideoEmbed"
 import StreamingVideo from "../components/StreamingVideo"
