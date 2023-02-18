@@ -13,11 +13,11 @@ require("dotenv").config({
 const config = require("gatsby-plugin-config")
 
 const strapiConfig = {
-  apiUrl: process.env.STRAPI_API_URL || `http://localhost:1337`,
+  apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
   collectionTypes: [
     {
-      singularName: "work",
+      singularName: `work`,
       queryParams: {
         populate: {
           meta: "*",
@@ -37,7 +37,7 @@ const strapiConfig = {
   ],
   singleTypes: [
     {
-      singularName: "about",
+      singularName: `about`,
       queryParams: {
         populate: {
           MarginalColumn: { populate: "*" },
@@ -48,7 +48,7 @@ const strapiConfig = {
       },
     },
     {
-      singularName: "contact",
+      singularName: `contact`,
       queryParams: {
         populate: {
           MarginalColumn: { populate: "*" },
@@ -59,18 +59,15 @@ const strapiConfig = {
       },
     },
     {
-      singularName: "imprint",
+      singularName: `imprint`,
       queryParams: {
         populate: {
-          MarginalColumn: { populate: "*" },
-          streamingVideo: { populate: "*" },
-          marginalTxt: { populate: "*" },
           seo: { populate: "*" },
         },
       },
     },
   ],
-  queryLimit: 1000,
+  queryLimit: 5000,
 }
 
 module.exports = {
