@@ -25,7 +25,7 @@ const strapiConfig = {
           meta: "*",
           artist: "*",
           keywords: "*",
-          Gallery: "*",
+          Gallery: { populate: "*" },
           Weblink: "*",
           Videos: {
             populate: "*",
