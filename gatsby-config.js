@@ -13,7 +13,9 @@ require("dotenv").config({
 const config = require("gatsby-plugin-config")
 
 const strapiConfig = {
-  apiURL: process.env.STRAPI_API_URL,
+  apiURL:
+    process.env.STRAPI_API_URL ||
+    `https://ambulant-strapi-backend.onrender.com`,
   accessToken: process.env.STRAPI_TOKEN,
   collectionTypes: [
     {
