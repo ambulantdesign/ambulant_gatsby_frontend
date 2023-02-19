@@ -75,8 +75,7 @@ const WorkDetails = ({ data }) => {
               {allGalleries.map((slide, index) => {
                 // const { id, caption, localFile } = slide
                 const { id, caption, localFile = null, mime = null } = slide
-
-                // let media = null
+                let media = null
                 // if (!mime) {
                 //   media = getImage(localFile)
                 // } else {
