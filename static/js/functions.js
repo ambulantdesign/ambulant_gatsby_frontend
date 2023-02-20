@@ -1,3 +1,6 @@
+// Check if window is defined (so if in the browser or in node.js).
+const isBrowser = typeof window !== "undefined"
+
 /* slide-in side navigation from the right */
 function openNav(e) {
   e.preventDefault()
@@ -10,17 +13,21 @@ function closeNav(e) {
   document.querySelector(".gfgSideNav").style.width = "0"
 }
 
-// Checks if device does support 'orientationchange' event
-// if not: use 'resize' event for fallback
-let supportsOrientationChange = "onorientationchange" in window,
-  orientationEvent = supportsOrientationChange ? "orientationchange" : "resize"
+if (isBrowser) {
+  // Check if device does support 'orientationchange' event
+  // if not: use 'resize' event for fallback
+  let supportsOrientationChange = "onorientationchange" in window,
+    orientationEvent = supportsOrientationChange
+      ? "orientationchange"
+      : "resize"
 
-window.addEventListener(
-  orientationEvent,
-  function () {
-    document.querySelector(".gfgSideNav").style = ""
-  },
-  false
-)
-window.openNav = openNav
-window.closeNav = closeNav
+  window.addEventListener(
+    orientationEvent,
+    function () {
+      document.querySelector(".gfgSideNav").style = ""
+    },
+    false
+  )
+  window.openNav = openNav
+  window.closeNav = closeNav
+}

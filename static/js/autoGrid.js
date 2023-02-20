@@ -25,13 +25,11 @@ function resizeInstance(instance) {
   item = instance.elements[0]
   resizeGridItem(item)
 }
-window.onload = resizeAllGridItems()
-window.addEventListener("resize", resizeAllGridItems)
 
-window.resizeInstance = resizeInstance
-window.resizeGridItem = resizeGridItem
-// allItems = document.getElementsByClassName("gridItem")
-// console.log(allItems)
-// for (x = 0; x < allItems.length; x++) {
-//   imagesLoaded(allItems[x], resizeInstance)
-// }
+if (isBrowser) {
+  window.onload = resizeAllGridItems()
+  window.addEventListener("resize", resizeAllGridItems)
+
+  window.resizeInstance = resizeInstance
+  window.resizeGridItem = resizeGridItem
+}

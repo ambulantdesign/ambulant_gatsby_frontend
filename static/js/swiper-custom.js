@@ -8,5 +8,6 @@ function autoPlayVideo(activeIndex) {
     activeSlideVideo.play()
   }
 }
-
-window.autoPlayVideo = autoPlayVideo
+if (isBrowser) {
+  window.autoPlayVideo = autoPlayVideo
+}

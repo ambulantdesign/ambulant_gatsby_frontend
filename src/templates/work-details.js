@@ -48,6 +48,23 @@ const WorkDetails = ({ data }) => {
   }
   allGalleries = [...allGalleries, ...gallery]
 
+  // Check if window is defined (so if in the browser or in node.js).
+  const isBrowser = typeof window !== "undefined"
+
+  const transitionStartHandler = () => {
+    if (isBrowser) {
+      const videos = document.querySelectorAll("video")
+      Array.prototype.forEach.call(videos, function (video) {
+        video.pause()
+      })
+    }
+  }
+  const transitionEndHandler = swiper => {
+    if (isBrowser) {
+      window.autoPlayVideo(swiper.activeIndex)
+    }
+  }
+
   return (
     <>
       <Layout>
@@ -62,15 +79,8 @@ const WorkDetails = ({ data }) => {
               navigation
               keyboard
               pagination={{ clickable: true }}
-              onTransitionStart={() => {
-                const videos = document.querySelectorAll("video")
-                Array.prototype.forEach.call(videos, function (video) {
-                  video.pause()
-                })
-              }}
-              onTransitionEnd={swiper =>
-                window.autoPlayVideo(swiper.activeIndex)
-              }
+              onTransitionStart={() => transitionStartHandler()}
+              onTransitionEnd={swiper => transitionEndHandler(swiper)}
             >
               {allGalleries.map((slide, index) => {
                 const { id, caption, localFile = null, mime = null } = slide

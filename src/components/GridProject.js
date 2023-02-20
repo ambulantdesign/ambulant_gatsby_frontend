@@ -7,6 +7,15 @@ const GridProject = ({ id, title, slug, artist, gallery }) => {
   const index = Math.floor(Math.random() * gallery.length)
   const randomImg = getImage(gallery[index].localFile)
 
+  // Check if window is defined (so if in the browser or in node.js).
+  const isBrowser = typeof window !== "undefined"
+
+  const gridItemHandler = item => {
+    if (isBrowser) {
+      window.resizeGridItem(document.getElementById(item))
+    }
+  }
+
   return (
     <Wrapper className="gridItem-content">
       <Link to={`/works/${slug}`}>
@@ -14,9 +23,7 @@ const GridProject = ({ id, title, slug, artist, gallery }) => {
           image={randomImg}
           alt={title}
           className="mb-4"
-          onLoad={() =>
-            window.resizeGridItem(document.getElementById(`gridItem-${id}`))
-          }
+          onLoad={() => gridItemHandler(`gridItem-${id}`)}
         />
         <h4 className="pr-4 text-xl">{title}</h4>
         <h5 className="pr-4">{artist.fullname}</h5>
