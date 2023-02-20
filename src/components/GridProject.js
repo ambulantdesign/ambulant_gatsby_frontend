@@ -5,8 +5,7 @@ import styled from "styled-components"
 
 const GridProject = ({ id, title, slug, artist, gallery }) => {
   const index = Math.floor(Math.random() * gallery.length)
-  const randomImg = getImage(gallery[index])
-  // getImage(gallery[index].localFile)
+  const randomImg = getImage(gallery[index].localFile)
 
   return (
     <Wrapper className="gridItem-content">

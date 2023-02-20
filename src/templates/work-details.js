@@ -73,17 +73,16 @@ const WorkDetails = ({ data }) => {
               }
             >
               {allGalleries.map((slide, index) => {
-                // const { id, caption, localFile } = slide
                 const { id, caption, localFile = null, mime = null } = slide
                 let media = null
-                // if (!mime) {
-                //   media = getImage(localFile)
-                // } else {
-                //   media = {
-                //     src: localFile.url,
-                //     mime: mime,
-                //   }
-                // }
+                if (!mime) {
+                  media = getImage(localFile)
+                } else {
+                  media = {
+                    src: localFile.url,
+                    mime: mime,
+                  }
+                }
 
                 if (!mime) {
                   return (
@@ -208,12 +207,23 @@ export const query = graphql`
       gallery: Gallery {
         id
         caption
+        localFile {
+          childImageSharp {
+            fluid {
+              src
+            }
+            gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
+          }
+        }
       }
       videos: Videos {
         file {
           id
           caption
           mime
+          localFile {
+            url
+          }
         }
         addToSlider
       }
@@ -237,19 +247,6 @@ export const query = graphql`
     }
   }
 `
-
-// localFile {
-//           childImageSharp {
-//             fluid {
-//               src
-//             }
-//             gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
-//           }
-//         }
-
-// localFile {
-//             url
-//           }
 
 export const Head = ({ data }) => {
   const { title } = data.work
