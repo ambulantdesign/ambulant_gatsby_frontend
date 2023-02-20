@@ -65,9 +65,6 @@ export const query = graphql`
           caption
           localFile {
             childImageSharp {
-              fluid {
-                src
-              }
               gatsbyImageData(
                 layout: CONSTRAINED
                 placeholder: BLURRED
