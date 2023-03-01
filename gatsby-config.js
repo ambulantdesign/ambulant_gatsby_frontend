@@ -9,9 +9,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
-// And then you can use the config in gatsby-config.js
-const config = require("gatsby-plugin-config")
-
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
