@@ -64,7 +64,7 @@ const strapiConfig = {
       },
     },
   ],
-  queryLimit: 5000,
+  queryLimit: 15000,
 }
 
 module.exports = {
