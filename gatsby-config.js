@@ -12,58 +12,7 @@ require("dotenv").config({
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: [
-    {
-      singularName: `work`,
-      queryParams: {
-        populate: {
-          meta: "*",
-          artist: "*",
-          keywords: "*",
-          Gallery: { populate: "*" },
-          Weblink: "*",
-          Videos: {
-            populate: "*",
-          },
-          streamingVideo: { populate: "*" },
-        },
-      },
-    },
-    `keyword`,
-    `artist`,
-  ],
-  singleTypes: [
-    {
-      singularName: `about`,
-      queryParams: {
-        populate: {
-          MarginalColumn: { populate: "*" },
-          streamingVideo: { populate: "*" },
-          marginalTxt: { populate: "*" },
-          seo: { populate: "*" },
-        },
-      },
-    },
-    {
-      singularName: `contact`,
-      queryParams: {
-        populate: {
-          MarginalColumn: { populate: "*" },
-          streamingVideo: { populate: "*" },
-          marginalTxt: { populate: "*" },
-          seo: { populate: "*" },
-        },
-      },
-    },
-    {
-      singularName: `imprint`,
-      queryParams: {
-        populate: {
-          seo: { populate: "*" },
-        },
-      },
-    },
-  ],
+
   queryLimit: 15000,
 }
 
