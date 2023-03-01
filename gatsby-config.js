@@ -79,7 +79,6 @@ module.exports = {
     email: `info@ambulantdesign.nl`,
   },
   plugins: [
-    `gatsby-plugin-gatsby-cloud`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-postcss`,
     {
