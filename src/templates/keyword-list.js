@@ -28,15 +28,12 @@ const KeywordList = ({ data, pageContext }) => {
       <Layout>
         <main className={styles.portfolio} id="main">
           <ContentHeader title={pageContext.title} />
-          {noresults ? (
-            <NoResults tagName={pageContext.title} />
-          ) : (
-            <Loading
-              elemId="spinner"
-              wrapperClasses="loading-spinner"
-              refHandle={loaderRef}
-            />
-          )}
+          {noresults && <NoResults tagName={pageContext.title} />}
+          <Loading
+            elemId="spinner"
+            wrapperClasses="loading-spinner"
+            refHandle={loaderRef}
+          />
 
           <div
             className={styles.portfolioGrid}
