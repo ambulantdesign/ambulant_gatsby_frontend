@@ -18,27 +18,10 @@ function resizeGridItem(item) {
 }
 
 function resizeAllGridItems() {
-  var spinner = document.getElementById("spinner")
-  var grid = document.getElementById("portfolio-grid")
   allItems = document.getElementsByClassName("gridItem")
   for (x = 0; x < allItems.length; x++) {
     resizeGridItem(allItems[x])
   }
-  // if (!spinner || !grid) {
-  //   setTimeout(() => {
-  //     spinner = document.getElementById("spinner")
-  //     grid = document.getElementById("portfolio-grid")
-  //     if (spinner) {
-  //       spinner.style.display = "none"
-  //     }
-  //     if (grid) {
-  //       grid.style.opacity = "100"
-  //     }
-  //   }, 666)
-  // } else {
-  //   spinner.style.display = "none"
-  //   grid.style.opacity = "100"
-  // }
 }
 
 function resizeInstance(instance) {

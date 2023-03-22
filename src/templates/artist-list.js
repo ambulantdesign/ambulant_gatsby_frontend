@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useRef, useEffect } from "react"
 import { graphql, withPrefix } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -10,10 +11,17 @@ import NoResults from "../components/NoResults"
 import * as styles from "../assets/css/index.module.css"
 
 const ArtistList = ({ data, pageContext }) => {
+  const loaderRef = useRef()
+  const gridRef = useRef()
   const {
     works: { nodes: projects },
   } = data
   const noresults = projects.length <= 0
+
+  useEffect(() => {
+    loaderRef.current.style.display = "none"
+    gridRef.current.style.opacity = "100"
+  }, [data])
 
   return (
     <>
@@ -23,7 +31,11 @@ const ArtistList = ({ data, pageContext }) => {
           {noresults ? (
             <NoResults tagName={pageContext.title} />
           ) : (
-            <Loading elemId="spinner" wrapperClasses="loading-spinner" />
+            <Loading
+              elemId="spinner"
+              wrapperClasses="loading-spinner"
+              refHandle={loaderRef}
+            />
           )}
 
           <div className={styles.portfolioGrid} id="portfolio-grid">

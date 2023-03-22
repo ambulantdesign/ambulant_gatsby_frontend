@@ -26,7 +26,7 @@ const IndexPage = ({ data }) => {
         <main className={styles.portfolio} id="main">
           <Loading
             elemId="spinner"
-            wrapperClasses={`loading-spinner`}
+            wrapperClasses="loading-spinner"
             refHandle={loaderRef}
           />
 
