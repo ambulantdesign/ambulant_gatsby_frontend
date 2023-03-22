@@ -7,7 +7,7 @@ export default function Loading({ elemId, wrapperClasses }) {
       <Watch
         height="100"
         width="100"
-        color="#dbe0ea"
+        color="#F5F5F4"
         ariaLabel="watch-loading"
         wrapperStyle={{}}
         wrapperClassName=""
