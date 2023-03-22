@@ -49,7 +49,7 @@ const WorkDetails = ({ data }) => {
   allGalleries = [...allGalleries, ...gallery]
 
   // Check if window is defined (so if in the browser or in node.js).
-  const isBrowser = typeof window !== "undefined"
+  var isBrowser = typeof window !== "undefined"
 
   const transitionStartHandler = () => {
     if (isBrowser) {

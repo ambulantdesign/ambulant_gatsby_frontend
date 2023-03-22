@@ -8,7 +8,7 @@ const GridProject = ({ id, title, slug, artist, gallery }) => {
   const randomImg = getImage(gallery[index].localFile)
 
   // Check if window is defined (so if in the browser or in node.js).
-  const isBrowser = typeof window !== "undefined"
+  var isBrowser = typeof window !== "undefined"
 
   const gridItemHandler = item => {
     if (isBrowser) {

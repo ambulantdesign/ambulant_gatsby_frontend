@@ -1,5 +1,5 @@
 // Check if window is defined (so if in the browser or in node.js).
-const isBrowser = typeof window !== "undefined"
+var isBrowser = typeof window !== "undefined"
 
 /* slide-in side navigation from the right */
 function openNav(e) {
