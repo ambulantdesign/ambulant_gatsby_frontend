@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const NoResults = ({ tagName }) => {
   return (
-    <Wrapper className="grid gap-x-0 sm:gap-10 container mx-auto" id="content">
+    <Wrapper className="grid gap-x-0 sm:gap-10 container " id="content">
       <div className="description">
         <p>😔 Sorry, but we haven't created any content for “{tagName}” yet.</p>
         <p>Please try again later or …</p>

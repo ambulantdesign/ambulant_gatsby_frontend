@@ -115,10 +115,7 @@ const WorkDetails = ({ data }) => {
             </Swiper>
           </section>
           <ContentHeader title={title} subtitle={artist.fullname} />
-          <section
-            className="grid gap-x-0 sm:gap-10 container mx-auto"
-            id="content"
-          >
+          <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-6">
               <ProjectMeta meta={meta} weblink={weblink} />
               {streamingVideo && <StreamingVideo video={streamingVideo} />}

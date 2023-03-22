@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql, withPrefix } from "gatsby"
 
 import Layout from "../components/Layout"
+import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
 import * as styles from "../assets/css/index.module.css"
@@ -15,6 +16,8 @@ const IndexPage = ({ data }) => {
     <>
       <Layout id="home">
         <main className={styles.portfolio} id="main">
+          <Loading elemId="spinner" wrapperClasses={`loading-spinner`} />
+
           <div className={styles.portfolioGrid} id="portfolio-grid">
             {projects.map(project => {
               const { id, title, slug, artist, Gallery } = project

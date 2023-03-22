@@ -10,10 +10,7 @@ const NotFoundPage = () => (
   <Layout>
     <Wrapper className="portfolio" id="main">
       <ContentHeader title={"Oops – Page not found"} subtitle={""} />
-      <section
-        className="grid gap-x-0 sm:gap-10 container mx-auto"
-        id="content"
-      >
+      <section className="grid gap-x-0 sm:gap-10 container " id="content">
         <div className="col-1">
           <p>😔 Sorry, we couldn’t find what you were looking for.</p>
           <p>Please use the navigation, the full-text search or …</p>

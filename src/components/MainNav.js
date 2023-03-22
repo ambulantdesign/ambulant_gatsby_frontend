@@ -255,16 +255,6 @@ const Wrapper = styled.aside`
     border-color: var(--clr-links);
   }
   @media screen and (max-width: 900px) {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    width: 0; 
-    top: 0;
-    right: 0;
-    z-index: 99;
-    transition: width 0.5s ease-in-out; */
-
     display: flex;
     flex-direction: column;
     align-items: center;

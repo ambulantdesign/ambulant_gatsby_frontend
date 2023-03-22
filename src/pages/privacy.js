@@ -41,13 +41,10 @@ const PrivacyPage = ({ data }) => {
       <Layout id="privacy">
         <Wrapper className="portfolio" id="main">
           <ContentHeader title={title} subtitle={""} />
-          <section className="container mx-auto mb-8 heroContainer" id="map">
+          <section className="container mb-8 heroContainer" id="map">
             full-width placeholder
           </section>
-          <section
-            className="grid gap-x-0 sm:gap-10 container mx-auto"
-            id="content"
-          >
+          <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-1">
               <RichTextContent content={content} />
             </div>

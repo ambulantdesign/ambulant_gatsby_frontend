@@ -55,6 +55,7 @@ function Seo({ description, title, children }) {
         href="/safari-pinned-tab.svg"
         color="#5bbad5"
       ></link>
+      <meta name="robots" content="noindex, follow" />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
 

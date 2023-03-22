@@ -436,6 +436,13 @@ main {
 #slider .swiper-button-prev:hover {
   color: var(--clr-grey-4);
 }
+.loading-spinner {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  background-color: var(--clr-white);
+}
 
 @media screen and (max-width: 1024px) {
   .grid > .work {

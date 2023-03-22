@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql, withPrefix } from "gatsby"
 
 import Layout from "../components/Layout"
+import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import ContentHeader from "../components/ContentHeader"
 import GridProject from "../components/GridProject"
@@ -12,12 +13,19 @@ const KeywordList = ({ data, pageContext }) => {
   const {
     works: { nodes: projects },
   } = data
+  const noresults = projects.length <= 0
+
   return (
     <>
       <Layout>
         <main className={styles.portfolio} id="main">
           <ContentHeader title={pageContext.title} />
-          {!(projects.length > 0) && <NoResults tagName={pageContext.title} />}
+          {noresults ? (
+            <NoResults tagName={pageContext.title} />
+          ) : (
+            <Loading elemId="spinner" wrapperClasses="loading-spinner" />
+          )}
+
           <div className={styles.portfolioGrid} id="portfolio-grid">
             {projects.map(project => {
               const { id, title, slug, artist, Gallery } = project
