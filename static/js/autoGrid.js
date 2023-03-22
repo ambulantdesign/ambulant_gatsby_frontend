@@ -25,6 +25,7 @@ function resizeAllGridItems() {
     resizeGridItem(allItems[x])
   }
   setTimeout(() => {
+    alert(spinner, grid)
     if (spinner) {
       spinner.style.display = "none"
     }
