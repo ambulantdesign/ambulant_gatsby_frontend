@@ -1,9 +1,9 @@
 import * as React from "react"
 import { Watch } from "react-loader-spinner"
 
-export default function Loading({ elemId, wrapperClasses }) {
+export default function Loading({ elemId, wrapperClasses, refHandle }) {
   return (
-    <div id={elemId} className={wrapperClasses}>
+    <div id={elemId} className={wrapperClasses} style={{}} ref={refHandle}>
       <Watch
         height="100"
         width="100"

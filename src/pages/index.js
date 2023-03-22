@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useRef, useEffect } from "react"
 import { graphql, withPrefix } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -8,17 +9,33 @@ import GridProject from "../components/GridProject"
 import * as styles from "../assets/css/index.module.css"
 
 const IndexPage = ({ data }) => {
+  const loaderRef = useRef()
+  const gridRef = useRef()
   const {
     allStrapiWork: { nodes: projects },
   } = data
+
+  useEffect(() => {
+    loaderRef.current.style.display = "none"
+    gridRef.current.style.opacity = "100"
+  }, [data])
 
   return (
     <>
       <Layout id="home">
         <main className={styles.portfolio} id="main">
-          <Loading elemId="spinner" wrapperClasses={`loading-spinner`} />
+          <Loading
+            elemId="spinner"
+            wrapperClasses={`loading-spinner`}
+            refHandle={loaderRef}
+          />
 
-          <div className={styles.portfolioGrid} id="portfolio-grid">
+          <div
+            className={styles.portfolioGrid}
+            id="portfolio-grid"
+            style={{}}
+            ref={gridRef}
+          >
             {projects.map(project => {
               const { id, title, slug, artist, Gallery } = project
 
