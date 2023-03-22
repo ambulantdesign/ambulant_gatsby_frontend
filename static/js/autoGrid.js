@@ -24,12 +24,14 @@ function resizeAllGridItems() {
   for (x = 0; x < allItems.length; x++) {
     resizeGridItem(allItems[x])
   }
-  if (spinner) {
-    spinner.style.display = "none"
-  }
-  if (grid) {
-    grid.style.opacity = "100"
-  }
+  setTimeout(() => {
+    if (spinner) {
+      spinner.style.display = "none"
+    }
+    if (grid) {
+      grid.style.opacity = "100"
+    }
+  }, 250)
 }
 
 function resizeInstance(instance) {
