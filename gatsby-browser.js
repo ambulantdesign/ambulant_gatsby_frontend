@@ -22,3 +22,8 @@ require("./src/assets/css/global.css")
 
 //   return false
 // }
+export const onClientEntry = () => {
+  window.onload = () => {
+    /* do stuff */
+  }
+}

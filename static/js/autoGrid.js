@@ -35,7 +35,11 @@ function resizeAllGridItems() {
       // if (grid) {
       //   grid.style.opacity = "100"
       // }
-      return () => clearTimeout(timerId)
+      return () => {
+        clearTimeout(timerId)
+        spinner.style.display = "none"
+        grid.style.opacity = "100"
+      }
     }, 500)
   }
 
