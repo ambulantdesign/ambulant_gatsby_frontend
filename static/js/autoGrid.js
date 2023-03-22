@@ -24,15 +24,23 @@ function resizeAllGridItems() {
   for (x = 0; x < allItems.length; x++) {
     resizeGridItem(allItems[x])
   }
-  setTimeout(() => {
-    alert(spinner, grid)
-    if (spinner) {
-      spinner.style.display = "none"
-    }
-    if (grid) {
-      grid.style.opacity = "100"
-    }
-  }, 250)
+  if (!spinner || !grid) {
+    const timerId = setTimeout(() => {
+      spinner = document.getElementById("spinner")
+      grid = document.getElementById("portfolio-grid")
+      alert(spinner, grid)
+      // if (spinner) {
+      //   spinner.style.display = "none"
+      // }
+      // if (grid) {
+      //   grid.style.opacity = "100"
+      // }
+      return () => clearTimeout(timerId)
+    }, 500)
+  }
+
+  spinner.style.display = "none"
+  grid.style.opacity = "100"
 }
 
 function resizeInstance(instance) {
