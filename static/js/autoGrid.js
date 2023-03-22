@@ -34,7 +34,7 @@ function resizeAllGridItems() {
       if (grid) {
         grid.style.opacity = "100"
       }
-    }, 500)
+    }, 666)
   } else {
     spinner.style.display = "none"
     grid.style.opacity = "100"
