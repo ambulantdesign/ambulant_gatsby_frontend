@@ -9,11 +9,11 @@ const ContactOptions = ({ headline, extraClass }) => {
   const { title, phone, email } = useSiteMetadata()
   return (
     <Wrapper className={`contact-options ${extraClass}`}>
-      <div class="btn-container">
+      <div className="btn-container">
         <h4 className="mb-4">{headline}</h4>
         <p>
           <a
-            class="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
+            className="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
             title={`Call ${title}`}
             href={`tel:${phone}`}
           >
@@ -25,7 +25,7 @@ const ContactOptions = ({ headline, extraClass }) => {
         </p>
         <p>
           <a
-            class="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
+            className="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
             title={`Send mail to ${title}`}
             href={`mailto:${email}`}
           >

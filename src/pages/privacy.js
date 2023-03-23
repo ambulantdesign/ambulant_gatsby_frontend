@@ -49,7 +49,7 @@ const PrivacyPage = ({ data }) => {
               <RichTextContent content={content} />
             </div>
             <div className="col-2">
-              <div class="yt-consent py-2 px-4 border-transparent rounded">
+              <div className="yt-consent py-2 px-4 border-transparent rounded">
                 <h4 className="mb-4">Cookie consent for video streams</h4>
                 <p>
                   Change your browser settings to permit or refuse the use of
@@ -112,5 +112,6 @@ export const data = graphql`
     }
   }
 `
+export const Head = () => <Seo title="Privacy & Disclaimer" />
 
 export default PrivacyPage

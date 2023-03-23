@@ -74,11 +74,7 @@ const ContactPage = ({ data }) => {
                     />
                   )
                 case "STRAPI__COMPONENT_MEDIA_STREAMING_VIDEO":
-                  if (item.videoId) {
-                    return <StreamingVideo video={item} key={index} />
-                  } else {
-                    return null
-                  }
+                  return <StreamingVideo video={item} key={index} />
                 default:
                   return <></>
               }
@@ -111,33 +107,6 @@ const Wrapper = styled.main`
 `
 
 export const data = graphql`
-  fragment streamingVideoCont1 on STRAPI__COMPONENT_MEDIA_STREAMING_VIDEO {
-    id
-    streamingPlatform
-    url
-    urlParams
-    videoId
-    controls
-    loop
-    related
-    autoplay
-    videoCaption
-    show_fullscreen
-    consent_message {
-      data {
-        consent_message
-      }
-    }
-  }
-
-  fragment richTextCont1 on STRAPI__COMPONENT_LAYOUT_RICH_TEXT {
-    id
-    marginalTxt {
-      data {
-        marginalTxt
-      }
-    }
-  }
   {
     page: strapiContact {
       id
@@ -149,8 +118,14 @@ export const data = graphql`
       }
       MarginalColumn {
         __typename
-        ...richTextCont1
-        ...streamingVideoCont1
+        ... on STRAPI__COMPONENT_LAYOUT_RICH_TEXT {
+          id
+          marginalTxt {
+            data {
+              marginalTxt
+            }
+          }
+        }
       }
     }
   }
@@ -172,5 +147,7 @@ ContactPage.propTypes = {
     }),
   }).isRequired,
 }
+
+export const Head = () => <Seo title="Contact" />
 
 export default ContactPage

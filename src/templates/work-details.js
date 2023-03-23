@@ -176,7 +176,7 @@ const Wrapper = styled.main`
   }
 `
 export const query = graphql`
-  query WorkDetails($slug: String) {
+  query WorkDetails($slug: String!) {
     work: strapiWork(slug: { eq: $slug }) {
       id: strapi_id
       slug

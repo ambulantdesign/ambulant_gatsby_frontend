@@ -63,12 +63,13 @@ const Wrapper = styled.main`
   .grid#content footer {
     grid-column: span 12;
   }
-	@media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) {
     .grid > .col-1,
     .grid > .col-2 {
       grid-column: span 12;
-			padding-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
     }
+  }
 `
 
 export const data = graphql`
@@ -133,5 +134,7 @@ AboutPage.propTypes = {
     }),
   }).isRequired,
 }
+
+export const Head = () => <Seo title="About & CV" />
 
 export default AboutPage
