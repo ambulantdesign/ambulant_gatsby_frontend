@@ -1,28 +1,40 @@
-import * as React from "react"
+import { useState } from "react"
 
-export const useLocalStorage = (keyName, defaultValue) => {
-  const [storedValue, setStoredValue] = React.useState(() => {
+export const useLocalStorage = (keyName, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    if (typeof window === "undefined") {
+      return initialValue
+    }
     try {
       const value = window.localStorage.getItem(keyName)
-      if (value) {
-        console.log(`>>> ${keyName} <<<`, value)
-        window.localStorage.removeItem(keyName)
-        return defaultValue
-      } else {
-        console.log(`+++ ${keyName} +++`, value)
-        window.localStorage.setItem(keyName, JSON.stringify(defaultValue))
-        return defaultValue
-      }
-    } catch (err) {
-      return defaultValue
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key)
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error)
+      return initialValue
     }
   })
 
-  const setValue = newValue => {
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = value => {
     try {
-      window.localStorage.setItem(keyName, JSON.stringify(newValue))
-    } catch (err) {}
-    setStoredValue(newValue)
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value
+      // Save state
+      setStoredValue(valueToStore)
+      // Save to local storage
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      }
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error)
+    }
   }
 
   return [storedValue, setValue]
