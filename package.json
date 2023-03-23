@@ -41,7 +41,8 @@
     "save": "^2.9.0",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.5",
-    "use-local-storage-state": "^17.2.0",
+    "use-local-storage-state": "^17.3.0",
+    "use-session-storage-state": "^17.2.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

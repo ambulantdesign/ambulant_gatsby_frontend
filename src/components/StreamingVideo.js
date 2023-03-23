@@ -18,13 +18,15 @@ const StreamingVideo = ({ video }) => {
   const cookieName = `accept${video.streamingPlatform}Cookies`
 
   const [streamingConsent, setStreamingConsent] = useState(false)
-  const [acceptCookies, setAcceptCookies] = useLocalStorageState(cookieName, {
-    ssr: true,
-    defaultValue: false,
-  })
+  const [acceptCookies, setAcceptCookies, { removeItem }] =
+    useLocalStorageState(cookieName, {
+      ssr: true,
+      defaultValue: false,
+    })
 
   const handleSubmit = e => {
     e.preventDefault()
+    removeItem()
     setAcceptCookies(cookieName, streamingConsent)
   }
 

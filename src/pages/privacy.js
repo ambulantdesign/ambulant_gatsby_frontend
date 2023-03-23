@@ -19,22 +19,14 @@ const PrivacyPage = ({ data }) => {
   const { allProviders } = data.allStreamingVideo
   const providers = []
 
-  allProviders.map(video => {
-    return (
-      video.streamingPlatform &&
-      providers.push({
-        id: video.id,
-        platform: video.streamingPlatform,
-        cookieName: `accept${video.streamingPlatform}Cookies`,
-      })
-    )
+  const uniques = [...new Set(allProviders.map(obj => obj.streamingPlatform))]
+
+  uniques.map(platform => {
+    return providers.push({
+      platform: platform,
+      cookieName: `accept${platform}Cookies`,
+    })
   })
-  console.log(providers)
-  // const {
-  //   marginalTxt: {
-  //     data: { marginalTxt },
-  //   },
-  // } = MarginalColumn[0]
 
   return (
     <>
@@ -56,8 +48,8 @@ const PrivacyPage = ({ data }) => {
                   cookies by the following video streaming platforms used by
                   this website:
                 </p>
-                {providers.map(provider => (
-                  <CookieSwitch key={provider.id} provider={provider} />
+                {providers.map((provider, index) => (
+                  <CookieSwitch key={index} provider={provider} />
                 ))}
               </div>
               <RichTextContent content={`<p></p>`} />
