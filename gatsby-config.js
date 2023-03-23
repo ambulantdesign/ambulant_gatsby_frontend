@@ -25,7 +25,7 @@ const strapiConfig = {
           Videos: {
             populate: "*",
           },
-          streamingVideo: { populate: "*" },
+          streamingVideo: "*",
         },
       },
     },
