@@ -45,7 +45,7 @@ const PrivacyPage = ({ data }) => {
                 <h4 className="mb-4">Cookie consent for video streams</h4>
                 <p>
                   Change your browser settings to permit or refuse the use of
-                  cookies by the following video streaming platforms used by
+                  cookies by the following video streaming platforms used on
                   this website:
                 </p>
                 {providers.map((provider, index) => (
