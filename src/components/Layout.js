@@ -4,12 +4,16 @@
  *
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
-
+import qs from "qs"
 import * as React from "react"
-import PropTypes from "prop-types"
-import { Script, withPrefix } from "gatsby"
-import styled from "styled-components"
+import { useRef, useMemo } from "react"
+import { useLocation } from "@reach/router"
+import { Script, withPrefix, navigate } from "gatsby"
+import algoliasearch from "algoliasearch/lite"
+import { InstantSearch } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
+import PropTypes from "prop-types"
+import styled from "styled-components"
 
 import { useSiteMetadata } from "../hooks/use-site-metadata"
 import Header from "./Header"
@@ -21,16 +25,66 @@ const initialState = {
   artistNav: false,
   offCanvas: false,
 }
+const DEBOUNCE_TIME = 400
+
+/************** */
+const initialSearchState = {
+  query: "",
+  page: 1,
+}
+
+const createURL = state => `?${qs.stringify(state)}`
+
+const searchStateToUrl = (location, searchState) => {
+  let fullPath
+  location.pathname === "/search"
+    ? (fullPath = `${location.pathname}${createURL(searchState)}`)
+    : (fullPath = `/search${createURL(searchState)}`)
+  return searchState ? `${fullPath}` : ""
+}
+
+/************** */
 
 const Layout = ({ id = "", children }) => {
   const { title, author, city } = useSiteMetadata()
+  const [searchState, setSearchState] = useLocalStorageState("searchState", {
+    ssr: true,
+    defaultValue: initialSearchState,
+  })
   const [sideNav, setSideNav] = useLocalStorageState("sideNav", {
     ssr: true,
     defaultValue: initialState,
   })
-  // const toggleNavState = navName => {
-  //   setSideNav({ ...sideNav, [navName]: !sideNav[navName] })
-  // }
+  const location = useLocation()
+
+  // Connect and authenticate with your Algolia app
+  const searchClient = useMemo(
+    () =>
+      algoliasearch(
+        process.env.GATSBY_ALGOLIA_APP_ID,
+        process.env.GATSBY_ALGOLIA_SEARCH_KEY
+      ),
+    []
+  )
+  const debouncedSetStateRef = useRef(null)
+
+  function onSearchStateChange(updatedSearchState) {
+    // Aufruf: Search box 'onchange' (after debounce time)
+    clearTimeout(debouncedSetStateRef.current)
+
+    debouncedSetStateRef.current = setTimeout(() => {
+      // console.log("onSearchStateChange > debounced")
+      setSearchState({ ...updatedSearchState })
+
+      // **** update URL params > aber nur auf '/search' page!!!!
+      if (location.pathname === "/search") {
+        navigate(searchStateToUrl("/search", { ...updatedSearchState }), {
+          replace: true,
+        })
+      }
+    }, DEBOUNCE_TIME)
+  }
+
   const showMetaNavLinks = navName => {
     setSideNav({
       ...sideNav,
@@ -49,19 +103,28 @@ const Layout = ({ id = "", children }) => {
   return (
     <>
       <Wrapper className="site-container" id={id}>
-        <Header
-          siteTitle={title || `ambulant design`}
-          author={author || `Gabriele Franziska Götz`}
-          city={city || `Amsterdam`}
-          openMobileNav={openMobileNav}
-        />
-        {children}
-        <MainNav
-          sideNav={sideNav}
-          toggleNav={showMetaNavLinks}
-          closeMobileNav={closeMobileNav}
-        />
+        <InstantSearch
+          searchClient={searchClient}
+          indexName={process.env.ALGOLIA_INDEX_NAME}
+          onSearchStateChange={onSearchStateChange}
+          createURL={createURL}
+          searchState={searchState}
+        >
+          <Header
+            siteTitle={title || `ambulant design`}
+            author={author || `Gabriele Franziska Götz`}
+            city={city || `Amsterdam`}
+            openMobileNav={openMobileNav}
+          />
+          {children}
+          <MainNav
+            sideNav={sideNav}
+            toggleNav={showMetaNavLinks}
+            closeMobileNav={closeMobileNav}
+          />
+        </InstantSearch>
       </Wrapper>
+
       <Script src={withPrefix("/js/functions.js")} type="text/javascript" />
       <Script
         src="https://unpkg.com/external-svg-loader@latest/svg-loader.min.js"

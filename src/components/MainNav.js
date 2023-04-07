@@ -214,6 +214,7 @@ const Wrapper = styled.aside`
   flex-direction: column;
   align-items: flex-start;
   position: fixed;
+  z-index: 101;
   /* position: absolute; */
   width: var(--nav-lg-width);
   top: 0;

@@ -3,8 +3,14 @@
  *
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
-
 require("./src/assets/css/global.css")
+
+// import React from "react"
+// import { BrowserRouter as Router } from "react-router-dom"
+
+// export const wrapRootElement = ({ element }) => {
+//   return <Router>{element}</Router>
+// }
 
 // exports.shouldUpdateScroll = ({
 //   routerProps: { location },
@@ -22,8 +28,9 @@ require("./src/assets/css/global.css")
 
 //   return false
 // }
-export const onClientEntry = () => {
-  window.onload = () => {
-    // do stuff
-  }
-}
+
+// export const onClientEntry = () => {
+//   window.onload = () => {
+//     // do stuff
+//   }
+// }
