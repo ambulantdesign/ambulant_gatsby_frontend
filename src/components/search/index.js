@@ -11,6 +11,8 @@ import {
 
 export default function CustomSearch() {
   const HitCount = connectStateResults(({ searchResults }) => {
+    console.log("HitCount")
+    console.log(searchResults)
     const hitCount = searchResults && searchResults.nbHits
 
     return hitCount > 0 ? (
