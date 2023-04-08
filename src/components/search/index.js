@@ -11,8 +11,6 @@ import {
 
 export default function CustomSearch() {
   const HitCount = connectStateResults(({ searchResults }) => {
-    console.log("HitCount")
-    console.log(searchResults)
     const hitCount = searchResults && searchResults.nbHits
 
     return hitCount >= 0 ? (
@@ -27,7 +25,13 @@ export default function CustomSearch() {
       searchResults && searchResults.nbHits !== 0 ? (
         children
       ) : (
-        <p>😔 Sorry, nothing found for “{searchState.query}”.</p>
+        <>
+          <div class="hit-count">0 results</div>
+          <hr />
+          <div class="ais-Hits">
+            <p>😔 Sorry, nothing found for “{searchState.query}”.</p>
+          </div>
+        </>
       )
   )
 
