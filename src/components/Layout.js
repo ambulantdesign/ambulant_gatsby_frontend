@@ -71,9 +71,9 @@ const Layout = ({ id = "", children }) => {
   function onSearchStateChange(updatedSearchState) {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
-
     debouncedSetStateRef.current = setTimeout(() => {
-      // console.log("onSearchStateChange > debounced")
+      console.log("onSearchStateChange > debounced")
+      console.log(updatedSearchState)
       setSearchState({ ...updatedSearchState })
 
       // **** update URL params > aber nur auf '/search' page!!!!
