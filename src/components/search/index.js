@@ -15,12 +15,21 @@ export default function CustomSearch() {
     console.log(searchResults)
     const hitCount = searchResults && searchResults.nbHits
 
-    return hitCount > 0 ? (
+    return hitCount >= 0 ? (
       <div className="hit-count">
         {hitCount} result{hitCount !== 1 ? `s` : ``}
       </div>
     ) : null
   })
+
+  const Results = connectStateResults(
+    ({ searchState, searchResults, children }) =>
+      searchResults && searchResults.nbHits !== 0 ? (
+        children
+      ) : (
+        <p>😔 Sorry, nothing found for “{searchState.query}”.</p>
+      )
+  )
 
   const PageHit = ({ hit }) => {
     const { path, title, content, keywords, meta } = hit
@@ -77,10 +86,10 @@ export default function CustomSearch() {
   )
 
   return (
-    <>
+    <Results>
       <HitCount />
       <hr />
       <Hits hitComponent={PageHit} />
-    </>
+    </Results>
   )
 }
