@@ -105,7 +105,7 @@ const Layout = ({ id = "", children }) => {
       <Wrapper className="site-container" id={id}>
         <InstantSearch
           searchClient={searchClient}
-          indexName={process.env.ALGOLIA_INDEX_NAME}
+          indexName={`dev_ambulant-portfolio`}
           onSearchStateChange={onSearchStateChange}
           createURL={createURL}
           searchState={searchState}
