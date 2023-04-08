@@ -12,6 +12,12 @@ const aboutQuery = `{
 						content
 					}
 				}
+				internal {
+          # querying internal.contentDigest is required
+          contentDigest
+          type
+          owner
+        }
 			}
 		}
 	}
@@ -39,6 +45,12 @@ const portfolioQuery = `{
           publisher
           technical_details
           year
+        }
+				internal {
+          # querying internal.contentDigest is required
+          contentDigest
+          type
+          owner
         }
       }
     }
