@@ -26,9 +26,9 @@ export default function CustomSearch() {
         children
       ) : (
         <>
-          <div class="hit-count">0 results</div>
+          <div className="hit-count">0 results</div>
           <hr />
-          <div class="ais-Hits">
+          <div className="ais-Hits">
             <p>😔 Sorry, nothing found for “{searchState.query}”.</p>
           </div>
         </>

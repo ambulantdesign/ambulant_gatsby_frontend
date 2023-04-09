@@ -6,8 +6,13 @@ import useLocalStorageState from "use-local-storage-state"
 
 const createURL = state => `?${qs.stringify(state)}`
 
-const searchStateToUrl = searchState =>
-  searchState ? `/search${createURL(searchState)}` : ""
+const searchStateToUrl = (location, searchState) => {
+  let fullPath
+  location.pathname === "/search"
+    ? (fullPath = `${location.pathname}${createURL(searchState)}`)
+    : (fullPath = `/search${createURL(searchState)}`)
+  return searchState ? `${fullPath}` : ""
+}
 
 export default connectSearchBox(
   ({ refine, currentRefinement, className, onFocus }) => {
@@ -28,7 +33,9 @@ export default connectSearchBox(
         page: 1,
       }
       // navigate to search page with lastest search string (currentRefinement)
-      navigate(searchStateToUrl(updatedStateEntries))
+      navigate(searchStateToUrl("/search", updatedStateEntries), {
+        replace: false,
+      })
     }
 
     const handleChange = e => {
@@ -37,18 +44,6 @@ export default connectSearchBox(
     }
 
     React.useEffect(() => {
-      // console.log("---Search BOX > updated query")
-      // console.log(searchState.query)
-
-      // **** is search page?
-      // if (location.pathname === "/search") {
-      //   console.log("On SEARCH page")
-      //   const updatedStateEntries = {
-      //     query: currentRefinement,
-      //     page: 1,
-      //   }
-      //   console.log(updatedStateEntries)
-      // }
       // set latest search string as a value to search box
       if (searchState.query) {
         inputRef.current.value = searchState.query

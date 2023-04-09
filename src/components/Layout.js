@@ -73,11 +73,13 @@ const Layout = ({ id = "", children }) => {
     clearTimeout(debouncedSetStateRef.current)
     debouncedSetStateRef.current = setTimeout(() => {
       console.log("onSearchStateChange > debounced")
-      console.log(updatedSearchState)
+      // console.log(searchState)
+      // console.log(updatedSearchState)
       setSearchState({ ...updatedSearchState })
 
       // **** update URL params > aber nur auf '/search' page!!!!
       if (location.pathname === "/search") {
+        // console.log("update again??????????")
         navigate(searchStateToUrl("/search", { ...updatedSearchState }), {
           replace: true,
         })
