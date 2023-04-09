@@ -78,6 +78,10 @@ const Layout = ({ id = "", children }) => {
       setSearchState({ ...updatedSearchState })
 
       // **** update URL params > aber nur auf '/search' page!!!!
+      // das überschreibt aufgrund der Netz-Latenz wieder alle neuen Eingaben
+      // Hier müsste noch eine Und-Verknüpfung hin:
+      // wenn Anfrage von anderer Seite als '/search' kommt,
+      // dann Codeblock nicht ausführen
       if (location.pathname === "/search") {
         // console.log("update again??????????")
         navigate(searchStateToUrl("/search", { ...updatedSearchState }), {

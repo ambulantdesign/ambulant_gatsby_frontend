@@ -32,10 +32,12 @@ export default connectSearchBox(
         query: currentRefinement,
         page: 1,
       }
+      // if (location.pathname === "/search") {
       // navigate to search page with lastest search string (currentRefinement)
       navigate(searchStateToUrl("/search", updatedStateEntries), {
         replace: false,
       })
+      // }
     }
 
     const handleChange = e => {

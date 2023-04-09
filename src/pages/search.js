@@ -53,6 +53,8 @@ export default function SearchPage(props) {
 
     // console.log("***useEffect Search Page****")
     if (searchStateFromLocation) {
+      console.log("****searchStateFromLocation****")
+      console.log(searchStateFromLocation)
       if (
         "query" in searchStateFromLocation &&
         searchStateFromLocation.query !== ""
