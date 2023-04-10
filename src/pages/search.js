@@ -1,4 +1,3 @@
-import qs from "qs"
 import * as React from "react"
 import { useEffect, useRef } from "react"
 import { useLocation } from "@reach/router"
@@ -12,15 +11,10 @@ import CustomSearch from "../components/search"
 import SearchResult from "../components/search/search-result"
 import ContentHeader from "../components/ContentHeader"
 
-/************** */
 const initialSearchState = {
   query: "",
   page: 1,
 }
-
-const urlToSearchState = location => qs.parse(location.search.slice(1))
-
-/************** */
 
 export default function SearchPage(props) {
   const [searchState, setSearchState] = useLocalStorageState("searchState", {
@@ -28,6 +22,7 @@ export default function SearchPage(props) {
     defaultValue: initialSearchState,
   })
   const [isLocalStorage, setIsLocalStorage] = React.useState(false)
+  const [fromDiffOrigin, setFromDiffOrigin] = React.useState(false)
   const { state: searchStateFromLocation } = props.location
 
   let headline
@@ -49,38 +44,19 @@ export default function SearchPage(props) {
   )
 
   useEffect(() => {
-    let searchParams
-
-    // console.log("***useEffect Search Page****")
     if (searchStateFromLocation) {
-      console.log("****searchStateFromLocation****")
-      console.log(searchStateFromLocation)
       if (
         "query" in searchStateFromLocation &&
         searchStateFromLocation.query !== ""
       ) {
-        setIsLocalStorage(true)
-        searchParams = searchStateFromLocation.query
-      } else {
-        searchParams = location.search
+        setSearchState(searchState)
       }
-    } else {
-      searchParams = location.search
-    }
-
-    if (!isLocalStorage) {
-      const searchObjFromUrl = urlToSearchState(location)
-      // console.log("NOTHING there …")
-      // console.log(searchObjFromUrl)
-      setSearchState({ ...searchObjFromUrl })
-    } else {
-      setSearchState(searchState)
     }
   }, [])
 
   return (
     <>
-      <Layout id="search">
+      <Layout id="search" fromDiffOrigin={fromDiffOrigin}>
         <Wrapper className="portfolio" id="main">
           <LoadingIndicator />
           <ContentHeader title={headline} subtitle="" />

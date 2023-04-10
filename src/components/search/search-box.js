@@ -1,18 +1,8 @@
-import qs from "qs"
 import React, { useRef } from "react"
+import { useLocation } from "@reach/router"
 import { navigate } from "gatsby"
 import { connectSearchBox } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
-
-const createURL = state => `?${qs.stringify(state)}`
-
-const searchStateToUrl = (location, searchState) => {
-  let fullPath
-  location.pathname === "/search"
-    ? (fullPath = `${location.pathname}${createURL(searchState)}`)
-    : (fullPath = `/search${createURL(searchState)}`)
-  return searchState ? `${fullPath}` : ""
-}
 
 export default connectSearchBox(
   ({ refine, currentRefinement, className, onFocus }) => {
@@ -24,6 +14,7 @@ export default connectSearchBox(
       },
     })
     const inputRef = useRef()
+    const location = useLocation()
 
     const handleSumbit = e => {
       e.preventDefault()
@@ -32,25 +23,16 @@ export default connectSearchBox(
         query: currentRefinement,
         page: 1,
       }
-      // if (location.pathname === "/search") {
-      // navigate to search page with lastest search string (currentRefinement)
-      navigate(searchStateToUrl("/search", updatedStateEntries), {
-        replace: false,
-      })
-      // }
+
+      if (location.pathname !== "/search") {
+        navigate("/search", { replace: false, state: updatedStateEntries })
+      }
     }
 
     const handleChange = e => {
       const newSearchString = e.target.value
       refine(newSearchString)
     }
-
-    React.useEffect(() => {
-      // set latest search string as a value to search box
-      if (searchState.query) {
-        inputRef.current.value = searchState.query
-      }
-    }, [])
 
     return (
       <form className="search" onSubmit={handleSumbit}>

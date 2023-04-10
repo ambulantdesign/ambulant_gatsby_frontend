@@ -7,8 +7,7 @@
 import qs from "qs"
 import * as React from "react"
 import { useRef, useMemo } from "react"
-import { useLocation } from "@reach/router"
-import { Script, withPrefix, navigate } from "gatsby"
+import { Script, withPrefix } from "gatsby"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
@@ -27,7 +26,6 @@ const initialState = {
 }
 const DEBOUNCE_TIME = 400
 
-/************** */
 const initialSearchState = {
   query: "",
   page: 1,
@@ -35,17 +33,7 @@ const initialSearchState = {
 
 const createURL = state => `?${qs.stringify(state)}`
 
-const searchStateToUrl = (location, searchState) => {
-  let fullPath
-  location.pathname === "/search"
-    ? (fullPath = `${location.pathname}${createURL(searchState)}`)
-    : (fullPath = `/search${createURL(searchState)}`)
-  return searchState ? `${fullPath}` : ""
-}
-
-/************** */
-
-const Layout = ({ id = "", children }) => {
+const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
   const { title, author, city } = useSiteMetadata()
   const [searchState, setSearchState] = useLocalStorageState("searchState", {
     ssr: true,
@@ -55,7 +43,6 @@ const Layout = ({ id = "", children }) => {
     ssr: true,
     defaultValue: initialState,
   })
-  const location = useLocation()
 
   // Connect and authenticate with your Algolia app
   const searchClient = useMemo(
@@ -72,22 +59,7 @@ const Layout = ({ id = "", children }) => {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
     debouncedSetStateRef.current = setTimeout(() => {
-      console.log("onSearchStateChange > debounced")
-      // console.log(searchState)
-      // console.log(updatedSearchState)
-      setSearchState({ ...updatedSearchState })
-
-      // **** update URL params > aber nur auf '/search' page!!!!
-      // das überschreibt aufgrund der Netz-Latenz wieder alle neuen Eingaben
-      // Hier müsste noch eine Und-Verknüpfung hin:
-      // wenn Anfrage von anderer Seite als '/search' kommt,
-      // dann Codeblock nicht ausführen
-      if (location.pathname === "/search") {
-        // console.log("update again??????????")
-        navigate(searchStateToUrl("/search", { ...updatedSearchState }), {
-          replace: true,
-        })
-      }
+      setSearchState(updatedSearchState)
     }, DEBOUNCE_TIME)
   }
 
