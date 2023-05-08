@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useRef, useEffect } from "react"
 
-const VideoEmbed = ({ videoObj }) => {
+const VideoEmbed = ({ videos }) => {
   const videoRef = useRef(null)
 
   useEffect(() => {
@@ -10,7 +10,12 @@ const VideoEmbed = ({ videoObj }) => {
 
   return (
     <video className="video-js" preload="auto" muted={true} ref={videoRef}>
-      <source src={videoObj.src} type={videoObj.mime}></source>
+      {videos.map(videoObj => {
+        const { url: src } = videoObj.localFile
+        return (
+          <source key={videoObj.id} src={src} type={videoObj.mime}></source>
+        )
+      })}
       {/* <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
 			<source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source> */}
       <p className="vjs-no-js">

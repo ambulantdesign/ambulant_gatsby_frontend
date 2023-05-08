@@ -39,14 +39,22 @@ const WorkDetails = ({ data }) => {
   } = data.work
 
   let allGalleries = []
+  let sliderVideos = []
+  let extraVideos = []
+
   if (videos.length > 0) {
     videos.map(video =>
       video.addToSlider
-        ? allGalleries.push(video.file)
-        : (allGalleries = [...allGalleries])
+        ? sliderVideos.push(video.file)
+        : extraVideos.push(video.file)
     )
   }
-  allGalleries = [...allGalleries, ...gallery]
+  const allSliderVideos = {
+    id: sliderVideos[0].id,
+    isSliderVideo: true,
+    sliderVideos,
+  }
+  allGalleries = [allSliderVideos, ...gallery]
 
   // Check if window is defined (so if in the browser or in node.js).
   var isBrowser = typeof window !== "undefined"
@@ -83,18 +91,21 @@ const WorkDetails = ({ data }) => {
               onTransitionEnd={swiper => transitionEndHandler(swiper)}
             >
               {allGalleries.map((slide, index) => {
-                const { id, caption, localFile = null, mime = null } = slide
+                const {
+                  id,
+                  caption = null,
+                  localFile = null,
+                  isSliderVideo = null,
+                  sliderVideos = null,
+                } = slide
                 let media = null
-                if (!mime) {
+                if (!isSliderVideo) {
                   media = getImage(localFile)
                 } else {
-                  media = {
-                    src: localFile.url,
-                    mime: mime,
-                  }
+                  media = sliderVideos
                 }
 
-                if (!mime) {
+                if (!isSliderVideo) {
                   return (
                     <SwiperSlide key={id} virtualIndex={index}>
                       <GatsbyImage
@@ -107,7 +118,7 @@ const WorkDetails = ({ data }) => {
                 } else {
                   return (
                     <SwiperSlide key={id} virtualIndex={index}>
-                      <VideoEmbed videoObj={media} />
+                      <VideoEmbed videos={media} />
                     </SwiperSlide>
                   )
                 }
