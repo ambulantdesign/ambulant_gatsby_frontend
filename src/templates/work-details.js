@@ -49,12 +49,16 @@ const WorkDetails = ({ data }) => {
         : extraVideos.push(video.file)
     )
   }
-  const allSliderVideos = {
-    id: sliderVideos[0].id,
-    isSliderVideo: true,
-    sliderVideos,
+  if (sliderVideos.length > 0) {
+    const allSliderVideos = {
+      id: sliderVideos[0].id,
+      isSliderVideo: true,
+      sliderVideos,
+    }
+    allGalleries = [allSliderVideos, ...gallery]
+  } else {
+    allGalleries = gallery
   }
-  allGalleries = [allSliderVideos, ...gallery]
 
   // Check if window is defined (so if in the browser or in node.js).
   var isBrowser = typeof window !== "undefined"
