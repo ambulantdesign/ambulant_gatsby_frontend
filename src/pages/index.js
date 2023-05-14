@@ -27,7 +27,7 @@ const IndexPage = ({ data }) => {
     ["desc", "asc"]
   )
 
-  // console.log(randomProjects)
+  console.log(randomProjects)
 
   useEffect(() => {
     loaderRef.current.style.display = "none"

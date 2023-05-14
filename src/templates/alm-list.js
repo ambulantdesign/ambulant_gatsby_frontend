@@ -92,6 +92,8 @@ const AlmListPage = ({ data, pageContext }) => {
     gridRef.current.style.opacity = "100"
   }, [data])
 
+  console.log(projects)
+
   return (
     <>
       <Layout>
