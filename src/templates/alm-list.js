@@ -14,7 +14,9 @@ import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
   const { title, contentType } = pageContext
-  let sliceLength
+  const [sliceLength, setSliceLength] = useState(
+    parseInt(process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE)
+  )
   let projects
 
   if (contentType === "artists") {
@@ -29,17 +31,8 @@ const AlmListPage = ({ data, pageContext }) => {
 
   const noresults = projects.length <= 0
 
-  // first page render
-  const [firstRender, setFirstRender] = useState(true)
   // CSS class for fade-in animation of last added item
   const [fadeIn, setFadeIn] = useState("")
-
-  if (firstRender) {
-    sliceLength = parseInt(process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE)
-    setFirstRender(false)
-  } else {
-    sliceLength = parseInt(process.env.REACT_APP_GATSBY_POSTS_ON_ALM)
-  }
 
   // State for the list
   const [list, setList] = useState([...projects.slice(0, sliceLength)])
@@ -59,6 +52,7 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // Handle loading more articles
   useEffect(() => {
+    setSliceLength(parseInt(process.env.REACT_APP_GATSBY_POSTS_ON_ALM))
     if (loadMore && hasMore) {
       const currentLength = list.length
       const isMore = currentLength < projects.length
