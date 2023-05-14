@@ -1,7 +1,7 @@
 const path = require("path")
 
 // create pages dynamically
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
   const resultWorks = await graphql(`
     query Projects {
@@ -46,21 +46,23 @@ exports.createPages = async ({ graphql, actions }) => {
   resultArtists.data.artists.nodes.forEach(artist => {
     createPage({
       path: `/artists/${artist.slug}`,
-      component: path.resolve(`src/templates/artist-list.js`),
+      component: path.resolve(`src/templates/alm-list.js`),
       context: {
         slug: artist.slug,
         title: artist.fullname,
+        contentType: "artists",
       },
-      defer: false, // Defer page generation to the first user request? (DSG)
+      defer: true, // Defer page generation to the first user request? (DSG)
     })
   })
   resultKeywords.data.keywords.nodes.forEach(keyword => {
     createPage({
       path: `/keywords/${keyword.slug}`,
-      component: path.resolve(`src/templates/keyword-list.js`),
+      component: path.resolve(`src/templates/alm-list.js`),
       context: {
         slug: keyword.slug,
         title: keyword.name,
+        contentType: "keywords",
       },
       defer: false, // Defer page generation to the first user request? (DSG)
     })

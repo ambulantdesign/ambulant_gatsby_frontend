@@ -8,12 +8,26 @@ import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
 import * as styles from "../assets/css/index.module.css"
 
+var _collection = require("lodash/collection")
+
 const IndexPage = ({ data }) => {
   const loaderRef = useRef()
   const gridRef = useRef()
   const {
     allStrapiWork: { nodes: projects },
   } = data
+
+  let randomProjects = _collection.sampleSize(
+    projects,
+    process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE
+  )
+  randomProjects = _collection.orderBy(
+    randomProjects,
+    ["productionDate", "slug"],
+    ["desc", "asc"]
+  )
+
+  // console.log(randomProjects)
 
   useEffect(() => {
     loaderRef.current.style.display = "none"
@@ -36,7 +50,7 @@ const IndexPage = ({ data }) => {
             style={{}}
             ref={gridRef}
           >
-            {projects.map(project => {
+            {randomProjects.map(project => {
               const { id, title, slug, artist, Gallery } = project
 
               return (
@@ -64,11 +78,12 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allStrapiWork {
+    allStrapiWork(sort: { order: DESC, fields: [productionDate, slug] }) {
       nodes {
         id: strapi_id
         title
         slug
+        productionDate
         keywords {
           name
         }
