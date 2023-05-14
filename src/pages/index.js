@@ -13,26 +13,28 @@ var _collection = require("lodash/collection")
 const IndexPage = ({ data }) => {
   const loaderRef = useRef()
   const gridRef = useRef()
+  const [randomProjects, setRandomProjects] = React.useState([])
   const {
     allStrapiWork: { nodes: projects },
   } = data
 
-  let randomProjects = _collection.sampleSize(
-    projects,
-    process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE
-  )
-  randomProjects = _collection.orderBy(
-    randomProjects,
-    ["productionDate", "slug"],
-    ["desc", "asc"]
-  )
-
-  console.log(randomProjects)
-
   useEffect(() => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
+
+    let tmpProjects = _collection.sampleSize(
+      projects,
+      process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE
+    )
+    tmpProjects = _collection.orderBy(
+      tmpProjects,
+      ["productionDate", "slug"],
+      ["desc", "asc"]
+    )
+    setRandomProjects(tmpProjects)
   }, [data])
+
+  console.log(randomProjects)
 
   return (
     <>
@@ -50,25 +52,26 @@ const IndexPage = ({ data }) => {
             style={{}}
             ref={gridRef}
           >
-            {randomProjects.map(project => {
-              const { id, title, slug, artist, Gallery } = project
+            {randomProjects &&
+              randomProjects.map(project => {
+                const { id, title, slug, artist, Gallery } = project
 
-              return (
-                <div
-                  className={`${styles.work} gridItem pr-4`}
-                  key={id}
-                  id={`gridItem-${id}`}
-                >
-                  <GridProject
-                    id={id}
-                    title={title}
-                    slug={slug}
-                    artist={artist}
-                    gallery={Gallery}
-                  />
-                </div>
-              )
-            })}
+                return (
+                  <div
+                    className={`${styles.work} gridItem pr-4`}
+                    key={id}
+                    id={`gridItem-${id}`}
+                  >
+                    <GridProject
+                      id={id}
+                      title={title}
+                      slug={slug}
+                      artist={artist}
+                      gallery={Gallery}
+                    />
+                  </div>
+                )
+              })}
           </div>
         </main>
       </Layout>
