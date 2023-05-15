@@ -30,7 +30,10 @@ const AlmListPage = ({ data, pageContext }) => {
   const loaderRef = useRef()
   const gridRef = useRef()
 
-  console.log(projects, projects.length)
+  console.log(
+    process.env.GATSBY_POSTS_ON_ALM,
+    process.env.GATSBY_POSTS_FIRST_PAGE
+  )
 
   const noresults = projects.length <= 0
 
@@ -90,8 +93,6 @@ const AlmListPage = ({ data, pageContext }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
   }, [data])
-
-  console.log(list, list.length)
 
   return (
     <>

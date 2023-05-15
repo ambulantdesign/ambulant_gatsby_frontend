@@ -25,7 +25,7 @@ const IndexPage = ({ data }) => {
     console.log(projects, process.env.GATSBY_POSTS_FIRST_PAGE)
 
     let tmpProjects = _.sampleSize(projects, 3)
-    console.log(tmpProjects)
+
     tmpProjects = _.orderBy(
       tmpProjects,
       ["productionDate", "slug"],
@@ -33,8 +33,6 @@ const IndexPage = ({ data }) => {
     )
     setRandomProjects(tmpProjects)
   }, [data])
-
-  console.log(randomProjects)
 
   return (
     <>
