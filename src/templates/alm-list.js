@@ -37,7 +37,7 @@ const AlmListPage = ({ data, pageContext }) => {
   const [fadeIn, setFadeIn] = useState("")
 
   // State for the list
-  const [list, setList] = useState([...projects.slice(0, sliceLength)])
+  const [list, setList] = useState([])
 
   // current length of list
   const [oldItems, setOldItems] = useState(list.length)
@@ -52,8 +52,6 @@ const AlmListPage = ({ data, pageContext }) => {
   const handleLoadMore = () => {
     setLoadMore(true)
   }
-
-  console.log(list, list.length)
 
   // Handle loading more articles
   useEffect(() => {
@@ -90,6 +88,12 @@ const AlmListPage = ({ data, pageContext }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
   }, [data])
+
+  useEffect(() => {
+    setList([...projects.slice(0, sliceLength)])
+  }, [])
+
+  console.log(list, list.length)
 
   return (
     <>
