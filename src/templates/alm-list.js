@@ -14,10 +14,10 @@ import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
   const { title, contentType } = pageContext
-  // const [sliceLength, setSliceLength] = useState(
-  //   parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
-  // )
-  const [sliceLength, setSliceLength] = useState(3)
+  const [sliceLength, setSliceLength] = useState(
+    parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
+  )
+
   let projects
 
   if (contentType === "artists") {
@@ -29,11 +29,6 @@ const AlmListPage = ({ data, pageContext }) => {
 
   const loaderRef = useRef()
   const gridRef = useRef()
-
-  console.log(
-    process.env.GATSBY_POSTS_ON_ALM,
-    process.env.GATSBY_POSTS_FIRST_PAGE
-  )
 
   const noresults = projects.length <= 0
 
@@ -59,8 +54,7 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // Handle loading more articles
   useEffect(() => {
-    setSliceLength(1)
-    // setSliceLength(parseInt(process.env.GATSBY_POSTS_ON_ALM))
+    setSliceLength(parseInt(process.env.GATSBY_POSTS_ON_ALM))
     if (loadMore && hasMore) {
       const currentLength = list.length
       const isMore = currentLength < projects.length

@@ -22,9 +22,10 @@ const IndexPage = ({ data }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
 
-    console.log(projects, process.env.GATSBY_POSTS_FIRST_PAGE)
-
-    let tmpProjects = _.sampleSize(projects, 3)
+    let tmpProjects = _.sampleSize(
+      projects,
+      parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
+    )
 
     tmpProjects = _.orderBy(
       tmpProjects,
