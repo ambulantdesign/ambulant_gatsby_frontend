@@ -29,6 +29,8 @@ const AlmListPage = ({ data, pageContext }) => {
   const loaderRef = useRef()
   const gridRef = useRef()
 
+  console.log(projects, projects.length)
+
   const noresults = projects.length <= 0
 
   // CSS class for fade-in animation of last added item
@@ -36,6 +38,7 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // State for the list
   const [list, setList] = useState([...projects.slice(0, sliceLength)])
+
   // current length of list
   const [oldItems, setOldItems] = useState(list.length)
 
@@ -49,6 +52,8 @@ const AlmListPage = ({ data, pageContext }) => {
   const handleLoadMore = () => {
     setLoadMore(true)
   }
+
+  console.log(list, list.length)
 
   // Handle loading more articles
   useEffect(() => {
@@ -85,8 +90,6 @@ const AlmListPage = ({ data, pageContext }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
   }, [data])
-
-  console.log(projects)
 
   return (
     <>

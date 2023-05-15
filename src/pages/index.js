@@ -8,7 +8,7 @@ import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
 import * as styles from "../assets/css/index.module.css"
 
-var _collection = require("lodash/collection")
+var _ = require("lodash")
 
 const IndexPage = ({ data }) => {
   const loaderRef = useRef()
@@ -22,11 +22,13 @@ const IndexPage = ({ data }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
 
-    let tmpProjects = _collection.sampleSize(
+    console.log(projects)
+
+    let tmpProjects = _.sampleSize(
       projects,
       process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE
     )
-    tmpProjects = _collection.orderBy(
+    tmpProjects = _.orderBy(
       tmpProjects,
       ["productionDate", "slug"],
       ["desc", "asc"]
