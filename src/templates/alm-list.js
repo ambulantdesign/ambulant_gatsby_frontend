@@ -14,9 +14,10 @@ import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
   const { title, contentType } = pageContext
-  const [sliceLength, setSliceLength] = useState(
-    parseInt(process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE)
-  )
+  // const [sliceLength, setSliceLength] = useState(
+  //   parseInt(process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE)
+  // )
+  const [sliceLength, setSliceLength] = useState(3)
   let projects
 
   if (contentType === "artists") {
