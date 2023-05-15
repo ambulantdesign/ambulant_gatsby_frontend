@@ -26,7 +26,7 @@ const IndexPage = ({ data }) => {
 
     let tmpProjects = _.sampleSize(
       projects,
-      process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE
+      parseInt(process.env.REACT_APP_GATSBY_POSTS_FIRST_PAGE)
     )
     tmpProjects = _.orderBy(
       tmpProjects,
