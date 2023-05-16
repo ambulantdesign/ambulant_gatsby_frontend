@@ -76,17 +76,14 @@ const AlmListPage = ({ data, pageContext }) => {
   // Check if element added to current list
   useEffect(() => {
     if (!oldItems) return
+    loaderRef.current.style.display = "none"
+    gridRef.current.style.opacity = "100"
     let timeout = setTimeout(() => setFadeIn("fade"), 500)
     return () => {
       clearTimeout(timeout)
       setFadeIn("")
     }
   }, [oldItems]) //eslint-disable-line
-
-  useEffect(() => {
-    loaderRef.current.style.display = "none"
-    gridRef.current.style.opacity = "100"
-  }, [data])
 
   return (
     <>
