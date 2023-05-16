@@ -5,7 +5,14 @@ import { connectSearchBox } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
 
 export default connectSearchBox(
-  ({ refine, currentRefinement, className, onFocus, focusBgCol }) => {
+  ({
+    refine,
+    currentRefinement,
+    className,
+    onFocus,
+    focusBgCol,
+    closeMobileNav,
+  }) => {
     const [searchState, setSearchState] = useLocalStorageState("searchState", {
       ssr: true,
       defaultValue: {
@@ -27,6 +34,7 @@ export default connectSearchBox(
       if (location.pathname !== "/search") {
         navigate("/search", { replace: false, state: updatedStateEntries })
       }
+      closeMobileNav()
     }
 
     const handleChange = e => {

@@ -69,6 +69,8 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
     scrollDiv.current.scrollTop = scrollY
   }, [scrollY])
 
+  console.log(offCanvas)
+
   return (
     <>
       {/* Assign CSS classes 'slide-out' oder 'slide-in' depepending on value of 'offCanvas' state variable > Maybe everything inside the 'Layout' component (higher level)  */}
@@ -92,7 +94,10 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
         </div>
         <nav className="w-full px-5">
           <div className="form-field">
-            <CustomSearchBox focusBgCol="bg-white" />
+            <CustomSearchBox
+              focusBgCol="bg-white"
+              closeMobileNav={closeMobileNav}
+            />
           </div>
           <ul className="list-none taxonomy-nav">
             <li>
@@ -114,6 +119,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                         className="bg-transparent py-4"
                         to={`/keywords/${slug}`}
                         activeClassName="active"
+                        onClick={offCanvas && closeMobileNav}
                       >
                         {name}
                       </Link>
@@ -141,6 +147,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                         className="bg-transparent py-4"
                         to={`/artists/${slug}`}
                         activeClassName="active"
+                        onClick={offCanvas && closeMobileNav}
                       >
                         {fullname}
                       </Link>
