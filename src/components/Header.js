@@ -20,7 +20,7 @@ const Header = ({ siteTitle, author, openMobileNav }) => {
         </h1>
       </div>
       <div className="form-field">
-        <CustomSearchBox />
+        <CustomSearchBox focusBgCol="bg-stone-100" />
       </div>
       <div className="menu-icon">
         {/* <!-- Please refer: https://github.com/shubhamjain/svg-loader --> */}

@@ -5,7 +5,7 @@ import { connectSearchBox } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
 
 export default connectSearchBox(
-  ({ refine, currentRefinement, className, onFocus }) => {
+  ({ refine, currentRefinement, className, onFocus, focusBgCol }) => {
     const [searchState, setSearchState] = useLocalStorageState("searchState", {
       ssr: true,
       defaultValue: {
@@ -56,7 +56,7 @@ export default connectSearchBox(
             </button>
           </span>
           <input
-            className="py-2 text-sm text-gray-700 bg-gray-50 border-transparent rounded-md pl-10 focus:outline-none focus:bg-stone-100 focus:text-gray-900"
+            className={`py-2 text-sm text-gray-700 bg-gray-50 border-transparent rounded-md pl-10 focus:outline-none focus:${focusBgCol} focus:text-gray-900`}
             type="text"
             placeholder="Search …"
             aria-label="Search …"
