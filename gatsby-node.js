@@ -52,7 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         title: artist.fullname,
         contentType: "artists",
       },
-      defer: true, // Defer page generation to the first user request? (DSG)
+      defer: false, // Defer page generation to the first user request? (DSG)
     })
   })
   resultKeywords.data.keywords.nodes.forEach(keyword => {
