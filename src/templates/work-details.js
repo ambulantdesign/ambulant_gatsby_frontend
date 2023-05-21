@@ -77,6 +77,8 @@ const WorkDetails = ({ data }) => {
     }
   }
 
+  console.log(artist)
+
   return (
     <>
       <Layout>
@@ -129,10 +131,7 @@ const WorkDetails = ({ data }) => {
               })}
             </Swiper>
           </section>
-          <ContentHeader
-            title={title}
-            subtitle={artist.fullname ? artist.fullname : null}
-          />
+          <ContentHeader title={title} subtitle={""} />
           <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-6">
               <ProjectMeta meta={meta} weblink={weblink} />
