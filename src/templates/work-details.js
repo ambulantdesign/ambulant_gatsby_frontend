@@ -38,8 +38,6 @@ const WorkDetails = ({ data }) => {
     streamingVideo,
   } = data.work
 
-  const [hasArtistRel, setHasArtistRel] = React.useState(false)
-
   let allGalleries = []
   let sliderVideos = []
   let extraVideos = []
@@ -79,13 +77,7 @@ const WorkDetails = ({ data }) => {
     }
   }
 
-  React.useEffect(() => {
-    if (artist && artist.fullname) {
-      setHasArtistRel(true)
-    }
-  }, [artist])
-
-  console.log(hasArtistRel)
+  console.log(artist)
 
   return (
     <>
@@ -139,10 +131,7 @@ const WorkDetails = ({ data }) => {
               })}
             </Swiper>
           </section>
-          <ContentHeader
-            title={title}
-            subtitle={hasArtistRel ? artist.fullname : null}
-          />
+          <ContentHeader title={title} subtitle={artist?.fullname} />
           <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-6">
               <ProjectMeta meta={meta} weblink={weblink} />
@@ -154,7 +143,7 @@ const WorkDetails = ({ data }) => {
             <footer className="my-10">
               <h5>related works</h5>
               <div className="btn-container">
-                {hasArtistRel && (
+                {artist.fullname && (
                   <Link
                     className="text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
                     to={`/artists/${artist.slug}`}
