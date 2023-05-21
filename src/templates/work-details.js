@@ -143,7 +143,7 @@ const WorkDetails = ({ data }) => {
             <footer className="my-10">
               <h5>related works</h5>
               <div className="btn-container">
-                {artist.fullname && (
+                {artist?.fullname && (
                   <Link
                     className="text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
                     to={`/artists/${artist.slug}`}
