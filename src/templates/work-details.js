@@ -129,10 +129,7 @@ const WorkDetails = ({ data }) => {
               })}
             </Swiper>
           </section>
-          <ContentHeader
-            title={title}
-            subtitle={artist ? artist.fullname : null}
-          />
+          <ContentHeader title={title} subtitle={artist.fullname} />
           <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-6">
               <ProjectMeta meta={meta} weblink={weblink} />
@@ -148,7 +145,7 @@ const WorkDetails = ({ data }) => {
                   className="text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
                   to={`/artists/${artist.slug}`}
                 >
-                  artist && <span className="">{artist.fullname}</span>
+                  artist.fullname && <span className="">{artist.fullname}</span>
                 </Link>
                 {keywords.map(keyword => (
                   <Link

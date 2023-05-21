@@ -26,7 +26,7 @@ const GridProject = ({ id, title, slug, artist, gallery }) => {
           onLoad={() => gridItemHandler(`gridItem-${id}`)}
         />
         <h4 className="pr-4 text-xl">{title}</h4>
-        artist && <h5 className="pr-4">{artist.fullname}</h5>
+        artist.fullname && <h5 className="pr-4">{artist.fullname}</h5>
       </Link>
     </Wrapper>
   )
