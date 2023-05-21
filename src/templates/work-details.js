@@ -38,7 +38,7 @@ const WorkDetails = ({ data }) => {
     streamingVideo,
   } = data.work
 
-  const [hasArtistRel, setHasArtistRel] = React.useState(true)
+  const [hasArtistRel, setHasArtistRel] = React.useState(false)
 
   let allGalleries = []
   let sliderVideos = []
@@ -80,8 +80,8 @@ const WorkDetails = ({ data }) => {
   }
 
   React.useEffect(() => {
-    if (!artist || !artist.fullname) {
-      setHasArtistRel(false)
+    if (artist && artist.fullname) {
+      setHasArtistRel(true)
     }
   }, [artist])
 
