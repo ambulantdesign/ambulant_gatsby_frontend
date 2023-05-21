@@ -129,7 +129,10 @@ const WorkDetails = ({ data }) => {
               })}
             </Swiper>
           </section>
-          <ContentHeader title={title} subtitle={artist.fullname} />
+          <ContentHeader
+            title={title}
+            subtitle={artist.fullname ? artist.fullname : null}
+          />
           <section className="grid gap-x-0 sm:gap-10 container " id="content">
             <div className="col-6">
               <ProjectMeta meta={meta} weblink={weblink} />
