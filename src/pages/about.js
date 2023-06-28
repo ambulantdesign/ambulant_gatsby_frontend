@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"
@@ -39,6 +40,20 @@ const AboutPage = ({ data }) => {
                     },
                   } = item
                   return <RichTextContent content={marginalTxt} key={index} />
+                case "STRAPI__COMPONENT_MEDIA_SINGLE_IMAGE":
+                  const {
+                    id,
+                    image: { caption = null, localFile = null },
+                  } = item
+
+                  return (
+                    <GatsbyImage
+                      key={id}
+                      image={getImage(localFile)}
+                      alt={caption}
+                      className="mb-4"
+                    />
+                  )
                 case "STRAPI__COMPONENT_MEDIA_STREAMING_VIDEO":
                   return <StreamingVideo video={item} key={index} />
                 default:
@@ -100,6 +115,17 @@ export const data = graphql`
       }
     }
   }
+  fragment singleImageCont on STRAPI__COMPONENT_MEDIA_SINGLE_IMAGE {
+    id
+    image {
+      localFile {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
+        }
+      }
+      caption
+    }
+  }
   {
     page: strapiAbout {
       id
@@ -113,6 +139,7 @@ export const data = graphql`
         __typename
         ...richTextCont
         ...streamingVideoCont
+        ...singleImageCont
       }
     }
   }
