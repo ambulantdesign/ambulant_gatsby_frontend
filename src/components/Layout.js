@@ -34,7 +34,7 @@ const initialSearchState = {
 const createURL = state => `?${qs.stringify(state)}`
 
 const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
-  const { title, author, city } = useSiteMetadata()
+  const { title, authorShort, city } = useSiteMetadata()
   const [searchState, setSearchState] = useLocalStorageState("searchState", {
     ssr: true,
     defaultValue: initialSearchState,
