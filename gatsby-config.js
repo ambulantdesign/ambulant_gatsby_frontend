@@ -75,6 +75,7 @@ module.exports = {
     city: `Amsterdam`,
     description: `One-woman-studio for visual communication and editorial design based in Amsterdam – The Netherlands | Book | Catalog | Museum | Gallery | Artists | Publisher | Visual Identity | Teaching`,
     author: `Gabriele Franziska Götz`,
+    authorShort: `Gabriele Götz`,
     siteUrl: `https://ambulantdesign.nl`,
     phone: `+31206890280`,
     email: `info@ambulantdesign.nl`,

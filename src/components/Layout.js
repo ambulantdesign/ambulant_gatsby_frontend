@@ -90,7 +90,7 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
         >
           <Header
             siteTitle={title || `ambulant design`}
-            author={author || `Gabriele Franziska Götz`}
+            author={authorShort || `Gabriele Franziska Götz`}
             city={city || `Amsterdam`}
             openMobileNav={openMobileNav}
           />
