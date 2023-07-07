@@ -10,13 +10,17 @@ const Header = ({ siteTitle, author, openMobileNav }) => {
     <Wrapper className="grid h-24">
       <div className="logo">
         <h1>
-          <Link to="/">
-            <svg height="28" width="28" className="circle">
-              <circle cx="14" cy="14" r="14" fill="#f67c6d" />
-            </svg>
-          </Link>
-          <Link to="/">{siteTitle}</Link>
-          <span>{author}</span>
+          <span className="ambulant">
+            <Link to="/">
+              <svg height="28" width="28" className="circle">
+                <circle cx="14" cy="14" r="14" fill="#f67c6d" />
+              </svg>
+            </Link>
+            <Link to="/">{siteTitle}</Link>
+          </span>
+          <span className="authorName">
+            <Link to="/about">{author}</Link>
+          </span>
         </h1>
       </div>
       <div className="form-field">
@@ -46,23 +50,28 @@ const Wrapper = styled.header`
   }
   .logo,
   .logo > h1,
-  .logo > h1 a {
+  .logo > h1 span.ambulant {
     display: flex;
     flex-direction: row;
     align-items: center;
+    row-gap: 0;
+  }
+  .logo > h1 span.ambulant {
+    column-gap: 10px;
+    margin-bottom: 0;
   }
   .logo > h1 {
     margin: 0;
     color: var(--clr-grey-3);
     font-weight: 400;
-    font-size: 1.75em;
+    font-size: 1.75rem;
     letter-spacing: -0.025em;
   }
   .logo > h1 a {
     color: var(--clr-links);
     font-weight: 700;
     white-space: nowrap;
-    margin-right: var(--space-10);
+    /* margin-right: var(--space-10); */
   }
   .logo > h1 a:hover {
     color: var(--clr-grey-4);
@@ -72,9 +81,16 @@ const Wrapper = styled.header`
     background-color: var(--clr-grey-4);
     transition: all 0.4s ease;
   }
-  .logo > h1 span {
+  .logo > h1 span.authorName {
+    margin-left: var(--space-20);
+  }
+  .logo > h1 span.authorName a {
     color: var(--clr-grey-2);
-    margin-left: var(--space-10);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .logo > h1 span.authorName a:hover {
+    color: var(--clr-grey-4);
   }
   .form-field {
     grid-column: span 3;
@@ -96,11 +112,22 @@ const Wrapper = styled.header`
     color: var(--clr-grey-3);
   }
   @media screen and (max-width: 1200px) {
-    .logo > h1 span {
-      display: none;
-    }
+    align-items: flex-start;
     .logo {
       grid-column: span 8;
+    }
+    .logo > h1 {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .logo > h1 span.ambulant {
+      column-gap: 10px;
+    }
+    .logo > h1 span.authorName {
+      /* display: none; */
+      font-size: 1.7rem;
+      margin-left: 38px;
+      padding-top: 0.125rem;
     }
     .form-field {
       grid-column: span 4;
