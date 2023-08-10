@@ -71,7 +71,8 @@ const strapiConfig = {
 module.exports = {
   // site config
   siteMetadata: {
-    title: `studio ambulant design`,
+    title: `ambulant design`,
+    studioName: `studio ambulant design`,
     city: `Amsterdam`,
     description: `One-woman-studio for visual communication and editorial design based in Amsterdam, The Netherlands | Book | Catalog | Museum | Gallery | Artists | Publisher | Visual Identity | CI`,
     author: `Gabriele Franziska Götz`,

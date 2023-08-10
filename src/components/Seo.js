@@ -15,7 +15,7 @@ function Seo({ description, title, children }) {
       query {
         site {
           siteMetadata {
-            title
+            title: studioName
             description
             author
             authorShort
