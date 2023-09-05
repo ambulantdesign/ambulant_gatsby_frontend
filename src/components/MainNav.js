@@ -69,8 +69,6 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
     scrollDiv.current.scrollTop = scrollY
   }, [scrollY])
 
-  console.log(offCanvas)
-
   return (
     <>
       {/* Assign CSS classes 'slide-out' oder 'slide-in' depepending on value of 'offCanvas' state variable > Maybe everything inside the 'Layout' component (higher level)  */}

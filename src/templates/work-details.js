@@ -77,8 +77,6 @@ const WorkDetails = ({ data }) => {
     }
   }
 
-  console.log(artist)
-
   return (
     <>
       <Layout>

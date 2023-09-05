@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useRef, useState, useEffect } from "react"
-import { graphql, withPrefix } from "gatsby"
+import { graphql, withPrefix, navigate } from "gatsby"
 import styled from "styled-components"
 import { FaParagraph } from "react-icons/fa"
 
@@ -47,11 +47,6 @@ const AlmListPage = ({ data, pageContext }) => {
   // State of whether there is more to load
   const [hasMore, setHasMore] = useState(projects.length > sliceLength)
 
-  // Load more button click
-  const handleLoadMore = () => {
-    setLoadMore(true)
-  }
-
   // Handle loading more articles
   useEffect(() => {
     setSliceLength(parseInt(process.env.GATSBY_POSTS_ON_ALM))
@@ -69,6 +64,11 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // Check if there is more
   useEffect(() => {
+    // programmatically navigate to detail page if there is only one work
+    if (list.length === 1 && contentType === "artists") {
+      const { slug } = projects[0]
+      navigate(`/works/${slug}`, { replace: true })
+    }
     const isMore = list.length < projects.length
     setHasMore(isMore)
   }, [list]) //eslint-disable-line
@@ -131,7 +131,7 @@ const AlmListPage = ({ data, pageContext }) => {
                 <button
                   type="button"
                   className="w-full btn-solid py-2 px-8 mr-4 border rounded inline-block"
-                  onClick={handleLoadMore}
+                  onClick={() => setLoadMore(true)}
                 >
                   Load More
                 </button>
