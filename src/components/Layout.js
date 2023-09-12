@@ -9,7 +9,7 @@ import * as React from "react"
 import { useRef, useMemo } from "react"
 import { Script, withPrefix } from "gatsby"
 import algoliasearch from "algoliasearch/lite"
-import { InstantSearch } from "react-instantsearch-dom"
+import { InstantSearch, SortBy } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
 import PropTypes from "prop-types"
 import styled from "styled-components"
@@ -88,6 +88,13 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
           createURL={createURL}
           searchState={searchState}
         >
+          <SortBy
+            items={[
+              { label: "Featured", value: "instant_search" },
+              { label: "A–Z (asc)", value: "instant_search_slug_asc" },
+              { label: "Z–A (desc)", value: "instant_search_slug_desc" },
+            ]}
+          />
           <Header
             siteTitle={title || `ambulant design`}
             author={authorShort || `Gabriele Franziska Götz`}
