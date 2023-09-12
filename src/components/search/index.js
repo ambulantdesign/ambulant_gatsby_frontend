@@ -36,7 +36,6 @@ export default function CustomSearch() {
   )
 
   const PageHit = ({ hit }) => {
-    console.log(hit)
     const { path, title, keywords, meta } = hit
 
     let metaArray = []

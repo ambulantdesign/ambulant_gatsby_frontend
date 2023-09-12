@@ -9,7 +9,7 @@ import * as React from "react"
 import { useRef, useMemo } from "react"
 import { Script, withPrefix } from "gatsby"
 import algoliasearch from "algoliasearch/lite"
-import { InstantSearch, SortBy } from "react-instantsearch-dom"
+import { InstantSearch } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
 import PropTypes from "prop-types"
 import styled from "styled-components"
@@ -55,8 +55,6 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
   )
   const debouncedSetStateRef = useRef(null)
 
-  const indexName = process.env.ALGOLIA_INDEX_NAME
-
   function onSearchStateChange(updatedSearchState) {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
@@ -85,24 +83,11 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
       <Wrapper className="site-container" id={id}>
         <InstantSearch
           searchClient={searchClient}
-          indexName={indexName}
+          indexName={process.env.ALGOLIA_INDEX_NAME}
           onSearchStateChange={onSearchStateChange}
           createURL={createURL}
           searchState={searchState}
         >
-          <SortBy
-            items={[
-              { label: "Featured", value: `${indexName}` },
-              {
-                label: "A–Z (asc)",
-                value: `${indexName}_slug_asc`,
-              },
-              {
-                label: "Z–A (desc)",
-                value: `${indexName}_slug_desc`,
-              },
-            ]}
-          />
           <Header
             siteTitle={title || `ambulant design`}
             author={authorShort || `Gabriele Franziska Götz`}
