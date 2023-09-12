@@ -10,7 +10,6 @@ import { useRef, useMemo } from "react"
 import { Script, withPrefix } from "gatsby"
 import algoliasearch from "algoliasearch/lite"
 import { InstantSearch, SortBy } from "react-instantsearch-dom"
-import { indexName } from "../utils/algolia"
 import useLocalStorageState from "use-local-storage-state"
 import PropTypes from "prop-types"
 import styled from "styled-components"
@@ -91,9 +90,15 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
         >
           <SortBy
             items={[
-              { label: "Featured", value: `${indexName}` },
-              { label: "A–Z (asc)", value: `${indexName}_slug_asc` },
-              { label: "Z–A (desc)", value: `${indexName}_slug_desc` },
+              { label: "Featured", value: `${process.env.ALGOLIA_INDEX_NAME}` },
+              {
+                label: "A–Z (asc)",
+                value: `${process.env.ALGOLIA_INDEX_NAME}_slug_asc`,
+              },
+              {
+                label: "Z–A (desc)",
+                value: `${process.env.ALGOLIA_INDEX_NAME}_slug_desc`,
+              },
             ]}
           />
           <Header
