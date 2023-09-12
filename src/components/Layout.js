@@ -55,6 +55,8 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
   )
   const debouncedSetStateRef = useRef(null)
 
+  const indexName = process.env.ALGOLIA_INDEX_NAME
+
   function onSearchStateChange(updatedSearchState) {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
@@ -90,14 +92,14 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
         >
           <SortBy
             items={[
-              { label: "Featured", value: `${process.env.ALGOLIA_INDEX_NAME}` },
+              { label: "Featured", value: `${indexName}` },
               {
                 label: "A–Z (asc)",
-                value: `${process.env.ALGOLIA_INDEX_NAME}_slug_asc`,
+                value: `${indexName}_slug_asc`,
               },
               {
                 label: "Z–A (desc)",
-                value: `${process.env.ALGOLIA_INDEX_NAME}_slug_desc`,
+                value: `${indexName}_slug_desc`,
               },
             ]}
           />
