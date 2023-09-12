@@ -57,7 +57,7 @@ const portfolioQuery = `{
 	}
 }`
 
-const indexName = `dev_ambulant-portfolio`
+export const indexName = `dev_ambulant-portfolio`
 
 const flatten = arr =>
   arr.map(({ node: { frontmatter, ...rest } }) => ({
