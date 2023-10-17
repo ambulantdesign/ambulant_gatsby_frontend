@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useEffect, useRef } from "react"
 import { connectStateResults } from "react-instantsearch-dom"
-// import useLocalStorageState from "use-local-storage-state"
+import useLocalStorageState from "use-local-storage-state"
 import styled from "styled-components"
 
-import { useGlobalContext } from "../context/SearchContext"
+// import { useGlobalContext } from "../context/SearchContext"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Loading from "../components/ui/Loading"
@@ -12,21 +12,27 @@ import CustomSearch from "../components/search"
 // import SearchResult from "../components/search/search-result"
 import ContentHeader from "../components/ContentHeader"
 
+const initialSearchState = {
+  query: "",
+  page: 1,
+}
+
 export default function SearchPage(props) {
   // ********
-  const { searchObj, setSearchObj } = useGlobalContext()
+  // const { searchObj, setSearchObj } = useGlobalContext()
+  // console.log(searchObj)
   // ********
-  // const [searchState, setSearchState] = useLocalStorageState("searchState", {
-  //   ssr: true,
-  //   defaultValue: initialSearchState,
-  // })
-  // const [isLocalStorage, setIsLocalStorage] = React.useState(false)
+  const [searchState, setSearchState] = useLocalStorageState("searchState", {
+    ssr: true,
+    defaultValue: initialSearchState,
+  })
+  const [isLocalStorage, setIsLocalStorage] = React.useState(false)
   const [fromDiffOrigin, setFromDiffOrigin] = React.useState(false)
   const { state: searchStateFromLocation } = props.location
 
   let headline
-  searchObj.query
-    ? (headline = `Search for “${searchObj.query}”`)
+  searchState.query
+    ? (headline = `Search for “${searchState.query}”`)
     : (headline = "All entries")
 
   const loaderRef = useRef()
@@ -47,8 +53,8 @@ export default function SearchPage(props) {
         "query" in searchStateFromLocation &&
         searchStateFromLocation.query !== ""
       ) {
-        // setSearchState(searchState)
-        setSearchObj(searchObj)
+        setSearchState(searchState)
+        // setSearchObj(searchState)
       }
     }
   }, [])

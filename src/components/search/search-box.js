@@ -3,7 +3,7 @@ import { useLocation } from "@reach/router"
 import { navigate } from "gatsby"
 import { connectSearchBox } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
-import { useGlobalContext } from "../../context/SearchContext"
+// import { useGlobalContext } from "../../context/SearchContext"
 
 export default connectSearchBox(
   ({
@@ -15,8 +15,14 @@ export default connectSearchBox(
     offCanvas,
     closeMobileNav,
   }) => {
-    const { searchObj, setSearchObj } = useGlobalContext()
-
+    // const { searchObj, setSearchObj } = useGlobalContext()
+    const [searchState, setSearchState] = useLocalStorageState("searchState", {
+      ssr: true,
+      defaultValue: {
+        query: "",
+        page: 1,
+      },
+    })
     const inputRef = useRef()
     const location = useLocation()
 

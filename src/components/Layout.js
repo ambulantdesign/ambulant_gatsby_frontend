@@ -27,15 +27,20 @@ const initialState = {
 }
 const DEBOUNCE_TIME = 400
 
+const initialSearchState = {
+  query: "",
+  page: 1,
+}
+
 const createURL = state => `?${qs.stringify(state)}`
 
 const Layout = ({ id = "", children }) => {
   const { title, authorShort, city } = useSiteMetadata()
-  const { searchObj, setSearchObj } = useGlobalContext()
-  // const [searchState, setSearchState] = useLocalStorageState("searchState", {
-  //   ssr: true,
-  //   defaultValue: initialSearchState,
-  // })
+  // const { setSearchObj } = useGlobalContext()
+  const [searchState, setSearchState] = useLocalStorageState("searchState", {
+    ssr: true,
+    defaultValue: initialSearchState,
+  })
   const [sideNav, setSideNav] = useLocalStorageState("sideNav", {
     ssr: true,
     defaultValue: initialState,
@@ -56,8 +61,8 @@ const Layout = ({ id = "", children }) => {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
     debouncedSetStateRef.current = setTimeout(() => {
-      // setSearchState(updatedSearchState)
-      setSearchObj(updatedSearchState)
+      setSearchState(updatedSearchState)
+      // setSearchObj(updatedSearchState)
     }, DEBOUNCE_TIME)
   }
 
@@ -84,7 +89,7 @@ const Layout = ({ id = "", children }) => {
           indexName={`dev_ambulant-portfolio`}
           onSearchStateChange={onSearchStateChange}
           createURL={createURL}
-          searchState={searchObj}
+          searchState={searchState}
         >
           <Header
             siteTitle={title || `ambulant design`}
