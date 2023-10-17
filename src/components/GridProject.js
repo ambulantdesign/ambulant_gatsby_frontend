@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
@@ -55,4 +56,32 @@ const Wrapper = styled.figure`
     max-height: 300px;
   }
 `
+
+GridProject.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  slug: PropTypes.string,
+  artist: PropTypes.object,
+  gallery: PropTypes.arrayOf(
+    PropTypes.shape({
+      localFile: PropTypes.object.isRequired,
+      id: PropTypes.string.isRequired,
+      caption: PropTypes.string,
+    })
+  ),
+}
+
+GridProject.defaultProps = {
+  id: ``,
+  title: `de`,
+  slug: ``,
+  artist: {},
+  gallery: [
+    {
+      localFile: {},
+      id: "0",
+      caption: ``,
+    },
+  ],
+}
 export default GridProject

@@ -269,19 +269,21 @@ export const query = graphql`
   }
 `
 
-export const Head = ({ data }) => {
+export const Head = ({ location, data }) => {
   const { title, artist } = data.work
   let fullTitle
+
   artist?.fullname
     ? (fullTitle = `${artist.fullname}: ${title} `)
     : (fullTitle = title)
+
   return (
     <Seo
       title={fullTitle}
       // description={excerpt}
       // image={card_image}
       // lang="de"
-      // pathname={props.location.pathname}
+      pathname={location.pathname}
     />
   )
 }

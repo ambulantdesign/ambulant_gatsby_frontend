@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -41,3 +42,42 @@ const Wrapper = styled.div`
     color: var(--clr-grey-3);
   }
 `
+ProjectMeta.propTypes = {
+  meta: PropTypes.shape({
+    ISBN: PropTypes.string,
+    city: PropTypes.string,
+    commissioner: PropTypes.string,
+    format: PropTypes.string,
+    info: PropTypes.string,
+    medium: PropTypes.string,
+    technical_details: PropTypes.string,
+    year: PropTypes.string.isRequired,
+  }),
+  weblink: PropTypes.arrayOf(
+    PropTypes.shape({
+      button: PropTypes.bool.isRequired,
+      label: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    })
+  ),
+}
+
+ProjectMeta.defaultProps = {
+  meta: {
+    ISBN: null,
+    city: ``,
+    commissioner: ``,
+    format: ``,
+    info: ``,
+    medium: ``,
+    technical_details: ``,
+    year: ``,
+  },
+  weblink: [
+    {
+      button: true,
+      label: ``,
+      url: ``,
+    },
+  ],
+}

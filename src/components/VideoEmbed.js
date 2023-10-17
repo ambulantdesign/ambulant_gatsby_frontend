@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { useRef, useEffect } from "react"
 
 const VideoEmbed = ({ videos }) => {
@@ -32,4 +33,28 @@ const VideoEmbed = ({ videos }) => {
     </video>
   )
 }
+
+VideoEmbed.propTypes = {
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      localFile: PropTypes.object.isRequired,
+      id: PropTypes.string.isRequired,
+      caption: PropTypes.string,
+      mime: PropTypes.string.isRequired,
+    })
+  ),
+}
+VideoEmbed.defaultProps = {
+  videos: [
+    {
+      localFile: {
+        url: ``,
+      },
+      id: ``,
+      caption: ``,
+      mime: `video/mp4`,
+    },
+  ],
+}
+
 export default VideoEmbed

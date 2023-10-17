@@ -148,6 +148,14 @@ ContactPage.propTypes = {
   }).isRequired,
 }
 
-export const Head = () => <Seo title="Contact" />
+export const Head = ({ location }) => (
+  <Seo
+    title="Contact"
+    // description={excerpt}
+    // image={card_image}
+    // lang="de"
+    pathname={location.pathname}
+  />
+)
 
 export default ContactPage

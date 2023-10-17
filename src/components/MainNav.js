@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { useEffect, useCallback, useRef } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import styled from "styled-components"
@@ -242,6 +243,10 @@ const Wrapper = styled.aside`
     color: var(--clr-links);
     border-color: var(--clr-links);
   }
+  nav .list-none li > a,
+  nav .list-none li > button {
+    cursor: pointer;
+  }
   .form-field {
     display: none;
   }
@@ -277,5 +282,25 @@ const Wrapper = styled.aside`
     }
   }
 `
+
+MainNav.propTypes = {
+  sideNav: PropTypes.shape({
+    keywordNav: PropTypes.bool,
+    artistNav: PropTypes.bool,
+    offCanvas: PropTypes.bool,
+  }),
+  toggleNav: PropTypes.func.isRequired,
+  closeMobileNav: PropTypes.func.isRequired,
+}
+
+MainNav.defaultProps = {
+  sideNav: {
+    keywordNav: false,
+    artistNav: false,
+    offCanvas: false,
+  },
+  toggleNav: () => {},
+  closeMobileNav: () => {},
+}
 
 export default MainNav

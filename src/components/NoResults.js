@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
 import styled from "styled-components"
@@ -27,5 +28,12 @@ export const Wrapper = styled.div`
     grid-column: span 12;
   }
 `
+NoResults.propTypes = {
+  tagName: PropTypes.string.isRequired,
+}
+
+NoResults.defaultProps = {
+  tagName: ``,
+}
 
 export default NoResults

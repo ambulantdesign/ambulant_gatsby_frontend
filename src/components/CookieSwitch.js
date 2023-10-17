@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useRef, useState } from "react"
+import PropTypes from "prop-types"
 
 import useLocalStorageState from "use-local-storage-state"
 
@@ -43,6 +44,20 @@ const CookieSwitch = ({ provider }) => {
       </form>
     </>
   )
+}
+
+CookieSwitch.propTypes = {
+  provider: PropTypes.shape({
+    platform: PropTypes.string.isRequired,
+    cookieName: PropTypes.string.isRequired,
+  }),
+}
+
+CookieSwitch.defaultProps = {
+  provider: {
+    platform: ``,
+    cookieName: ``,
+  },
 }
 
 export default CookieSwitch

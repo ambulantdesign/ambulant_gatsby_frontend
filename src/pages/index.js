@@ -127,11 +127,17 @@ export const query = graphql`
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => {
+export const Head = ({ location }) => {
   return (
     <>
       <script src={withPrefix("/js/autoGrid.js")} type="text/javascript" />
-      <Seo title="Home" />
+      <Seo
+        title="Home"
+        // description={excerpt}
+        // image={card_image}
+        // lang="de"
+        pathname={location.pathname}
+      />
     </>
   )
 }

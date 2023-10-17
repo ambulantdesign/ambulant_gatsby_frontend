@@ -5,7 +5,8 @@ import { Link } from "gatsby"
 import CustomSearchBox from "../components/search/search-box"
 import styled from "styled-components"
 
-const Header = ({ siteTitle, author, openMobileNav }) => {
+const Header = props => {
+  const { siteTitle, author, city, openMobileNav } = props
   return (
     <Wrapper className="grid h-24">
       <div className="logo">
@@ -20,6 +21,9 @@ const Header = ({ siteTitle, author, openMobileNav }) => {
           </span>
           <span className="authorName">
             <Link to="/about">{author}</Link>
+            <span>
+              {` `} — studio {siteTitle} {city}
+            </span>
           </span>
         </h1>
       </div>
@@ -91,6 +95,9 @@ const Wrapper = styled.header`
   }
   .logo > h1 span.authorName a:hover {
     color: var(--clr-grey-4);
+  }
+  .logo > h1 span.authorName span {
+    display: none;
   }
   .form-field {
     grid-column: span 3;
@@ -167,13 +174,17 @@ const Wrapper = styled.header`
 `
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-  author: PropTypes.string,
+  siteTitle: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  city: PropTypes.string,
+  openMobileNav: PropTypes.func.isRequired,
 }
 
 Header.defaultProps = {
   siteTitle: ``,
   author: ``,
+  city: `Amsterdam`,
+  openMobileNav: () => {},
 }
 
 export default Header

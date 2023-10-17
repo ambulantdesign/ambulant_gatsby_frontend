@@ -104,6 +104,14 @@ export const data = graphql`
     }
   }
 `
-export const Head = () => <Seo title="Privacy & Disclaimer" />
+export const Head = ({ location }) => (
+  <Seo
+    title="Privacy & Disclaimer"
+    // description={excerpt}
+    // image={card_image}
+    // lang="de"
+    pathname={location.pathname}
+  />
+)
 
 export default PrivacyPage

@@ -1,37 +1,35 @@
 import * as React from "react"
 import { useEffect, useRef } from "react"
-import { useLocation } from "@reach/router"
 import { connectStateResults } from "react-instantsearch-dom"
-import useLocalStorageState from "use-local-storage-state"
+// import useLocalStorageState from "use-local-storage-state"
 import styled from "styled-components"
 
+import { useGlobalContext } from "../context/SearchContext"
 import Layout from "../components/Layout"
+import Seo from "../components/Seo"
 import Loading from "../components/ui/Loading"
 import CustomSearch from "../components/search"
-import SearchResult from "../components/search/search-result"
+// import SearchResult from "../components/search/search-result"
 import ContentHeader from "../components/ContentHeader"
 
-const initialSearchState = {
-  query: "",
-  page: 1,
-}
-
 export default function SearchPage(props) {
-  const [searchState, setSearchState] = useLocalStorageState("searchState", {
-    ssr: true,
-    defaultValue: initialSearchState,
-  })
-  const [isLocalStorage, setIsLocalStorage] = React.useState(false)
+  // ********
+  const { searchObj, setSearchObj } = useGlobalContext()
+  // ********
+  // const [searchState, setSearchState] = useLocalStorageState("searchState", {
+  //   ssr: true,
+  //   defaultValue: initialSearchState,
+  // })
+  // const [isLocalStorage, setIsLocalStorage] = React.useState(false)
   const [fromDiffOrigin, setFromDiffOrigin] = React.useState(false)
   const { state: searchStateFromLocation } = props.location
 
   let headline
-  searchState.query
-    ? (headline = `Search for “${searchState.query}”`)
+  searchObj.query
+    ? (headline = `Search for “${searchObj.query}”`)
     : (headline = "All entries")
 
   const loaderRef = useRef()
-  const location = useLocation()
 
   const LoadingIndicator = connectStateResults(({ isSearchStalled }) =>
     isSearchStalled ? (
@@ -49,7 +47,8 @@ export default function SearchPage(props) {
         "query" in searchStateFromLocation &&
         searchStateFromLocation.query !== ""
       ) {
-        setSearchState(searchState)
+        // setSearchState(searchState)
+        setSearchObj(searchObj)
       }
     }
   }, [])
@@ -116,3 +115,18 @@ const Wrapper = styled.main`
     }
   }
 `
+
+export const Head = ({ location, pageContext }) => {
+  const { title, contentType } = pageContext
+  console.log(title, contentType)
+  // ggf. Context API (useContext) für den search string
+
+  return (
+    <Seo
+      title={`Search for “blabla”`}
+      // description={excerpt}
+      // image={card_image}
+      pathname={location.pathname}
+    />
+  )
+}

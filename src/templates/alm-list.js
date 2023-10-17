@@ -262,7 +262,7 @@ export const query = graphql`
   }
 `
 
-export const Head = ({ data, pageContext }) => {
+export const Head = ({ location, data, pageContext }) => {
   const { title, contentType } = pageContext
   let seoTitle
 
@@ -281,7 +281,7 @@ export const Head = ({ data, pageContext }) => {
         // description={excerpt}
         // image={card_image}
         // lang="de"
-        // pathname={props.location.pathname}
+        pathname={location.pathname}
       />
     </>
   )

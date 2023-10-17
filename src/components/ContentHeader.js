@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 const ContentHeader = ({ title, subtitle = null }) => {
   return (
@@ -18,5 +19,15 @@ export const Wrapper = styled.section`
   z-index: 90;
   background-color: var(--clr-white-opac-85);
 `
+
+ContentHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+}
+
+ContentHeader.defaultProps = {
+  title: ``,
+  subtitle: ``,
+}
 
 export default ContentHeader

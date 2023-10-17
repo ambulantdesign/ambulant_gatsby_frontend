@@ -162,6 +162,14 @@ AboutPage.propTypes = {
   }).isRequired,
 }
 
-export const Head = () => <Seo title="About & CV" />
+export const Head = ({ location }) => (
+  <Seo
+    title="About & CV"
+    // description={excerpt}
+    // image={card_image}
+    // lang="de"
+    pathname={location.pathname}
+  />
+)
 
 export default AboutPage

@@ -15,6 +15,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import { useSiteMetadata } from "../hooks/use-site-metadata"
+import { useGlobalContext } from "../context/SearchContext"
 import Header from "./Header"
 import MainNav from "./MainNav"
 import "../assets/css/layout.css"
@@ -26,19 +27,15 @@ const initialState = {
 }
 const DEBOUNCE_TIME = 400
 
-const initialSearchState = {
-  query: "",
-  page: 1,
-}
-
 const createURL = state => `?${qs.stringify(state)}`
 
-const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
+const Layout = ({ id = "", children }) => {
   const { title, authorShort, city } = useSiteMetadata()
-  const [searchState, setSearchState] = useLocalStorageState("searchState", {
-    ssr: true,
-    defaultValue: initialSearchState,
-  })
+  const { searchObj, setSearchObj } = useGlobalContext()
+  // const [searchState, setSearchState] = useLocalStorageState("searchState", {
+  //   ssr: true,
+  //   defaultValue: initialSearchState,
+  // })
   const [sideNav, setSideNav] = useLocalStorageState("sideNav", {
     ssr: true,
     defaultValue: initialState,
@@ -59,7 +56,8 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
     // Aufruf: Search box 'onchange' (after debounce time)
     clearTimeout(debouncedSetStateRef.current)
     debouncedSetStateRef.current = setTimeout(() => {
-      setSearchState(updatedSearchState)
+      // setSearchState(updatedSearchState)
+      setSearchObj(updatedSearchState)
     }, DEBOUNCE_TIME)
   }
 
@@ -86,7 +84,7 @@ const Layout = ({ id = "", fromDiffOrigin = false, children }) => {
           indexName={`dev_ambulant-portfolio`}
           onSearchStateChange={onSearchStateChange}
           createURL={createURL}
-          searchState={searchState}
+          searchState={searchObj}
         >
           <Header
             siteTitle={title || `ambulant design`}

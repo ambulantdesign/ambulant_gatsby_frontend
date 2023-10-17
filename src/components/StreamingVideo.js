@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { useState, useRef } from "react"
 import styled from "styled-components"
 import useLocalStorageState from "use-local-storage-state"
@@ -102,5 +103,49 @@ const Wrapper = styled.div`
     }
   }
 `
+
+StreamingVideo.propTypes = {
+  video: PropTypes.shape({
+    id: PropTypes.string,
+    autoplay: PropTypes.bool,
+    consent_message: PropTypes.shape({
+      data: PropTypes.shape({
+        consent_message: PropTypes.string,
+      }),
+    }),
+    controls: PropTypes.bool,
+    loop: PropTypes.bool,
+    related: PropTypes.bool,
+    show_fullscreen: PropTypes.bool,
+    streamingPlatform: PropTypes.string,
+    url: PropTypes.string,
+    urlParams: PropTypes.string,
+    videoCaption: PropTypes.string,
+    videoId: PropTypes.string,
+    __typename: PropTypes.string,
+  }),
+}
+
+StreamingVideo.defaultProps = {
+  video: {
+    id: ``,
+    autoplay: false,
+    consent_message: {
+      data: {
+        consent_message: ``,
+      },
+    },
+    controls: false,
+    loop: false,
+    related: false,
+    show_fullscreen: false,
+    streamingPlatform: ``,
+    url: ``,
+    urlParams: ``,
+    videoCaption: ``,
+    videoId: ``,
+    __typename: `STRAPI__COMPONENT_MEDIA_STREAMING_VIDEO`,
+  },
+}
 
 export default StreamingVideo
