@@ -30,14 +30,14 @@ Variables
   --clr-black: #26222a;
   --clr-white: #ffffff;
   --clr-sand: rgba(247, 245, 244, 1);
-  --clr-links: rgb(246, 124, 109);
+  --clr-links: rgba(206, 27, 28, 1);
   --clr-stone: rgb(245 245 244);
   --clr-white-opac-50: rgba(255, 255, 255, 0.5);
   --clr-white-opac-85: rgba(255, 255, 255, 0.85);
-  --clr-links-opac-50: rgba(246, 124, 109, 0.5);
+  --clr-links-opac-50: rgba(206, 27, 28, 0.5);
   --clr-link-col-light: #dec1fb;
-  --swiper-navigation-color: #f67c6d;
-  --swiper-pagination-color: #f67c6d;
+  --swiper-navigation-color: #ce1b1c;
+  --swiper-pagination-color: #ce1b1c;
 
   --ff-primary: "Karla", -apple-system, "BlinkMacSystemFont", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
