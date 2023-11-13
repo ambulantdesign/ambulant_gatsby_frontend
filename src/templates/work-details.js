@@ -8,6 +8,7 @@ import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"
 import VideoEmbed from "../components/VideoEmbed"
 import StreamingVideo from "../components/StreamingVideo"
+import RichTextContent from "../components/RichTextContent"
 import Seo from "../components/Seo"
 import { ProjectMeta } from "../components/ProjectMeta"
 
@@ -21,7 +22,6 @@ import "swiper/css/lazy"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import "swiper/css/keyboard"
-import RichTextContent from "../components/RichTextContent"
 
 const WorkDetails = ({ data }) => {
   const {

@@ -30,6 +30,15 @@ const strapiConfig = {
         },
       },
     },
+    {
+      singularName: `archive-item`,
+      queryParams: {
+        populate: {
+          Gallery: { populate: "*" },
+          sliderImgTxt: { populate: "*" },
+        },
+      },
+    },
     `keyword`,
     `artist`,
   ],
@@ -58,6 +67,14 @@ const strapiConfig = {
     },
     {
       singularName: `imprint`,
+      queryParams: {
+        populate: {
+          seo: { populate: "*" },
+        },
+      },
+    },
+    {
+      singularName: `archive`,
       queryParams: {
         populate: {
           seo: { populate: "*" },

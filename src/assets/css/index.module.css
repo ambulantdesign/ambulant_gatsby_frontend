@@ -63,11 +63,13 @@
 .grid#content footer {
   grid-column: span 12;
 }
-.portfolio {
+.portfolio,
+.archive-container {
   padding: var(--space-20);
   margin-right: var(--nav-lg-width);
 }
-.portfolio .header {
+.portfolio .header,
+.archive-container .header {
   display: flex;
   flex-direction: column-reverse;
 }
