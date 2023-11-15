@@ -15,7 +15,7 @@ import "swiper/css/pagination"
 import "swiper/css/keyboard"
 
 const ArchiveSlider = ({ gallery }) => (
-  <Wrapper className="archive mb-2 md:mb-4" id="slider">
+  <Wrapper className="archive mb-2 md:mb-2" id="slider">
     <Swiper
       modules={[Lazy, Navigation, Pagination, Keyboard, Virtual]}
       spaceBetween={24}
