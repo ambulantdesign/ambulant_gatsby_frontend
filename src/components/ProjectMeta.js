@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 
 export const ProjectMeta = ({ meta, weblink }) => {
-  console.log(meta)
+  // console.log(meta)
   let metaData = Object.keys(meta).map(key => [
     String(key).split("_").join(" "),
     meta[key],
