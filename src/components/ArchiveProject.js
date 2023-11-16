@@ -16,13 +16,17 @@ const ArchiveProject = ({
   yearEnd = null,
   Gallery = null,
 }) => {
+  const regex =
+    /<([^>\s]+)[^>]*>(?:\s*(?:<br(?:\s*\/){0,1}>|&nbsp;|&thinsp;|&ensp;|&emsp;|&#8201;|&#8194;|&#8195;)\s*)*<\/\1>/gm
   let meta = {
     medium: medium,
     city: city,
     year: yearEnd ? `${yearStart}–${yearEnd}` : yearStart,
   }
-  let desc = description.trim().length > 0 ? description.trim() : null
+  let desc = str.replace(regex, description.trim())
+  desc = desc.length > 10 ? description.trim() : null
   console.log(`${title} // ${description.trim()}`)
+
   return (
     <Wrapper className="gridItem-content mb-12">
       <h4 className="pr-4 text-xl mb-6">{title}</h4>
