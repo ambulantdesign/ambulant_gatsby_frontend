@@ -26,7 +26,6 @@ const ArchiveProject = ({
   let desc = description.trim()
   desc = desc.replace(regex, desc)
   desc = desc.length > 10 ? desc : null
-  console.log(`${title} // ${desc}`)
 
   return (
     <Wrapper className="gridItem-content mb-12">
