@@ -22,17 +22,14 @@ const ArchiveProject = ({
     year: yearEnd ? `${yearStart}–${yearEnd}` : yearStart,
   }
   let desc = description.trim().length > 0 ? description.trim() : null
-
+  console.log(`${title} // ${description.trim().length}`)
   return (
     <Wrapper className="gridItem-content mb-12">
       <h4 className="pr-4 text-xl mb-6">{title}</h4>
       <section className="grid gap-10 container" id="content">
         {Gallery && (
           <div className="col-6">
-            <ArchiveSlider
-              gallery={Gallery}
-              description={description}
-            ></ArchiveSlider>
+            <ArchiveSlider gallery={Gallery}></ArchiveSlider>
           </div>
         )}
         <div className="col-6">
