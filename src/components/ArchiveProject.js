@@ -23,7 +23,8 @@ const ArchiveProject = ({
     city: city,
     year: yearEnd ? `${yearStart}–${yearEnd}` : yearStart,
   }
-  let desc = str.replace(regex, description.trim())
+  let desc = description.trim()
+  desc = desc.replace(regex, desc)
   desc = desc.length > 10 ? description.trim() : null
   console.log(`${title} // ${description.trim()}`)
 
