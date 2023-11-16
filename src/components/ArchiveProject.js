@@ -22,7 +22,7 @@ const ArchiveProject = ({
     year: yearEnd ? `${yearStart}–${yearEnd}` : yearStart,
   }
   let desc = description.trim().length > 0 ? description.trim() : null
-  console.log(`${title} // ${description.trim().length}`)
+  console.log(`${title} // ${description.trim()}`)
   return (
     <Wrapper className="gridItem-content mb-12">
       <h4 className="pr-4 text-xl mb-6">{title}</h4>

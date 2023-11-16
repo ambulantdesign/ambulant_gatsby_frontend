@@ -29,7 +29,6 @@ const ArchiveSlider = ({ gallery }) => (
       pagination={{ clickable: true }}
     >
       {gallery.map((slide, index) => {
-        console.log(slide)
         const { id, caption = null, localFile = null } = slide
         let media = getImage(localFile)
 
