@@ -176,13 +176,12 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
               </Link>
             </li>
             <li>
-              <Link
+              <a
                 className="bg-transparent py-4"
-                to="https://redges.ambulantdesign.nl"
-                activeClassName="active"
+                href="https://redges.ambulantdesign.nl"
               >
                 <span className="text-xl">Teaching</span>
-              </Link>
+              </a>
             </li>
             <li>
               <Link

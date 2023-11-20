@@ -1,14 +1,14 @@
 import * as React from "react"
 import { useRef, useEffect } from "react"
-import { graphql, withPrefix } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 
-import * as styles from "../assets/css/index.module.css"
 import Layout from "../components/Layout"
 import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import ArchiveProject from "../components/ArchiveProject"
 import ContentHeader from "../components/ContentHeader"
+import * as styles from "../assets/css/index.module.css"
 
 var _ = require("lodash")
 
@@ -22,18 +22,6 @@ const ArchivePage = ({ data }) => {
   useEffect(() => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
-
-    //   let tmpProjects = _.sampleSize(
-    //     projects,
-    //     parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
-    //   )
-
-    //   tmpProjects = _.orderBy(
-    //     tmpProjects,
-    //     ["productionDate", "slug"],
-    //     ["desc", "asc"]
-    //   )
-    //   setRandomProjects(tmpProjects)
   }, [data])
 
   return (
@@ -47,9 +35,9 @@ const ArchivePage = ({ data }) => {
           />
 
           <div
-            className={styles.archiveContent}
+            className="archive-content"
             id="portfolio-grid"
-            style={{}}
+            style={{ opacity: "0" }}
             ref={gridRef}
           >
             <ContentHeader title={`Archive`} />
@@ -60,18 +48,7 @@ const ArchivePage = ({ data }) => {
                   key={project.id}
                   id={`gridItem-${project.id}`}
                 >
-                  <ArchiveProject
-                    // id={id}
-                    // title={title}
-                    // description={description}
-                    // medium={medium}
-                    // city={city}
-                    // yearStart={yearStart}
-                    // yearEnd={yearEnd}
-                    // gallery={Gallery}
-                    key={project.id}
-                    {...project}
-                  />
+                  <ArchiveProject key={project.id} {...project} />
                 </div>
               ))}
           </div>
@@ -98,6 +75,9 @@ const Wrapper = styled.main`
     font-weight: bold;
     color: var(--clr-text);
     margin-bottom: 1em;
+  }
+  .archive-content {
+    opacity: 0;
   }
   @media screen and (max-width: 600px) {
     .grid > .col-6 {
