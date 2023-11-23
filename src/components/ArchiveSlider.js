@@ -20,7 +20,6 @@ const ArchiveSlider = ({ gallery }) => (
       modules={[Lazy, Navigation, Pagination, Keyboard, Virtual]}
       spaceBetween={24}
       slidesPerView={1}
-      lazy={true}
       rewind={true}
       autoHeight
       observer
