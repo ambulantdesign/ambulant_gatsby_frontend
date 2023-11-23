@@ -47,7 +47,7 @@ const Header = props => {
             data-src="https://s2.svgbox.net/hero-solid.svg?ic=menu"
             width="32"
             height="32"
-            fill="#F67C5F"
+            fill="#ce1b1c"
           ></svg>
         </button>
       </div>

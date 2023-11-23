@@ -87,7 +87,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
               data-src="https://s2.svgbox.net/hero-outline.svg?ic=x"
               width="48"
               height="48"
-              color="#F67C5F"
+              color="#ce1b1c"
             ></svg>
           </button>
         </div>

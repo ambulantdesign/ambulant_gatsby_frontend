@@ -23,6 +23,8 @@ const ArchiveSlider = ({ gallery }) => (
       lazy={true}
       rewind={true}
       autoHeight
+      observer
+      observeParents
       virtual
       navigation
       keyboard
