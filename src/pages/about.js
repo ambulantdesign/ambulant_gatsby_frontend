@@ -182,17 +182,37 @@ AboutPage.propTypes = {
 
 export const Head = ({ location, data }) => {
   const {
-    seo: { seo_title, seo_description },
+    seo: { seo_title, seo_description, seo_image = null },
   } = data.page
   return (
     <Seo
       title={seo_title}
       description={seo_description}
-      image={data.page?.seo_image}
+      image={seo_image}
       /**** lang="de" !!! bitte checken *****/
       pathname={location.pathname}
     />
   )
+}
+
+Head.defaultProps = {
+  location: {},
+  data: {},
+}
+Head.propTypes = {
+  location: PropTypes.oneOfType([
+    PropTypes.shape({}),
+    PropTypes.arrayOf(PropTypes.shape({})),
+  ]),
+  data: PropTypes.shape({
+    page: PropTypes.shape({
+      seo: PropTypes.shape({
+        seo_title: PropTypes.string,
+        seo_description: PropTypes.string,
+        seo_image: PropTypes.oneOfType([PropTypes.shape({}), null]),
+      }),
+    }),
+  }),
 }
 
 export default AboutPage
