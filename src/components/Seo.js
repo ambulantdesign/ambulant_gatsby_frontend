@@ -55,7 +55,10 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
   const og_thumbnailW = og_thumbnail?.localFile?.childImageSharp?.fixed?.width
   const og_thumbnailH = og_thumbnail?.localFile?.childImageSharp?.fixed?.height
 
-  // console.log(og_thumbnailW, og_thumbnailH)
+  const tempTwitterImg = `${process.env.GATSBY_SITE_URL}${getSrc(
+    twitterCardImg
+  )}`
+  console.log(tempTwitterImg)
 
   const twitterImg = twitterCardImg
     ? `${process.env.GATSBY_SITE_URL}${getSrc(twitterCardImg)}`
@@ -108,6 +111,7 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
+
       {og_thumbnailImg && (
         <>
           <meta property="og:image" content={og_thumbnailImg} />
@@ -123,7 +127,9 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
       ) : (
         <meta name="twitter:card" content="summary" />
       )}
+
       <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
+      <meta name="twitter:url" content={canonical} />
       <meta
         name="twitter:title"
         content={defaultTitle ? `${title} | ${defaultTitle}` : title}
