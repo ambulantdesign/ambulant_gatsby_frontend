@@ -46,6 +46,7 @@
     "striptags": "^3.2.0",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.7",
+    "underscore": "^1.12.1",
     "use-local-storage-state": "^17.3.0",
     "yup": "^0.32.11"
   },

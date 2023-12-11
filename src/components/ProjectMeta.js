@@ -9,7 +9,7 @@ export const ProjectMeta = ({ meta, weblink }) => {
     String(key).split("_").join(" "),
     meta[key],
   ])
-  console.log(metaData)
+  // console.log(metaData)
 
   return (
     <Wrapper className="meta-info mb-0 sm:mb-4 ">

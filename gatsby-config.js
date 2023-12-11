@@ -95,9 +95,13 @@ module.exports = {
     author: `Gabriele Franziska Götz`,
     authorShort: `Gabriele Götz`,
     jobDesc: `graphic designer`,
-    siteUrl: `https://ambulantdesign.nl`,
+    siteUrl: `${process.env.GATSBY_SITE_URL}`,
     phone: `+31206890280`,
     email: `info@ambulantdesign.nl`,
+    seo: {
+      google: `xxx111222333xxx`,
+      bing: ``,
+    },
   },
   plugins: [
     `gatsby-plugin-netlify`,

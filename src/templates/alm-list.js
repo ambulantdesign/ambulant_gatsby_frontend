@@ -19,6 +19,7 @@ const AlmListPage = ({ data, pageContext }) => {
   )
 
   let projects
+  let og_thumbnail = null
 
   if (contentType === "artists") {
     projects = data.artists.nodes
@@ -279,7 +280,7 @@ export const Head = ({ location, data, pageContext }) => {
       <Seo
         title={seoTitle}
         // description={excerpt}
-        // image={card_image}
+        // image={og_thumbnail}
         // lang="de"
         pathname={location.pathname}
       />

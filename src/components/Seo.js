@@ -8,10 +8,10 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { getSrc } from "gatsby-plugin-image"
 
-function Seo({ description, title, pathname, children }) {
-  // console.log(pathname)
-  const { site } = useStaticQuery(
+function Seo({ description, image: og_thumbnail, title, pathname, children }) {
+  const { site, twitterCardImg } = useStaticQuery(
     graphql`
       query {
         site {
@@ -20,6 +20,24 @@ function Seo({ description, title, pathname, children }) {
             description
             author
             authorShort
+            siteUrl
+            seo {
+              google
+              bing
+            }
+          }
+        }
+        twitterCardImg: file(name: { eq: "twitter-card_ambulant-design" }) {
+          id
+          childImageSharp {
+            fixed(width: 480) {
+              ...GatsbyImageSharpFixed
+            }
+            gatsbyImageData(
+              placeholder: NONE
+              layout: FULL_WIDTH
+              formats: NO_CHANGE
+            )
           }
         }
       }
@@ -29,8 +47,30 @@ function Seo({ description, title, pathname, children }) {
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = `${site.siteMetadata?.title} – ${site.siteMetadata?.authorShort}`
 
+  const og_thumbnailImg =
+    og_thumbnail && og_thumbnail.localFile
+      ? `${process.env.GATSBY_SITE_URL}${getSrc(og_thumbnail.localFile)}`
+      : null
+
+  const og_thumbnailW = og_thumbnail?.localFile?.childImageSharp?.fixed?.width
+  const og_thumbnailH = og_thumbnail?.localFile?.childImageSharp?.fixed?.height
+
+  // console.log(og_thumbnailW, og_thumbnailH)
+
+  const twitterImg = twitterCardImg
+    ? `${process.env.GATSBY_SITE_URL}${getSrc(twitterCardImg)}`
+    : null
+  const canonical = pathname
+    ? `${process.env.GATSBY_SITE_URL}${pathname}`
+    : null
+
   return (
     <>
+      <meta name="robots" content="noindex, follow" />
+      <meta
+        name="google-site-verification"
+        content={site.siteMetadata?.seo?.google || ``}
+      />
       <link rel="icon" href="/favicon.ico" sizes="any"></link>
       <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
       <link rel="manifest" href="/manifest.json"></link>
@@ -57,11 +97,9 @@ function Seo({ description, title, pathname, children }) {
         href="/safari-pinned-tab.svg"
         color="#5bbad5"
       ></link>
-      <meta name="robots" content="noindex, follow" />
+      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
-
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
       <meta name="description" content={metaDescription} />
       <meta
         property="og:title"
@@ -69,7 +107,22 @@ function Seo({ description, title, pathname, children }) {
       />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
+      <meta property="og:url" content={canonical} />
+      {og_thumbnailImg && (
+        <>
+          <meta property="og:image" content={og_thumbnailImg} />
+          <meta property="og:image:width" content={og_thumbnailW} />
+          <meta property="og:image:height" content={og_thumbnailH} />
+        </>
+      )}
+      {twitterCardImg ? (
+        <>
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image:src" content={twitterImg} />
+        </>
+      ) : (
+        <meta name="twitter:card" content="summary" />
+      )}
       <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
       <meta
         name="twitter:title"
@@ -85,12 +138,27 @@ Seo.defaultProps = {
   description: ``,
   title: ``,
   pathname: `/`,
+  image: null,
 }
 
 Seo.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   pathname: PropTypes.string,
+  image: PropTypes.shape({
+    localFile: PropTypes.shape({
+      childImageSharp: PropTypes.shape({
+        fixed: PropTypes.oneOfType([
+          PropTypes.shape({}),
+          PropTypes.arrayOf(PropTypes.shape({})),
+        ]),
+        gatsbyImageData: PropTypes.oneOfType([
+          PropTypes.shape({}),
+          PropTypes.arrayOf(PropTypes.shape({})),
+        ]),
+      }),
+    }),
+  }),
   children: PropTypes.node,
 }
 

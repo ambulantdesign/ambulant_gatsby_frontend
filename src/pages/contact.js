@@ -43,7 +43,7 @@ const ContactPage = ({ data }) => {
                 <Popup minWidth="340">
                   <StaticImage
                     src="../assets/images/vis-card2.png"
-                    alt="Gabriele Franziska Götz – Business Card ambulant design"
+                    alt="Gabriele Franziska Götz – business card ”studio ambulant design“"
                   />
                 </Popup>
               </Marker>

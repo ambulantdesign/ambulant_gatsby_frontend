@@ -135,6 +135,24 @@ export const data = graphql`
           content
         }
       }
+      seo {
+        seo_title
+        seo_description
+        seo_image {
+          localFile {
+            childImageSharp {
+              fixed(width: 480) {
+                ...GatsbyImageSharpFixed
+              }
+              gatsbyImageData(
+                placeholder: NONE
+                layout: FULL_WIDTH
+                formats: NO_CHANGE
+              )
+            }
+          }
+        }
+      }
       MarginalColumn {
         __typename
         ...richTextCont
@@ -162,14 +180,19 @@ AboutPage.propTypes = {
   }).isRequired,
 }
 
-export const Head = ({ location }) => (
-  <Seo
-    title="About & CV"
-    // description={excerpt}
-    // image={card_image}
-    // lang="de"
-    pathname={location.pathname}
-  />
-)
+export const Head = ({ location, data }) => {
+  const {
+    seo: { seo_title, seo_description, seo_image },
+  } = data.page
+  return (
+    <Seo
+      title={seo_title}
+      description={seo_description}
+      image={seo_image}
+      /**** lang="de" !!! bitte checken *****/
+      pathname={location.pathname}
+    />
+  )
+}
 
 export default AboutPage
