@@ -47,22 +47,21 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = `${site.siteMetadata?.title} – ${site.siteMetadata?.authorShort}`
 
-  const og_thumbnailImg =
+  let og_thumbnailW, og_thumbnailH
+  let seoThumbnail =
     og_thumbnail && og_thumbnail.localFile
       ? `${process.env.GATSBY_SITE_URL}${getSrc(og_thumbnail.localFile)}`
       : null
 
-  const og_thumbnailW = og_thumbnail?.localFile?.childImageSharp?.fixed?.width
-  const og_thumbnailH = og_thumbnail?.localFile?.childImageSharp?.fixed?.height
+  if (seoThumbnail === null) {
+    seoThumbnail = `${process.env.GATSBY_SITE_URL}${getSrc(twitterCardImg)}`
+    og_thumbnailW = "480"
+    og_thumbnailH = "270"
+  } else {
+    og_thumbnailW = og_thumbnail?.localFile?.childImageSharp?.fixed?.width
+    og_thumbnailH = og_thumbnail?.localFile?.childImageSharp?.fixed?.height
+  }
 
-  const tempTwitterImg = `${process.env.GATSBY_SITE_URL}${getSrc(
-    twitterCardImg
-  )}`
-  console.log(tempTwitterImg)
-
-  const twitterImg = twitterCardImg
-    ? `${process.env.GATSBY_SITE_URL}${getSrc(twitterCardImg)}`
-    : null
   const canonical = pathname
     ? `${process.env.GATSBY_SITE_URL}${pathname}`
     : null
@@ -112,17 +111,13 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
 
-      {og_thumbnailImg && (
+      {seoThumbnail ? (
         <>
-          <meta property="og:image" content={og_thumbnailImg} />
+          <meta property="og:image" content={seoThumbnail} />
           <meta property="og:image:width" content={og_thumbnailW} />
           <meta property="og:image:height" content={og_thumbnailH} />
-        </>
-      )}
-      {twitterCardImg ? (
-        <>
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image:src" content={twitterImg} />
+          <meta name="twitter:image:src" content={seoThumbnail} />
         </>
       ) : (
         <meta name="twitter:card" content="summary" />
