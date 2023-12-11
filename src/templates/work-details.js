@@ -265,12 +265,19 @@ export const query = graphql`
           }
         }
       }
+      seo {
+        seo_description
+      }
     }
   }
 `
 
 export const Head = ({ location, data }) => {
-  const { title, artist } = data.work
+  const {
+    title,
+    artist,
+    seo: { seo_description },
+  } = data.work
   let fullTitle
 
   artist?.fullname
@@ -280,7 +287,7 @@ export const Head = ({ location, data }) => {
   return (
     <Seo
       title={fullTitle}
-      // description={excerpt}
+      description={seo_description}
       // image={card_image}
       // lang="de"
       pathname={location.pathname}
