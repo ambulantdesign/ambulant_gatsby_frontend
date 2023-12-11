@@ -182,7 +182,7 @@ AboutPage.propTypes = {
 
 export const Head = ({ location, data }) => {
   const {
-    seo: { seo_title, seo_description, seo_image },
+    seo: { seo_title, seo_description, seo_image = null },
   } = data.page
   return (
     <Seo
