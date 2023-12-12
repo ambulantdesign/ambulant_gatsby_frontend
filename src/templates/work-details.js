@@ -193,6 +193,24 @@ const Wrapper = styled.main`
   }
 `
 export const query = graphql`
+  fragment seoFields on STRAPI__COMPONENT_SEO_SEO_BASIC_FIELDS {
+    seo_title
+    seo_description
+    seo_image {
+      localFile {
+        childImageSharp {
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+          gatsbyImageData(
+            placeholder: NONE
+            layout: FULL_WIDTH
+            formats: NO_CHANGE
+          )
+        }
+      }
+    }
+  }
   query WorkDetails($slug: String!) {
     work: strapiWork(slug: { eq: $slug }) {
       id: strapi_id
@@ -266,18 +284,15 @@ export const query = graphql`
         }
       }
       seo {
-        seo_description
+        ...seoFields
       }
     }
   }
 `
 
 export const Head = ({ location, data }) => {
-  const {
-    title,
-    artist,
-    seo: { seo_description },
-  } = data.work
+  const { title, artist, seo } = data.work
+
   let fullTitle
 
   artist?.fullname
@@ -287,8 +302,8 @@ export const Head = ({ location, data }) => {
   return (
     <Seo
       title={fullTitle}
-      description={seo_description}
-      // image={card_image}
+      description={seo?.seo_description}
+      image={seo?.seo_image}
       // lang="de"
       pathname={location.pathname}
     />

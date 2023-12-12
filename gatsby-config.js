@@ -27,6 +27,7 @@ const strapiConfig = {
             populate: "*",
           },
           streamingVideo: "*",
+          seo: { populate: "*" },
         },
       },
     },

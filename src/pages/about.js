@@ -126,6 +126,24 @@ export const data = graphql`
       caption
     }
   }
+  fragment seoFields on STRAPI__COMPONENT_SEO_SEO_BASIC_FIELDS {
+    seo_title
+    seo_description
+    seo_image {
+      localFile {
+        childImageSharp {
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+          gatsbyImageData(
+            placeholder: NONE
+            layout: FULL_WIDTH
+            formats: NO_CHANGE
+          )
+        }
+      }
+    }
+  }
   {
     page: strapiAbout {
       id
@@ -136,22 +154,7 @@ export const data = graphql`
         }
       }
       seo {
-        seo_title
-        seo_description
-        seo_image {
-          localFile {
-            childImageSharp {
-              fixed(width: 480) {
-                ...GatsbyImageSharpFixed
-              }
-              gatsbyImageData(
-                placeholder: NONE
-                layout: FULL_WIDTH
-                formats: NO_CHANGE
-              )
-            }
-          }
-        }
+        ...seoFields
       }
       MarginalColumn {
         __typename
@@ -193,26 +196,6 @@ export const Head = ({ location, data }) => {
       pathname={location.pathname}
     />
   )
-}
-
-Head.defaultProps = {
-  location: {},
-  data: {},
-}
-Head.propTypes = {
-  location: PropTypes.oneOfType([
-    PropTypes.shape({}),
-    PropTypes.arrayOf(PropTypes.shape({})),
-  ]),
-  data: PropTypes.shape({
-    page: PropTypes.shape({
-      seo: PropTypes.shape({
-        seo_title: PropTypes.string,
-        seo_description: PropTypes.string,
-        seo_image: PropTypes.oneOfType([PropTypes.shape({}), null]),
-      }),
-    }),
-  }),
 }
 
 export default AboutPage
