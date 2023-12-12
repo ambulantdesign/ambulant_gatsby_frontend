@@ -131,13 +131,15 @@ export const query = graphql`
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
 export const Head = ({ location, data }) => {
+  const [seoImg, setSeoImg] = React.useState(null)
   const { nodes: projects } = data.allStrapiWork
-  let randomImg = null
 
-  if (projects && projects.length > 0) {
-    const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
-    randomImg = randomGalleryItem(Gallery)
-  }
+  useEffect(() => {
+    if (projects && projects.length > 0) {
+      const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
+      setSeoImg(randomGalleryItem(Gallery))
+    }
+  }, [data])
 
   return (
     <>
@@ -145,7 +147,7 @@ export const Head = ({ location, data }) => {
       <Seo
         title="Home"
         // description={excerpt}
-        image={randomImg}
+        image={seoImg}
         pathname={location.pathname}
       />
     </>
