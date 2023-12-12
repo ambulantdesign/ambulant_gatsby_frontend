@@ -267,6 +267,7 @@ export const query = graphql`
 `
 
 export const Head = ({ location, data, pageContext }) => {
+  const [seoImg, setSeoImg] = React.useState(null)
   const { studioName, city, authorShort } = useSiteMetadata()
   const { title, contentType } = pageContext
 
@@ -282,8 +283,13 @@ export const Head = ({ location, data, pageContext }) => {
   }
 
   seoDesc = `Work by ${authorShort} related to ${seoTitle} | ${studioName}, ${city}`
-  const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
-  const randomImg = randomGalleryItem(Gallery)
+
+  useEffect(() => {
+    if (projects && projects.length > 0) {
+      const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
+      setSeoImg(randomGalleryItem(Gallery))
+    }
+  }, [data])
 
   return (
     <>
@@ -291,7 +297,7 @@ export const Head = ({ location, data, pageContext }) => {
       <Seo
         title={seoTitle}
         description={seoDesc}
-        image={randomImg}
+        image={seoImg}
         pathname={location.pathname}
       />
     </>
