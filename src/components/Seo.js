@@ -58,8 +58,12 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
     og_thumbnailW = "480"
     og_thumbnailH = "270"
   } else {
-    og_thumbnailW = og_thumbnail?.localFile?.childImageSharp?.fixed?.width
-    og_thumbnailH = og_thumbnail?.localFile?.childImageSharp?.fixed?.height
+    og_thumbnailW =
+      og_thumbnail?.localFile?.childImageSharp?.fixed?.width ||
+      og_thumbnail?.localFile?.childImageSharp?.gatsbyImageData?.width
+    og_thumbnailH =
+      og_thumbnail?.localFile?.childImageSharp?.fixed?.height ||
+      og_thumbnail?.localFile?.childImageSharp?.gatsbyImageData?.height
   }
 
   const canonical = pathname
