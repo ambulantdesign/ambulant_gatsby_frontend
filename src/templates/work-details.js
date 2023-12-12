@@ -304,7 +304,6 @@ export const Head = ({ location, data }) => {
       title={fullTitle}
       description={seo?.seo_description}
       image={seo?.seo_image}
-      // lang="de"
       pathname={location.pathname}
     />
   )

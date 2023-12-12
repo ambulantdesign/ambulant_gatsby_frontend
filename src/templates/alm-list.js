@@ -10,6 +10,10 @@ import Seo from "../components/Seo"
 import ContentHeader from "../components/ContentHeader"
 import GridProject from "../components/GridProject"
 import NoResults from "../components/NoResults"
+
+import { useSiteMetadata } from "../hooks/use-site-metadata"
+import { randomGalleryItem } from "../utils/gallery-helper"
+
 import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
@@ -19,7 +23,6 @@ const AlmListPage = ({ data, pageContext }) => {
   )
 
   let projects
-  let og_thumbnail = null
 
   if (contentType === "artists") {
     projects = data.artists.nodes
@@ -264,24 +267,31 @@ export const query = graphql`
 `
 
 export const Head = ({ location, data, pageContext }) => {
+  const { studioName, city, authorShort } = useSiteMetadata()
   const { title, contentType } = pageContext
-  let seoTitle
+
+  let seoTitle, seoDesc, projects
 
   if (contentType === "artists") {
+    projects = data.artists.nodes
     seoTitle = `Artist: ${title}`
   }
   if (contentType === "keywords") {
+    projects = data.keywords.nodes
     seoTitle = `Keyword: ${title}`
   }
+
+  seoDesc = `Work by ${authorShort} related to ${seoTitle} | ${studioName}, ${city}`
+  const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
+  const randomImg = randomGalleryItem(Gallery)
 
   return (
     <>
       <script src={withPrefix("/js/autoGrid.js")} type="text/javascript" />
       <Seo
         title={seoTitle}
-        // description={excerpt}
-        // image={og_thumbnail}
-        // lang="de"
+        description={seoDesc}
+        image={randomImg}
         pathname={location.pathname}
       />
     </>

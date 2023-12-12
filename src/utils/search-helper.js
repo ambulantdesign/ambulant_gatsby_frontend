@@ -1,6 +1,6 @@
 import qs from "qs"
 
-export const initialSearchState = {
+export const defaultAppState = {
   query: "",
   page: 1,
 }

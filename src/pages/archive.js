@@ -133,7 +133,6 @@ export const Head = ({ location }) => {
         title="Archive"
         // description={excerpt}
         // image={card_image}
-        // lang="de"
         pathname={location.pathname}
       />
     </>

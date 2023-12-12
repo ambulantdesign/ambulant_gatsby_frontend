@@ -6,14 +6,16 @@ import Layout from "../components/Layout"
 import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
+import { randomGalleryItem } from "../utils/gallery-helper"
+
 import * as styles from "../assets/css/index.module.css"
 
 var _ = require("lodash")
 
 const IndexPage = ({ data }) => {
+  const [randomProjects, setRandomProjects] = React.useState([])
   const loaderRef = useRef()
   const gridRef = useRef()
-  const [randomProjects, setRandomProjects] = React.useState([])
   const {
     allStrapiWork: { nodes: projects },
   } = data
@@ -22,17 +24,18 @@ const IndexPage = ({ data }) => {
     loaderRef.current.style.display = "none"
     gridRef.current.style.opacity = "100"
 
-    let tmpProjects = _.sampleSize(
+    let homeProjects = _.sampleSize(
       projects,
       parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
     )
 
-    tmpProjects = _.orderBy(
-      tmpProjects,
+    homeProjects = _.orderBy(
+      homeProjects,
       ["productionDate", "slug"],
       ["desc", "asc"]
     )
-    setRandomProjects(tmpProjects)
+
+    setRandomProjects(homeProjects)
   }, [data])
 
   return (
@@ -127,15 +130,22 @@ export const query = graphql`
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = ({ location }) => {
+export const Head = ({ location, data }) => {
+  const { nodes: projects } = data.allStrapiWork
+  let randomImg = null
+
+  if (projects && projects.length > 0) {
+    const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
+    randomImg = randomGalleryItem(Gallery)
+  }
+
   return (
     <>
       <script src={withPrefix("/js/autoGrid.js")} type="text/javascript" />
       <Seo
         title="Home"
         // description={excerpt}
-        // image={card_image}
-        // lang="de"
+        image={randomImg}
         pathname={location.pathname}
       />
     </>

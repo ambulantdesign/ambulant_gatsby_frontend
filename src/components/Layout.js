@@ -15,7 +15,7 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import { useSiteMetadata } from "../hooks/use-site-metadata"
-import { useGlobalContext } from "../context/SearchContext"
+import { useGlobalContext } from "../context/AppContext"
 import Header from "./Header"
 import MainNav from "./MainNav"
 import "../assets/css/layout.css"
@@ -27,7 +27,7 @@ const initialState = {
 }
 const DEBOUNCE_TIME = 400
 
-const initialSearchState = {
+const defaultAppState = {
   query: "",
   page: 1,
 }
@@ -36,10 +36,10 @@ const createURL = state => `?${qs.stringify(state)}`
 
 const Layout = ({ id = "", children }) => {
   const { title, authorShort, city } = useSiteMetadata()
-  // const { setSearchObj } = useGlobalContext()
+  // const { updateState } = useGlobalContext()
   const [searchState, setSearchState] = useLocalStorageState("searchState", {
     ssr: true,
-    defaultValue: initialSearchState,
+    defaultValue: defaultAppState,
   })
   const [sideNav, setSideNav] = useLocalStorageState("sideNav", {
     ssr: true,
@@ -62,7 +62,7 @@ const Layout = ({ id = "", children }) => {
     clearTimeout(debouncedSetStateRef.current)
     debouncedSetStateRef.current = setTimeout(() => {
       setSearchState(updatedSearchState)
-      // setSearchObj(updatedSearchState)
+      // updateState(updatedSearchState)
     }, DEBOUNCE_TIME)
   }
 

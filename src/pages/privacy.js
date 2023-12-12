@@ -109,7 +109,6 @@ export const Head = ({ location }) => (
     title="Privacy & Disclaimer"
     // description={excerpt}
     // image={card_image}
-    // lang="de"
     pathname={location.pathname}
   />
 )

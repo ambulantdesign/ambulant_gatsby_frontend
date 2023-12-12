@@ -4,7 +4,7 @@ import { connectStateResults } from "react-instantsearch-dom"
 import useLocalStorageState from "use-local-storage-state"
 import styled from "styled-components"
 
-// import { useGlobalContext } from "../context/SearchContext"
+// import { useGlobalContext } from "../context/AppContext"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import Loading from "../components/ui/Loading"
@@ -12,19 +12,19 @@ import CustomSearch from "../components/search"
 // import SearchResult from "../components/search/search-result"
 import ContentHeader from "../components/ContentHeader"
 
-const initialSearchState = {
+const defaultAppState = {
   query: "",
   page: 1,
 }
 
 export default function SearchPage(props) {
   // ********
-  // const { searchObj, setSearchObj } = useGlobalContext()
-  // console.log(searchObj)
+  // const { appState, updateState } = useGlobalContext()
+  // console.log(appState)
   // ********
   const [searchState, setSearchState] = useLocalStorageState("searchState", {
     ssr: true,
-    defaultValue: initialSearchState,
+    defaultValue: defaultAppState,
   })
   const [isLocalStorage, setIsLocalStorage] = React.useState(false)
   const [fromDiffOrigin, setFromDiffOrigin] = React.useState(false)
@@ -54,7 +54,7 @@ export default function SearchPage(props) {
         searchStateFromLocation.query !== ""
       ) {
         setSearchState(searchState)
-        // setSearchObj(searchState)
+        // updateState(searchState)
       }
     }
   }, [])

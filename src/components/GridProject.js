@@ -1,12 +1,13 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
+import { getRandomGalleryImage } from "../utils/gallery-helper"
+
 const GridProject = ({ id, title, slug, artist, gallery }) => {
-  const index = Math.floor(Math.random() * gallery.length)
-  const randomImg = getImage(gallery[index].localFile)
+  const randomImg = getRandomGalleryImage(gallery)
 
   // Check if window is defined (so if in the browser or in node.js).
   var isBrowser = typeof window !== "undefined"

@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/browser-apis/
  */
 import React from "react"
-import { SearchProvider } from "./src/context/SearchContext"
+import { CtxProvider } from "./src/context/AppContext"
 require("./src/assets/css/global.css")
 
 // import React from "react"
@@ -37,5 +37,5 @@ require("./src/assets/css/global.css")
 //   }
 // }
 export const wrapRootElement = ({ element }) => (
-  <SearchProvider>{element}</SearchProvider>
+  <CtxProvider>{element}</CtxProvider>
 )

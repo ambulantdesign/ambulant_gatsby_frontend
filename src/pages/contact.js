@@ -153,7 +153,6 @@ export const Head = ({ location }) => (
     title="Contact"
     // description={excerpt}
     // image={card_image}
-    // lang="de"
     pathname={location.pathname}
   />
 )
