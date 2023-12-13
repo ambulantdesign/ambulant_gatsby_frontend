@@ -282,7 +282,9 @@ export const Head = ({ location, data, pageContext }) => {
     seoTitle = `Keyword: ${title}`
   }
 
-  seoDesc = `Work by ${authorShort} related to ${seoTitle} | ${studioName}, ${city}`
+  seoDesc = `Works by ${authorShort} related to ${seoTitle
+    .split(":")
+    .join("")} | ${studioName}, ${city}`
 
   useMemo(() => {
     if (projects && projects.length > 0) {
