@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useMemo } from "react"
 import { graphql, withPrefix } from "gatsby"
 
 import Layout from "../components/Layout"
@@ -132,14 +132,16 @@ export const query = graphql`
  */
 export const Head = ({ location, data }) => {
   const [seoImg, setSeoImg] = React.useState(null)
-  const { nodes: projects } = data.allStrapiWork
+  const {
+    allStrapiWork: { nodes: projects },
+  } = data
 
-  useEffect(() => {
+  useMemo(() => {
     if (projects && projects.length > 0) {
       const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
       setSeoImg(randomGalleryItem(Gallery))
     }
-  }, [data])
+  }, [projects])
 
   return (
     <>

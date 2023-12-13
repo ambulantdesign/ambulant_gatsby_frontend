@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { graphql, withPrefix, navigate } from "gatsby"
 import styled from "styled-components"
 import { FaParagraph } from "react-icons/fa"
@@ -284,12 +284,12 @@ export const Head = ({ location, data, pageContext }) => {
 
   seoDesc = `Work by ${authorShort} related to ${seoTitle} | ${studioName}, ${city}`
 
-  useEffect(() => {
+  useMemo(() => {
     if (projects && projects.length > 0) {
       const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
       setSeoImg(randomGalleryItem(Gallery))
     }
-  }, [data])
+  }, [projects])
 
   return (
     <>
