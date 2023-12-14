@@ -10,6 +10,7 @@ export const useSiteMetadata = () => {
             studioName
             author
             authorShort
+            archiveDescription
             city
             phone
             email

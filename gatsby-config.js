@@ -93,6 +93,7 @@ module.exports = {
     studioName: `studio ambulant design`,
     city: `Amsterdam`,
     description: `One-woman-studio for visual communication and editorial design based in Amsterdam, The Netherlands | Book | Catalog | Museum | Gallery | Artists | Publisher | Visual Identity | CI`,
+    archiveDescription: `Emblematic works from the early years (1985 till 2005) of studio ambulant design – Gabriele Franziska Götz | Book | Catalog | Museum | Gallery | Artists | Publisher | Visual Identity | CI`,
     author: `Gabriele Franziska Götz`,
     authorShort: `Gabriele Götz`,
     jobDesc: `graphic designer`,
@@ -100,7 +101,7 @@ module.exports = {
     phone: `+31206890280`,
     email: `info@ambulantdesign.nl`,
     seo: {
-      google: `xxx111222333xxx`,
+      google: `xxx111placeholder111xxx`,
       bing: ``,
     },
   },

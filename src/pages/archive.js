@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useRef, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 
@@ -8,9 +8,11 @@ import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import ArchiveProject from "../components/ArchiveProject"
 import ContentHeader from "../components/ContentHeader"
-import * as styles from "../assets/css/index.module.css"
 
-var _ = require("lodash")
+import { useSiteMetadata } from "../hooks/use-site-metadata"
+import { randomGalleryItem } from "../utils/gallery-helper"
+
+import * as styles from "../assets/css/index.module.css"
 
 const ArchivePage = ({ data }) => {
   const loaderRef = useRef()
@@ -126,13 +128,26 @@ export const query = graphql`
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = ({ location }) => {
+export const Head = ({ location, data }) => {
+  const [seoImg, setSeoImg] = useState(null)
+  const { archiveDescription } = useSiteMetadata()
+  const {
+    allStrapiArchiveItem: { nodes: projects },
+  } = data
+
+  useMemo(() => {
+    if (projects && projects.length > 0) {
+      const { Gallery } = projects[Math.floor(Math.random() * projects.length)]
+      setSeoImg(randomGalleryItem(Gallery))
+    }
+  }, [projects])
+
   return (
     <>
       <Seo
         title="Archive"
-        // description={excerpt}
-        // image={card_image}
+        description={archiveDescription}
+        image={seoImg}
         pathname={location.pathname}
       />
     </>
