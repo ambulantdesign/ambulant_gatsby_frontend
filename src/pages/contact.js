@@ -107,6 +107,24 @@ const Wrapper = styled.main`
 `
 
 export const data = graphql`
+  fragment seoFields on STRAPI__COMPONENT_SEO_SEO_BASIC_FIELDS {
+    seo_title
+    seo_description
+    seo_image {
+      localFile {
+        childImageSharp {
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+          gatsbyImageData(
+            placeholder: NONE
+            layout: FULL_WIDTH
+            formats: NO_CHANGE
+          )
+        }
+      }
+    }
+  }
   {
     page: strapiContact {
       id
@@ -115,6 +133,9 @@ export const data = graphql`
         data {
           content
         }
+      }
+      seo {
+        ...seoFields
       }
       MarginalColumn {
         __typename
@@ -148,13 +169,18 @@ ContactPage.propTypes = {
   }).isRequired,
 }
 
-export const Head = ({ location }) => (
-  <Seo
-    title="Contact"
-    // description={excerpt}
-    // image={card_image}
-    pathname={location.pathname}
-  />
-)
+export const Head = ({ location, data }) => {
+  const {
+    seo: { seo_title = "Contact", seo_description, seo_image = null },
+  } = data.page
+  return (
+    <Seo
+      title={seo_title}
+      description={seo_description}
+      image={seo_image}
+      pathname={location.pathname}
+    />
+  )
+}
 
 export default ContactPage
