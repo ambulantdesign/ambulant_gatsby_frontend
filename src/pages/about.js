@@ -184,14 +184,12 @@ AboutPage.propTypes = {
 }
 
 export const Head = ({ location, data }) => {
-  const {
-    seo: { seo_title, seo_description, seo_image = null },
-  } = data.page
+  const { page } = data
   return (
     <Seo
-      title={seo_title}
-      description={seo_description}
-      image={seo_image}
+      title={page?.seo?.seo_title || `About`}
+      description={page?.seo?.seo_description || null}
+      image={page?.seo?.seo_image || null}
       /**** lang="de" !!! bitte checken *****/
       pathname={location.pathname}
     />

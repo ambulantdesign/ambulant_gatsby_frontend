@@ -86,6 +86,24 @@ const Wrapper = styled.main`
 `
 
 export const data = graphql`
+  fragment seoFields on STRAPI__COMPONENT_SEO_SEO_BASIC_FIELDS {
+    seo_title
+    seo_description
+    seo_image {
+      localFile {
+        childImageSharp {
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+          gatsbyImageData(
+            placeholder: NONE
+            layout: FULL_WIDTH
+            formats: NO_CHANGE
+          )
+        }
+      }
+    }
+  }
   {
     page: strapiImprint {
       id
@@ -94,6 +112,9 @@ export const data = graphql`
         data {
           content
         }
+      }
+      seo {
+        ...seoFields
       }
     }
     allStreamingVideo: allStrapiComponentMediaStreamingVideo {
@@ -104,13 +125,16 @@ export const data = graphql`
     }
   }
 `
-export const Head = ({ location }) => (
-  <Seo
-    title="Privacy & Disclaimer"
-    // description={excerpt}
-    // image={card_image}
-    pathname={location.pathname}
-  />
-)
+export const Head = ({ location, data }) => {
+  const { page } = data
+  return (
+    <Seo
+      title={page?.seo?.seo_title || `Privacy & Disclaimer`}
+      description={page?.seo?.seo_description || null}
+      image={page?.seo?.seo_image || null}
+      pathname={location.pathname}
+    />
+  )
+}
 
 export default PrivacyPage
