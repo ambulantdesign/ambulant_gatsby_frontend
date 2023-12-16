@@ -17,7 +17,7 @@ const defaultAppState = {
   page: 1,
 }
 
-export default function SearchPage(props) {
+export default function SearchPage({ location, pageContext }) {
   // ********
   // const { appState, updateState } = useGlobalContext()
   // console.log(appState)
@@ -26,9 +26,7 @@ export default function SearchPage(props) {
     ssr: true,
     defaultValue: defaultAppState,
   })
-  const [isLocalStorage, setIsLocalStorage] = React.useState(false)
-  const [fromDiffOrigin, setFromDiffOrigin] = React.useState(false)
-  const { state: searchStateFromLocation } = props.location
+  const { state: searchStateFromLocation } = location
 
   let headline
   searchState.query
@@ -61,7 +59,7 @@ export default function SearchPage(props) {
 
   return (
     <>
-      <Layout id="search" fromDiffOrigin={fromDiffOrigin}>
+      <Layout id="search">
         <Wrapper className="portfolio" id="main">
           <LoadingIndicator />
           <ContentHeader title={headline} subtitle="" />
@@ -123,13 +121,18 @@ const Wrapper = styled.main`
 `
 
 export const Head = ({ location, pageContext }) => {
-  const { title, contentType } = pageContext
-  console.log(title, contentType)
-  // ggf. Context API (useContext) für den search string
+  const [searchState, setSearchState] = useLocalStorageState("searchState", {
+    ssr: true,
+    defaultValue: defaultAppState,
+  })
+  let searchString
+  searchState.query
+    ? (searchString = `Search for “${searchState.query}”`)
+    : (searchString = "Search")
 
   return (
     <Seo
-      title={`Search for “blabla”`}
+      title={searchString}
       // description={excerpt}
       // image={card_image}
       pathname={location.pathname}
