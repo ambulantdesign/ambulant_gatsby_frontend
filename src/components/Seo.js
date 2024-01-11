@@ -77,6 +77,7 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
         name="google-site-verification"
         content={site.siteMetadata?.seo?.google || ``}
       />
+      <meta name="msvalidate.01" content={site.siteMetadata?.seo?.bing || ``} />
       <link rel="icon" href="/favicon.ico" sizes="any"></link>
       <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
       <link rel="manifest" href="/manifest.json"></link>

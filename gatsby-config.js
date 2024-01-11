@@ -101,8 +101,8 @@ module.exports = {
     phone: `+31206890280`,
     email: `info@ambulantdesign.nl`,
     seo: {
-      google: `xxx111placeholder111xxx`,
-      bing: ``,
+      google: `FiqFQFGBeFJGzpoQ4QmIC3eQPp2BfNxwKisK57StmpM`,
+      bing: `767B33DB3497D2F5C7FAD3E74DC065CF`,
     },
   },
   plugins: [
