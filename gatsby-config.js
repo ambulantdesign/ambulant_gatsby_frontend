@@ -119,14 +119,14 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
-    {
-      resolve: `gatsby-plugin-web-font-loader`,
-      options: {
-        google: {
-          families: [`Karla:300,400,700`],
-        },
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-web-font-loader`,
+    //   options: {
+    //     google: {
+    //       families: [`Karla:300,400,700`],
+    //     },
+    //   },
+    // },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
