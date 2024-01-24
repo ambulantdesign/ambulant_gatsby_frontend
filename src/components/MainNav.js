@@ -84,7 +84,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
           {/* <!-- Please refer: https://github.com/shubhamjain/svg-loader --> */}
           <button type="button" onClick={closeMobileNav}>
             <svg
-              data-src="https://s2.svgbox.net/hero-outline.svg?ic=x"
+              data-src="/hero-outline.svg?ic=x"
               width="48"
               height="48"
               color="#ce1b1c"

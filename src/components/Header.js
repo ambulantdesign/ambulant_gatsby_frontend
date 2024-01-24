@@ -44,7 +44,7 @@ const Header = props => {
         {/* <!-- Please refer: https://github.com/shubhamjain/svg-loader --> */}
         <button type="button" onClick={openMobileNav}>
           <svg
-            data-src="https://s2.svgbox.net/hero-solid.svg?ic=menu"
+            data-src="/hero-solid.svg?ic=menu"
             width="32"
             height="32"
             fill="#ce1b1c"
