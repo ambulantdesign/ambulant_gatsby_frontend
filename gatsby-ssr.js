@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
-// require("./src/assets/css/global.css")
+const React = require("react")
 
 exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: `en` })
