@@ -57,6 +57,12 @@ exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
         type="font/woff2"
         crossOrigin="anonymous"
       />,
+      <script
+        key="ccm19"
+        src="https://cloud.ccm19.de/app.js?apiKey=a8c422dae95cd45f96ece931114cc35d10381cff86fdfa2f&domain=65aeacd8e24abc31fb0d48b2&lang=en_US"
+        type="text/javascript"
+        referrerpolicy="origin"
+      />,
     ],
   ])
 }
