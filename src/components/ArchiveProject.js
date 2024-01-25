@@ -71,4 +71,36 @@ const Wrapper = styled.div`
   }
 `
 
+ArchiveProject.defaultProps = {
+  title: ``,
+  description: {
+    data: { description: null },
+  },
+  medium: null,
+  city: null,
+  yearStart: null,
+  yearEnd: null,
+  Gallery: [],
+}
+
+ArchiveProject.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.shape({
+    data: PropTypes.shape({
+      description: PropTypes.string,
+    }),
+  }),
+  medium: PropTypes.string,
+  city: PropTypes.string,
+  yearStart: PropTypes.string,
+  yearEnd: PropTypes.string,
+  Gallery: PropTypes.arrayOf(
+    PropTypes.shape({
+      localFile: PropTypes.object.isRequired,
+      id: PropTypes.string.isRequired,
+      caption: PropTypes.string,
+    })
+  ),
+}
+
 export default ArchiveProject

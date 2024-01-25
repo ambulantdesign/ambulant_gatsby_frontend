@@ -1,6 +1,5 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 import styled from "styled-components"
 
 export const ProjectMeta = ({ meta, weblink }) => {
@@ -26,13 +25,14 @@ export const ProjectMeta = ({ meta, weblink }) => {
         {weblink.length > 0 &&
           weblink.map((link, key) => {
             return (
-              <Link
+              <a
                 key={key}
-                to={link.url}
+                href={link.url}
                 className="btn-solid py-2 px-4 mr-4 border rounded inline-block"
+                title={`external link`}
               >
                 {link.label}
-              </Link>
+              </a>
             )
           })}
       </p>

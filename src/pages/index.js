@@ -36,7 +36,7 @@ const IndexPage = ({ data }) => {
     )
 
     setRandomProjects(homeProjects)
-  }, [data])
+  }, [data, projects])
 
   return (
     <>

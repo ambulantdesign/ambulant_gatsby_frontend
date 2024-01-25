@@ -55,6 +55,7 @@ export default function SearchPage({ location, pageContext }) {
         // updateState(searchState)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

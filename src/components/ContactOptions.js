@@ -16,6 +16,7 @@ const ContactOptions = ({ headline, extraClass }) => {
             className="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
             title={`Call ${title}`}
             href={`tel:${phone}`}
+            aria-label={`Call ${title}`}
           >
             <span className="flex items-center justify-center">
               <FaPhoneAlt />
@@ -28,6 +29,7 @@ const ContactOptions = ({ headline, extraClass }) => {
             className="w-full text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
             title={`Send mail to ${title}`}
             href={`mailto:${email}`}
+            aria-label={`Send mail to ${title}`}
           >
             <span className="flex items-center justify-center">
               <FaEnvelope />

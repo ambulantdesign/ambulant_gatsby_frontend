@@ -27,12 +27,6 @@ const query = graphql`
   }
 `
 
-const initialState = {
-  keywordNav: false,
-  artistNav: false,
-  offCanvas: false,
-}
-
 const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
   const [scrollY, setScrollY] = useLocalStorageState("navScrollY", {
     ssr: true,
@@ -82,7 +76,11 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
       >
         <div className="menu-icon">
           {/* <!-- Please refer: https://github.com/shubhamjain/svg-loader --> */}
-          <button type="button" onClick={closeMobileNav}>
+          <button
+            type="button"
+            onClick={closeMobileNav}
+            aria-label="close menu"
+          >
             <svg
               data-src="/hero-outline.svg?ic=x"
               width="48"
@@ -106,6 +104,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                 }`}
                 type="button"
                 onClick={() => toggleNav("keywordNav")}
+                aria-label="Keywords"
               >
                 <span className="uppercase text-xl">Keywords</span>
               </button>
@@ -118,7 +117,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                         className="bg-transparent py-4"
                         to={`/keywords/${slug}`}
                         activeClassName="active"
-                        onClick={offCanvas && closeMobileNav}
+                        onClick={closeMobileNav}
                       >
                         {name}
                       </Link>
@@ -134,6 +133,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                 }`}
                 type="button"
                 onClick={() => toggleNav("artistNav")}
+                aria-label="Artists"
               >
                 <span className="uppercase text-xl">Artists</span>
               </button>
@@ -146,7 +146,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
                         className="bg-transparent py-4"
                         to={`/artists/${slug}`}
                         activeClassName="active"
-                        onClick={offCanvas && closeMobileNav}
+                        onClick={closeMobileNav}
                       >
                         {fullname}
                       </Link>
@@ -254,6 +254,15 @@ const Wrapper = styled.aside`
   nav .list-none li > a,
   nav .list-none li > button {
     cursor: pointer;
+  }
+  .menu-icon a svg,
+  .menu-icon button svg {
+    transition: all 0.4s ease;
+  }
+  .menu-icon button:hover svg,
+  .menu-icon button:focus svg {
+    fill: var(--clr-grey-3);
+    color: var(--clr-grey-3);
   }
   .form-field {
     display: none;

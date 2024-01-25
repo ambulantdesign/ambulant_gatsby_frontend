@@ -15,7 +15,6 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import { useSiteMetadata } from "../hooks/use-site-metadata"
-import { useGlobalContext } from "../context/AppContext"
 import Header from "./Header"
 import MainNav from "./MainNav"
 import "../assets/css/layout.css"

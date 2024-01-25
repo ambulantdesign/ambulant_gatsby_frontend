@@ -12,7 +12,7 @@ const Header = props => {
       <div className="logo">
         <h1>
           <span className="ambulant">
-            <Link to="/">
+            <Link to="/" title={`Home | ambulant design`}>
               <svg
                 className="circle"
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +27,18 @@ const Header = props => {
                 />
               </svg>
             </Link>
-            <Link to="/">{siteTitle}</Link>
+            <Link to="/" title={`Home | ambulant design`}>
+              {siteTitle}
+            </Link>
           </span>
           <span className="authorName">
-            <Link to="/about">{author}</Link>
+            <Link
+              to="/about"
+              title="About Gabriele Götz | ambulant design"
+              aria-label={`About Gabriele Götz | ambulant design`}
+            >
+              {author}
+            </Link>
             <span>
               {` `} — studio {siteTitle} {city}
             </span>
@@ -42,7 +50,7 @@ const Header = props => {
       </div>
       <div className="menu-icon">
         {/* <!-- Please refer: https://github.com/shubhamjain/svg-loader --> */}
-        <button type="button" onClick={openMobileNav}>
+        <button type="button" onClick={openMobileNav} aria-label="open menu">
           <svg
             data-src="/hero-solid.svg?ic=menu"
             width="32"
@@ -120,7 +128,8 @@ const Wrapper = styled.header`
   .menu-icon {
     display: none;
   }
-  .menu-icon a svg {
+  .menu-icon a svg,
+  .menu-icon button svg {
     transition: all 0.4s ease;
   }
   .menu-icon button:hover svg,

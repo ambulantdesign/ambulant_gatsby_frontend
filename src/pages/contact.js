@@ -5,7 +5,6 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { useHasMounted } from "../hooks/useHasMounted"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import { FaPhoneAlt } from "react-icons/fa"
 
 import Layout from "../components/Layout"
 import ContentHeader from "../components/ContentHeader"

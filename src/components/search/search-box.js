@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { useLocation } from "@reach/router"
 import { navigate } from "gatsby"
 import { connectSearchBox } from "react-instantsearch-dom"
-import useLocalStorageState from "use-local-storage-state"
+// import useLocalStorageState from "use-local-storage-state"
 // import { useGlobalContext } from "../../context/AppContext"
 
 export default connectSearchBox(
@@ -16,13 +16,13 @@ export default connectSearchBox(
     closeMobileNav,
   }) => {
     // const { appState, updateState } = useGlobalContext()
-    const [searchState, setSearchState] = useLocalStorageState("searchState", {
-      ssr: true,
-      defaultValue: {
-        query: "",
-        page: 1,
-      },
-    })
+    // const [searchState, setSearchState] = useLocalStorageState("searchState", {
+    //   ssr: true,
+    //   defaultValue: {
+    //     query: "",
+    //     page: 1,
+    //   },
+    // })
     const inputRef = useRef()
     const location = useLocation()
 
@@ -54,6 +54,7 @@ export default connectSearchBox(
             <button
               type="submit"
               className="p-1 focus:outline-none focus:shadow-outline"
+              aria-label="submit"
             >
               <svg
                 fill="none"
