@@ -26,6 +26,8 @@ const ArchivePage = ({ data }) => {
     gridRef.current.style.opacity = "100"
   }, [data])
 
+  console.log(projects)
+
   return (
     <>
       <Layout id="home">
@@ -91,7 +93,10 @@ const Wrapper = styled.main`
 export const query = graphql`
   {
     allStrapiArchiveItem(
-      sort: { fields: [yearStart, slug], order: [DESC, ASC] }
+      sort: {
+        fields: [artist___lastname, yearStart, slug]
+        order: [ASC, DESC, ASC]
+      }
     ) {
       nodes {
         id: strapi_id
@@ -104,6 +109,10 @@ export const query = graphql`
           data {
             description
           }
+        }
+        artist {
+          lastname
+          fullname
         }
         Gallery {
           id: strapi_id

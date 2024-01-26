@@ -10,6 +10,7 @@ const ArchiveProject = ({
   description: {
     data: { description = null },
   },
+  artist: { fullname },
   medium = null,
   city = null,
   yearStart,
@@ -29,7 +30,9 @@ const ArchiveProject = ({
 
   return (
     <Wrapper className="gridItem-content mb-12">
-      <h4 className="pr-4 text-xl mb-6">{title}</h4>
+      <h4 className="pr-4 text-xl mb-6">
+        {fullname}: {title}
+      </h4>
       <section className="grid gap-10 container" id="content">
         {Gallery && (
           <div className="col-6">
@@ -80,6 +83,10 @@ ArchiveProject.defaultProps = {
   city: null,
   yearStart: null,
   yearEnd: null,
+  artist: {
+    lastname: null,
+    fullname: null,
+  },
   Gallery: [],
 }
 
@@ -94,6 +101,10 @@ ArchiveProject.propTypes = {
   city: PropTypes.string,
   yearStart: PropTypes.string,
   yearEnd: PropTypes.string,
+  artist: PropTypes.shape({
+    lastname: PropTypes.string,
+    fullname: PropTypes.string,
+  }),
   Gallery: PropTypes.arrayOf(
     PropTypes.shape({
       localFile: PropTypes.object.isRequired,

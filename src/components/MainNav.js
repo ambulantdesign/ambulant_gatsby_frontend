@@ -15,6 +15,7 @@ const query = graphql`
         lastname
         fullname
         slug
+        isInstitution
       }
     }
     allStrapiKeyword(sort: { order: ASC, fields: name }) {
@@ -139,7 +140,8 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
               </button>
               <ul className="list-none artists">
                 {allArtists.map(artist => {
-                  const { id, fullname, slug } = artist
+                  const { id, fullname, slug, isInstitution } = artist
+                  if (isInstitution) return null
                   return (
                     <li key={id}>
                       <Link

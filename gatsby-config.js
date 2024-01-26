@@ -35,6 +35,7 @@ const strapiConfig = {
       singularName: `archive-item`,
       queryParams: {
         populate: {
+          artist: "*",
           Gallery: { populate: "*" },
           sliderImgTxt: { populate: "*" },
         },
