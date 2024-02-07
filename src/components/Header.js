@@ -174,7 +174,7 @@ const Wrapper = styled.header`
       display: block;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     gap: var(--space-10);
     .logo {
       grid-column: span 11;

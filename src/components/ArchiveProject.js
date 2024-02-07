@@ -64,7 +64,7 @@ const Wrapper = styled.div`
   .grid > .col-10 {
     grid-column: span 10;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .grid {
       gap: 0;
     }

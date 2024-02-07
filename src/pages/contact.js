@@ -96,7 +96,7 @@ const Wrapper = styled.main`
   .grid#content footer {
     grid-column: span 12;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .grid > .col-1,
     .grid > .col-2 {
       grid-column: span 12;

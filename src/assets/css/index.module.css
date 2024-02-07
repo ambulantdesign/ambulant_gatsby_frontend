@@ -64,11 +64,13 @@
   grid-column: span 12;
 }
 .portfolio,
+.search,
 .archive-container {
   padding: var(--space-20);
   margin-right: var(--nav-lg-width);
 }
 .portfolio .header,
+.search .header,
 .archive-container .header {
   display: flex;
   flex-direction: column-reverse;

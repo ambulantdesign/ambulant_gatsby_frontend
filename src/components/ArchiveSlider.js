@@ -1,4 +1,5 @@
 import * as React from "react"
+import PropTypes from "prop-types"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
@@ -15,7 +16,7 @@ import "swiper/css/pagination"
 import "swiper/css/keyboard"
 
 const ArchiveSlider = ({ gallery }) => (
-  <Wrapper className="archive mb-2 md:mb-2" id="slider">
+  <Wrapper className="archive mb-4" id="slider">
     <Swiper
       modules={[Lazy, Navigation, Pagination, Keyboard, Virtual]}
       spaceBetween={24}
@@ -60,7 +61,7 @@ const Wrapper = styled.figure`
     width: 100%;
     margin-top: 10px;
     text-align: left;
-    height: 40px;
+    height: 64px;
     overflow-y: hidden;
     background-color: transparent;
   }
@@ -72,11 +73,25 @@ const Wrapper = styled.figure`
   .swiper-button-next {
     transform: translateY(-20px);
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .swiper {
       grid-column: 1 / span 12 !important;
     }
   }
 `
+
+ArchiveSlider.defaultProps = {
+  gallery: [],
+}
+
+ArchiveSlider.propTypes = {
+  gallery: PropTypes.arrayOf(
+    PropTypes.shape({
+      caption: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      localFile: PropTypes.object.isRequired,
+    })
+  ),
+}
 
 export default ArchiveSlider

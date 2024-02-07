@@ -26,8 +26,6 @@ const ArchivePage = ({ data }) => {
     gridRef.current.style.opacity = "100"
   }, [data])
 
-  console.log(projects)
-
   return (
     <>
       <Layout id="home">
@@ -83,7 +81,7 @@ const Wrapper = styled.main`
   .archive-content {
     opacity: 0;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .grid > .col-6 {
       grid-column: span 12;
     }

@@ -156,7 +156,7 @@ const Wrapper = styled.div`
       transform: translate3d(-var(--nav-lg-width), 0, 0);
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .grid > .col-6 {
       grid-column: span 12;
     }

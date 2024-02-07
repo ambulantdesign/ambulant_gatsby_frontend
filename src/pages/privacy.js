@@ -76,7 +76,7 @@ const Wrapper = styled.main`
   .yt-consent {
     background-color: var(--clr-sand);
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     .grid > .col-1,
     .grid > .col-2 {
       grid-column: span 12;

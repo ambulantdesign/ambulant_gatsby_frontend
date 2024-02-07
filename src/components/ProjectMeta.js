@@ -3,12 +3,11 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 export const ProjectMeta = ({ meta, weblink }) => {
-  // console.log(meta)
+  // console.log(weblink)
   let metaData = Object.keys(meta).map(key => [
     String(key).split("_").join(" "),
     meta[key],
   ])
-  // console.log(metaData)
 
   return (
     <Wrapper className="meta-info mb-0 sm:mb-4 ">
@@ -75,11 +74,5 @@ ProjectMeta.defaultProps = {
     technical_details: ``,
     year: ``,
   },
-  weblink: [
-    {
-      button: true,
-      label: ``,
-      url: ``,
-    },
-  ],
+  weblink: [],
 }

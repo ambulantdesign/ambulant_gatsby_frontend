@@ -392,6 +392,18 @@ main {
   border-color: var(--clr-links);
   background: transparent;
 }
+.portfolio #content ul li {
+  margin-bottom: 0;
+}
+.portfolio #content ul li:before {
+  content: ">";
+  padding-right: 0.4rem;
+  margin-left: -1.5rem;
+}
+.portfolio #content ul li p {
+  display: inline-block;
+}
+
 #slider .swiper {
   width: 100%;
   height: 100%;

@@ -291,7 +291,7 @@ const Wrapper = styled.aside`
       align-self: end;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 640px) {
     nav {
       margin-top: var(--space-3);
     }

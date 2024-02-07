@@ -61,7 +61,7 @@ export default function SearchPage({ location, pageContext }) {
   return (
     <>
       <Layout id="search">
-        <Wrapper className="portfolio" id="main">
+        <Wrapper className="search" id="main">
           <LoadingIndicator />
           <ContentHeader title={headline} subtitle="" />
           <section className="grid gap-x-0 sm:gap-12 container " id="content">
