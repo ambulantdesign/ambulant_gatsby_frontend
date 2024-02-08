@@ -397,7 +397,7 @@ main {
 }
 .portfolio #content ul li:before {
   content: ">";
-  padding-right: 0.4rem;
+  position: absolute;
   margin-left: -1.5rem;
 }
 .portfolio #content ul li p {
