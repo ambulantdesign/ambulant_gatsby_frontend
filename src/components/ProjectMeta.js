@@ -3,17 +3,26 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 
 export const ProjectMeta = ({ meta, weblink }) => {
-  // console.log(weblink)
-  let metaData = Object.keys(meta).map(key => [
-    String(key).split("_").join(" "),
-    meta[key],
-  ])
+  let year_end = null
+  let metaData = Object.keys(meta).map(key => {
+    if (String(key) === "yearEnd") {
+      year_end = meta[key]
+    }
+    return [String(key).split("_").join(" "), meta[key]]
+  })
+
+  metaData.map(item =>
+    year_end && item[0] === "year"
+      ? (item[1] = `${item[1]}—${year_end}`)
+      : item[1]
+  )
 
   return (
     <Wrapper className="meta-info mb-0 sm:mb-4 ">
       {metaData.map(
         (item, key) =>
-          item[1] && (
+          item[1] &&
+          item[0] !== "yearEnd" && (
             <div key={key}>
               <h5>{item[0]}</h5>
               <p>{item[1]}</p>

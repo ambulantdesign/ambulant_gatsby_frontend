@@ -124,6 +124,7 @@ export const query = graphql`
         publisher
         technical_details
         year
+        yearEnd
       }
       weblink: Weblink {
         button
