@@ -60,7 +60,7 @@ const Wrapper = styled.figure`
     line-height: var(--line-height-dense);
     width: 100%;
     margin-top: 10px;
-    text-align: left;
+    text-align: center;
     height: 64px;
     overflow-y: hidden;
     background-color: transparent;
