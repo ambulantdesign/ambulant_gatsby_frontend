@@ -33,7 +33,7 @@ const WorkContentArchive = ({ data, gallery }) => {
         {/* <!-- col 2 --> */}
         <div className="col-6">
           <ProjectMeta meta={meta} />
-          <h5>design notes</h5>
+          {content && <h5>design notes</h5>}
           <RichTextContent content={content} extraClass="description" />
           <ProjectMeta weblink={weblink} />
         </div>
