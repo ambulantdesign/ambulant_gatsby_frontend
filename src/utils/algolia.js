@@ -38,6 +38,10 @@ const portfolioQuery = `{
         keywords {
           name
         }
+				artist {
+					fullname, 
+					lastname
+				}
         meta {
           medium
           info
