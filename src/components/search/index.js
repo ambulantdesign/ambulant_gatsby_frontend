@@ -36,8 +36,7 @@ export default function CustomSearch() {
   )
 
   const PageHit = ({ hit }) => {
-    console.log(hit)
-    const { path, title, keywords, meta } = hit
+    const { path, title, keywords, meta, artist } = hit
 
     let metaArray = []
     const [metaInfo, setMetaInfo] = useState(null || meta)
@@ -51,6 +50,9 @@ export default function CustomSearch() {
       <Link to={path}>
         <article>
           <h2>{title}</h2>
+          {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
+          <h4 className="pr-4 text-xl">{title}</h4>
+          {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
           {keywordList && (
             <ul className="keywords">
               {keywordList.map(keyword => (

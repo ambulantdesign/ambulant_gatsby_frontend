@@ -39,9 +39,9 @@ const portfolioQuery = `{
           name
         }
 				artist {
-					fullname, 
-					lastname
-				}
+          lastname
+          fullname
+        }
         meta {
           medium
           info
