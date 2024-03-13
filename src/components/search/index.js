@@ -36,41 +36,13 @@ export default function CustomSearch() {
   )
 
   const PageHit = ({ hit }) => {
-    const { path, title, keywords, meta, artist } = hit
-
-    let metaArray = []
-    const [metaInfo, setMetaInfo] = useState(null || meta)
-    const [keywordList, setKeywordList] = useState([] || keywords)
-
-    if (metaInfo) {
-      metaArray = Object.entries(meta)
-    }
+    const { path, title, artist } = hit
 
     return (
       <Link to={path}>
         <article>
           <h2>{title}</h2>
           {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
-          <h4 className="pr-4 text-xl">{title}</h4>
-          {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
-          {keywordList && (
-            <ul className="keywords">
-              {keywordList.map(keyword => (
-                <li>{keyword.name}</li>
-              ))}
-            </ul>
-          )}
-          {metaArray && (
-            <ul className="meta">
-              {metaArray.forEach(([key, value]) => {
-                return (
-                  <li>
-                    {key}: {value}
-                  </li>
-                )
-              })}
-            </ul>
-          )}
         </article>
       </Link>
     )
