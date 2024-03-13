@@ -84,7 +84,7 @@ const Wrapper = styled.main`
     grid-column: span 4;
   }
   .grid > .col-1 h2 {
-    /* font-weight: 400; */
+    font-weight: 400;
     color: inherit;
     margin-bottom: 0;
   }
