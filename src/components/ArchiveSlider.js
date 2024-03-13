@@ -22,6 +22,7 @@ const ArchiveSlider = ({ gallery }) => (
       spaceBetween={24}
       slidesPerView={1}
       rewind={true}
+      autoHeight={true}
       virtual
       navigation
       keyboard
