@@ -75,14 +75,14 @@ const strapiConfig = {
         },
       },
     },
-    {
-      singularName: `archive`,
-      queryParams: {
-        populate: {
-          seo: { populate: "*" },
-        },
-      },
-    },
+    // {
+    //   singularName: `archive`,
+    //   queryParams: {
+    //     populate: {
+    //       seo: { populate: "*" },
+    //     },
+    //   },
+    // },
   ],
   queryLimit: 5000,
 }
