@@ -21,7 +21,7 @@ export const randomGalleryItem = gallery => {
 export const artGalleryListOrder = (
   projects,
   institutions,
-  sortOrder = "begin"
+  sortOrder = "end"
 ) => {
   let newProjectsList = []
 
