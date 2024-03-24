@@ -12,11 +12,12 @@ import GridProject from "../components/GridProject"
 import NoResults from "../components/NoResults"
 
 import { useSiteMetadata } from "../hooks/use-site-metadata"
-import { randomGalleryItem } from "../utils/gallery-helper"
+import { randomGalleryItem, artGalleryListOrder } from "../utils/gallery-helper"
 
 import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
+  const { artists, keywords, galleries } = data
   const { title, contentType } = pageContext
   const [sliceLength, setSliceLength] = useState(
     parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
@@ -25,11 +26,17 @@ const AlmListPage = ({ data, pageContext }) => {
   let projects
 
   if (contentType === "artists") {
-    projects = data.artists.nodes
+    projects = artists.nodes
   }
   if (contentType === "keywords") {
-    projects = data.keywords.nodes
+    projects = keywords.nodes
   }
+
+  // ************** //
+
+  projects = artGalleryListOrder(projects, galleries.nodes, "begin")
+
+  // ************** //
 
   const loaderRef = useRef()
   const gridRef = useRef()
@@ -104,16 +111,16 @@ const AlmListPage = ({ data, pageContext }) => {
           <div
             className={styles.portfolioGrid}
             id="portfolio-grid"
-            style={{}}
             ref={gridRef}
           >
             {projects.length > 0 &&
               list.map((project, index) => {
-                const { id, title, slug, artist, Gallery } = project
+                const { id, title, slug, artist, Gallery, institution } =
+                  project
                 const isNew = index >= oldItems && index < projects.length
                 // const extraClass = isNew ? fadeIn : `old`
                 const extraClass = isNew ? `new ${fadeIn}` : `old`
-
+                console.log(project)
                 return (
                   <div
                     className={`${styles.work} ${extraClass} gridItem pr-4`}
@@ -126,6 +133,7 @@ const AlmListPage = ({ data, pageContext }) => {
                       slug={slug}
                       artist={artist}
                       gallery={Gallery}
+                      institution={institution}
                     />
                   </div>
                 )
@@ -214,6 +222,12 @@ export const query = graphql`
           year
           id
         }
+        institution: gallery {
+          id
+          name
+          sortName
+          colorCode
+        }
         Gallery {
           id
           caption
@@ -248,6 +262,11 @@ export const query = graphql`
           year
           id
         }
+        institution: gallery {
+          id
+          name
+          sortName
+        }
         Gallery {
           id
           caption
@@ -263,10 +282,18 @@ export const query = graphql`
         }
       }
     }
+    galleries: allStrapiGallery(sort: { fields: sortName, order: ASC }) {
+      nodes {
+        name
+        sortName
+        colorCode
+      }
+    }
   }
 `
 
 export const Head = ({ location, data, pageContext }) => {
+  const { artists, keywords } = data
   const [seoImg, setSeoImg] = React.useState(null)
   const { studioName, city, authorShort } = useSiteMetadata()
   const { title, contentType } = pageContext
@@ -274,11 +301,11 @@ export const Head = ({ location, data, pageContext }) => {
   let seoTitle, seoDesc, projects
 
   if (contentType === "artists") {
-    projects = data.artists.nodes
+    projects = artists.nodes
     seoTitle = `Artist: ${title}`
   }
   if (contentType === "keywords") {
-    projects = data.keywords.nodes
+    projects = keywords.nodes
     seoTitle = `Keyword: ${title}`
   }
 

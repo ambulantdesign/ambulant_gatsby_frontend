@@ -17,3 +17,36 @@ export const randomGalleryItem = gallery => {
   const randomImg = gallery[index]
   return randomImg
 }
+
+export const artGalleryListOrder = (
+  projects,
+  institutions,
+  sortOrder = "begin"
+) => {
+  let newProjectsList = []
+
+  // const allInstitutions = galleries.nodes
+  const galleryWorks = projects.filter(project => project.institution !== null)
+  const restWorks = projects.filter(project => project.institution === null)
+
+  let sortedInstitutions = []
+
+  // seperate institutions within 'galleryWorks'
+  institutions.map(institution => {
+    const worksFromSingleGallery = galleryWorks.filter(
+      work => work.institution.sortName === institution.sortName
+    )
+    sortedInstitutions.push(...worksFromSingleGallery)
+  })
+
+  // apply new sort oder to projects array or do not change order at all
+  if (sortOrder === "begin") {
+    newProjectsList = [...sortedInstitutions, ...restWorks]
+  } else if (sortOrder === "end") {
+    newProjectsList = [...restWorks, ...sortedInstitutions]
+  } else {
+    newProjectsList = projects
+  }
+
+  return newProjectsList
+}

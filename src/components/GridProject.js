@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 import { getRandomGalleryImage } from "../utils/gallery-helper"
 
-const GridProject = ({ id, title, slug, artist, gallery }) => {
+const GridProject = ({ id, title, slug, artist, gallery, institution }) => {
   const randomImg = getRandomGalleryImage(gallery)
 
   // Check if window is defined (so if in the browser or in node.js).
@@ -29,6 +29,14 @@ const GridProject = ({ id, title, slug, artist, gallery }) => {
         />
         <h4 className="pr-4 text-xl">{title}</h4>
         {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
+        {institution && (
+          <span
+            className="institution"
+            style={{ color: `${institution.colorCode}` }}
+          >
+            {institution.name}
+          </span>
+        )}
       </Link>
     </Wrapper>
   )
@@ -55,6 +63,12 @@ const Wrapper = styled.figure`
   }
   a img {
     max-height: 300px;
+  }
+  a .institution {
+    display: inline-block;
+    /* border-radius: 50%;
+    width: 10px;
+    height: 10px; */
   }
 `
 
