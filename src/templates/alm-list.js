@@ -120,7 +120,7 @@ const AlmListPage = ({ data, pageContext }) => {
                 const isNew = index >= oldItems && index < projects.length
                 // const extraClass = isNew ? fadeIn : `old`
                 const extraClass = isNew ? `new ${fadeIn}` : `old`
-                console.log(project)
+
                 return (
                   <div
                     className={`${styles.work} ${extraClass} gridItem pr-4`}
@@ -266,6 +266,7 @@ export const query = graphql`
           id
           name
           sortName
+          colorCode
         }
         Gallery {
           id
