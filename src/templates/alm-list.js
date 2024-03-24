@@ -34,7 +34,7 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // ************** //
 
-  projects = artGalleryListOrder(projects, galleries.nodes, "begin")
+  projects = artGalleryListOrder(projects, galleries.nodes, "end")
 
   // ************** //
 
