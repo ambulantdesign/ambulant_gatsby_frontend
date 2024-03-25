@@ -17,7 +17,6 @@ const GridProject = ({ id, title, slug, artist, gallery, institution }) => {
       window.resizeGridItem(document.getElementById(item))
     }
   }
-  console.log(institution)
 
   return (
     <Wrapper className="gridItem-content">

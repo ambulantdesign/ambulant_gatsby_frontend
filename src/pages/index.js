@@ -6,7 +6,7 @@ import Layout from "../components/Layout"
 import Loading from "../components/ui/Loading"
 import Seo from "../components/Seo"
 import GridProject from "../components/GridProject"
-import { randomGalleryItem } from "../utils/gallery-helper"
+import { randomGalleryItem, artGalleryListOrder } from "../utils/gallery-helper"
 
 import * as styles from "../assets/css/index.module.css"
 
@@ -18,6 +18,7 @@ const IndexPage = ({ data }) => {
   const gridRef = useRef()
   const {
     allStrapiWork: { nodes: projects },
+    galleries,
   } = data
 
   useEffect(() => {
@@ -34,6 +35,12 @@ const IndexPage = ({ data }) => {
       ["productionDate", "slug"],
       ["desc", "asc"]
     )
+
+    // ************** //
+
+    homeProjects = artGalleryListOrder(homeProjects, galleries.nodes, "end")
+
+    // ************** //
 
     setRandomProjects(homeProjects)
   }, [data, projects])
@@ -56,7 +63,8 @@ const IndexPage = ({ data }) => {
           >
             {randomProjects &&
               randomProjects.map(project => {
-                const { id, title, slug, artist, Gallery } = project
+                const { id, title, slug, artist, Gallery, institution } =
+                  project
 
                 return (
                   <div
@@ -70,6 +78,7 @@ const IndexPage = ({ data }) => {
                       slug={slug}
                       artist={artist}
                       gallery={Gallery}
+                      institution={institution}
                     />
                   </div>
                 )
@@ -83,7 +92,9 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allStrapiWork(sort: { order: DESC, fields: [productionDate, slug] }) {
+    allStrapiWork(
+      sort: { order: [DESC, ASC], fields: [productionDate, slug] }
+    ) {
       nodes {
         id: strapi_id
         title
@@ -107,6 +118,12 @@ export const query = graphql`
           year
           id: strapi_id
         }
+        institution: gallery {
+          id
+          name
+          sortName
+          colorCode
+        }
         Gallery {
           id: strapi_id
           caption
@@ -120,6 +137,12 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    galleries: allStrapiGallery(sort: { fields: sortName, order: ASC }) {
+      nodes {
+        name
+        sortName
       }
     }
   }
