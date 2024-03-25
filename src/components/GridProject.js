@@ -31,12 +31,18 @@ const GridProject = ({ id, title, slug, artist, gallery, institution }) => {
         <h4 className="pr-4 text-xl">{title}</h4>
         {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
         {institution && (
-          <span
-            className="institution"
-            style={{ color: `${institution.colorCode}` }}
-          >
-            {institution.name}
-          </span>
+          <div className="institution">
+            <span
+              className="dot"
+              style={{ backgroundColor: `${institution.colorCode}` }}
+            ></span>
+            <span
+              className="galleryName"
+              style={{ color: `${institution.colorCode}` }}
+            >
+              {institution.name}
+            </span>
+          </div>
         )}
       </Link>
     </Wrapper>
@@ -66,10 +72,22 @@ const Wrapper = styled.figure`
     max-height: 300px;
   }
   a .institution {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0.4rem;
+  }
+  a span.galleryName {
     display: inline-block;
     /* border-radius: 50%;
     width: 10px;
     height: 10px; */
+  }
+  a span.dot {
+    display: inline-block;
+    border-radius: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
   }
 `
 
