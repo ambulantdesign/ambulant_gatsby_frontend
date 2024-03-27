@@ -36,7 +36,7 @@ const StreamingVideo = ({ video }) => {
   }
 
   return (
-    <Wrapper id="videoContainer">
+    <Wrapper id="videoContainer" className="mt-5">
       {useHasMounted &&
         (!acceptCookies ? (
           <div className="yt-consent py-2 px-4 border-transparent rounded">

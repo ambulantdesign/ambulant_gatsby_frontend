@@ -41,7 +41,7 @@ export const ProjectMeta = ({ meta, weblink }) => {
                     href={link.url}
                     className={
                       link.button
-                        ? "btn-solid py-2 px-4 mr-4 border rounded inline-block"
+                        ? "text-center bg-transparent py-2 px-4 mr-4 border rounded inline-block nav-btn"
                         : "meta txt-link"
                     }
                     title={`external link`}
