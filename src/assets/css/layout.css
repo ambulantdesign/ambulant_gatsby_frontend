@@ -344,10 +344,12 @@ main {
   border: 1px solid transparent;
 }
 #content a {
-  color: var(--clr-grey-2);
   border-bottom: 1px solid;
   border-color: var(--clr-grey-4);
   padding-bottom: 0.125rem;
+}
+#content a.meta.txt-link {
+  color: var(--clr-grey-2);
 }
 #content .btn-container a,
 #content a.nav-btn {
