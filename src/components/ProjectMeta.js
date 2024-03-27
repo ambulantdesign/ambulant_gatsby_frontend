@@ -29,21 +29,30 @@ export const ProjectMeta = ({ meta, weblink }) => {
             </div>
           )
       )}
-      <p className={weblink.length === 0 ? "hidden" : "btn-container"}>
+      <div className={weblink.length === 0 ? "hidden" : "btn-container"}>
         {weblink.length > 0 &&
           weblink.map((link, key) => {
             return (
-              <a
-                key={key}
-                href={link.url}
-                className="btn-solid py-2 px-4 mr-4 border rounded inline-block"
-                title={`external link`}
-              >
-                {link.label}
-              </a>
+              <div key={key}>
+                {!link.button && <h5>www</h5>}
+                <p>
+                  <a
+                    key={key}
+                    href={link.url}
+                    className={
+                      link.button
+                        ? "btn-solid py-2 px-4 mr-4 border rounded inline-block"
+                        : ""
+                    }
+                    title={`external link`}
+                  >
+                    {link.label}
+                  </a>
+                </p>
+              </div>
             )
           })}
-      </p>
+      </div>
     </Wrapper>
   )
 }
