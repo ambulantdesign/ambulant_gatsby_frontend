@@ -36,7 +36,7 @@ const StreamingVideo = ({ video }) => {
   }
 
   return (
-    <Wrapper id="videoContainer" className="mt-5">
+    <Wrapper id="videoContainer">
       {useHasMounted &&
         (!acceptCookies ? (
           <div className="yt-consent py-2 px-4 border-transparent rounded">
@@ -84,6 +84,7 @@ const StreamingVideo = ({ video }) => {
 }
 
 const Wrapper = styled.div`
+  margin-top: var(--space-5);
   .yt-consent {
     background-color: var(--clr-sand);
   }

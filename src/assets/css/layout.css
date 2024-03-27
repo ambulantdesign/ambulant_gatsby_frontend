@@ -356,7 +356,9 @@ main {
   padding-bottom: 0.5rem;
 }
 #content a:active,
-#content a:hover {
+#content a:hover,
+#content a.meta.txt-link:active,
+#content a.meta.txt-link:hover {
   color: var(--clr-links);
   border-color: var(--clr-links);
 }
