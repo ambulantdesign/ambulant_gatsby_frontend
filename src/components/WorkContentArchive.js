@@ -7,8 +7,10 @@ import ContentHeader from "./ContentHeader"
 import RichTextContent from "./RichTextContent"
 import ArchiveSlider from "./ArchiveSlider"
 import WorkFooter from "./WorkFooter"
+import GalleryIndicator from "./GalleryIndicator"
+import RelatedGalleryProjects from "./RelatedGalleryProjects"
 
-const WorkContentArchive = ({ data, gallery }) => {
+const WorkContentArchive = ({ data, gallery, related }) => {
   const {
     content: {
       data: { content = null },
@@ -42,7 +44,10 @@ const WorkContentArchive = ({ data, gallery }) => {
         {/* <!-- visual index (full-width)? --> */}
         {institution && (
           // own component
-          <div className="col-12">visual index for {institution.name}</div>
+          <div className="col-12">
+            <GalleryIndicator institution={institution} />
+            <RelatedGalleryProjects related={related} />
+          </div>
         )}
 
         <WorkFooter artist={artist} keywords={keywords} />

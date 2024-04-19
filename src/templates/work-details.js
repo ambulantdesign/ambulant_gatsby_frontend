@@ -10,7 +10,18 @@ import WorkContentNormal from "../components/WorkContentNormal"
 import WorkContentArchive from "../components/WorkContentArchive"
 
 const WorkDetails = ({ data }) => {
-  const { gallery, smallSlider, videos, institution } = data.work
+  let allRelatedWorks = null
+  const { id, gallery, smallSlider, videos, institution } = data.work
+  const allGalleryWorks = data.allWorksForGallery.nodes
+
+  if (institution) {
+    allRelatedWorks = allGalleryWorks.filter(
+      item =>
+        item.institution !== null &&
+        item.institution.name === institution.name &&
+        id !== item.id
+    )
+  }
 
   let allGalleries = []
   let sliderVideos = []
@@ -39,9 +50,17 @@ const WorkDetails = ({ data }) => {
       <Layout>
         <Wrapper className="portfolio" id="main">
           {smallSlider ? (
-            <WorkContentArchive data={data} gallery={allGalleries} />
+            <WorkContentArchive
+              data={data}
+              gallery={allGalleries}
+              related={allRelatedWorks}
+            />
           ) : (
-            <WorkContentNormal data={data} gallery={allGalleries} />
+            <WorkContentNormal
+              data={data}
+              gallery={allGalleries}
+              related={allRelatedWorks}
+            />
           )}
           {/* <!-- big Swiper (seperate component) --> */}
         </Wrapper>
@@ -94,7 +113,7 @@ export const query = graphql`
       }
     }
   }
-  query WorkDetails($slug: String!) {
+  query WorkDetails($slug: String!, $gallery: STRAPI_GALLERYFilterInput) {
     work: strapiWork(slug: { eq: $slug }) {
       id: strapi_id
       slug
@@ -175,6 +194,38 @@ export const query = graphql`
       }
       seo {
         ...seoFields
+      }
+    }
+    allWorksForGallery: allStrapiWork(
+      sort: {
+        order: [ASC, DESC, ASC]
+        fields: [gallery___sortName, productionDate, slug]
+      }
+      filter: { gallery: $gallery }
+    ) {
+      nodes {
+        id: strapi_id
+        title
+        slug
+        productionDate
+        institution: gallery {
+          id
+          name
+          sortName
+        }
+        Gallery {
+          id
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                formats: WEBP
+                layout: CONSTRAINED
+                placeholder: BLURRED
+                height: 100
+              )
+            }
+          }
+        }
       }
     }
   }

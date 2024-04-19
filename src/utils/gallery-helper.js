@@ -32,7 +32,7 @@ export const artGalleryListOrder = (
   let sortedInstitutions = []
 
   // seperate institutions within 'galleryWorks'
-  institutions.map(institution => {
+  institutions.forEach(institution => {
     const worksFromSingleGallery = galleryWorks.filter(
       work => work.institution.sortName === institution.sortName
     )

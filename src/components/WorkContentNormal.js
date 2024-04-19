@@ -8,13 +8,14 @@ import RichTextContent from "./RichTextContent"
 import StreamingVideo from "./StreamingVideo"
 import NormalSlider from "./NormalSlider"
 import WorkFooter from "./WorkFooter"
+import GalleryIndicator from "./GalleryIndicator"
+import RelatedGalleryProjects from "./RelatedGalleryProjects"
 
-const WorkContentNormal = ({ data, gallery }) => {
+const WorkContentNormal = ({ data, gallery, related }) => {
   const {
     content: {
       data: { content },
     },
-    id,
     artist,
     keywords,
     title,
@@ -23,8 +24,6 @@ const WorkContentNormal = ({ data, gallery }) => {
     streamingVideo,
     institution,
   } = data.work
-
-  console.log(data.work)
 
   return (
     <Wrapper>
@@ -47,7 +46,10 @@ const WorkContentNormal = ({ data, gallery }) => {
         {/* <!-- visual index (full-width)? --> */}
         {institution && (
           // own component: <VisualIndex institution={institution} work={id} />
-          <div className="col-12">visual index for {institution.name}</div>
+          <div className="col-12">
+            <GalleryIndicator institution={institution} />
+            <RelatedGalleryProjects related={related} />
+          </div>
         )}
 
         <WorkFooter artist={artist} keywords={keywords} />

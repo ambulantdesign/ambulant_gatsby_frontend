@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
+import GalleryIndicator from "./GalleryIndicator"
 import { getRandomGalleryImage } from "../utils/gallery-helper"
 
 const GridProject = ({ id, title, slug, artist, gallery, institution }) => {
@@ -29,20 +30,7 @@ const GridProject = ({ id, title, slug, artist, gallery, institution }) => {
         />
         <h4 className="pr-4 text-xl">{title}</h4>
         {artist?.fullname && <h5 className="pr-4">{artist.fullname}</h5>}
-        {institution && (
-          <div className="institution">
-            <span
-              className="dot"
-              style={{ backgroundColor: `${institution.colorCode}` }}
-            ></span>
-            <span
-              className="galleryName"
-              style={{ color: `${institution.colorCode}` }}
-            >
-              {institution.name}
-            </span>
-          </div>
-        )}
+        {institution && <GalleryIndicator institution={institution} />}
       </Link>
     </Wrapper>
   )
@@ -70,24 +58,6 @@ const Wrapper = styled.figure`
   a img {
     max-height: 300px;
   }
-  a .institution {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    column-gap: 0.4rem;
-  }
-  a span.galleryName {
-    display: inline-block;
-    /* border-radius: 50%;
-    width: 10px;
-    height: 10px; */
-  }
-  a span.dot {
-    display: inline-block;
-    border-radius: 50%;
-    width: 0.5rem;
-    height: 0.5rem;
-  }
 `
 
 GridProject.propTypes = {
@@ -102,6 +72,7 @@ GridProject.propTypes = {
       caption: PropTypes.string,
     })
   ),
+  institution: PropTypes.object,
 }
 
 GridProject.defaultProps = {
@@ -116,5 +87,6 @@ GridProject.defaultProps = {
       caption: ``,
     },
   ],
+  institution: null,
 }
 export default GridProject

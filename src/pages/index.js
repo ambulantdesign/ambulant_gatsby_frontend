@@ -43,7 +43,7 @@ const IndexPage = ({ data }) => {
     // ************** //
 
     setRandomProjects(homeProjects)
-  }, [data, projects])
+  }, [data, projects, galleries.nodes])
 
   return (
     <>
