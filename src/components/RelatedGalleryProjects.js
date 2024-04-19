@@ -34,6 +34,15 @@ const Wrapper = styled.section`
     height: auto;
     max-height: 100px;
   }
+  a img {
+    border-top: 3px solid transparent;
+    background-color: transparent;
+    transition: border-color 0.4s ease;
+  }
+  a:active img,
+  a:hover img {
+    border-color: var(--clr-links);
+  }
   p {
     margin-bottom: 1em;
   }
