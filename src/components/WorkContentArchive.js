@@ -18,6 +18,7 @@ const WorkContentArchive = ({ data, gallery }) => {
     title,
     meta,
     weblink,
+    institution,
   } = data.work
 
   return (
@@ -38,6 +39,12 @@ const WorkContentArchive = ({ data, gallery }) => {
           <ProjectMeta weblink={weblink} />
         </div>
 
+        {/* <!-- visual index (full-width)? --> */}
+        {institution && (
+          // own component
+          <div className="col-12">visual index for {institution.name}</div>
+        )}
+
         <WorkFooter artist={artist} keywords={keywords} />
       </section>
     </Wrapper>
@@ -50,6 +57,9 @@ const Wrapper = styled.div`
   }
   .grid > .col-6 {
     grid-column: span 6;
+  }
+  .grid > .col-12 {
+    grid-column: span 12;
   }
   .grid h5 {
     color: var(--clr-grey-3);

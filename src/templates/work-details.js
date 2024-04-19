@@ -10,7 +10,7 @@ import WorkContentNormal from "../components/WorkContentNormal"
 import WorkContentArchive from "../components/WorkContentArchive"
 
 const WorkDetails = ({ data }) => {
-  const { gallery, smallSlider, videos } = data.work
+  const { gallery, smallSlider, videos, institution } = data.work
 
   let allGalleries = []
   let sliderVideos = []
@@ -130,6 +130,11 @@ export const query = graphql`
         button
         url
         label
+      }
+      institution: gallery {
+        id
+        name
+        colorCode
       }
       gallery: Gallery {
         id

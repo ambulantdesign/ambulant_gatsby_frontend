@@ -14,13 +14,17 @@ const WorkContentNormal = ({ data, gallery }) => {
     content: {
       data: { content },
     },
+    id,
     artist,
     keywords,
     title,
     meta,
     weblink,
     streamingVideo,
+    institution,
   } = data.work
+
+  console.log(data.work)
 
   return (
     <Wrapper>
@@ -40,6 +44,11 @@ const WorkContentNormal = ({ data, gallery }) => {
           {content && <h5>design notes</h5>}
           <RichTextContent content={content} extraClass="description" />
         </div>
+        {/* <!-- visual index (full-width)? --> */}
+        {institution && (
+          // own component: <VisualIndex institution={institution} work={id} />
+          <div className="col-12">visual index for {institution.name}</div>
+        )}
 
         <WorkFooter artist={artist} keywords={keywords} />
       </section>
@@ -53,6 +62,9 @@ const Wrapper = styled.div`
   }
   .grid > .col-6 {
     grid-column: span 6;
+  }
+  .grid > .col-12 {
+    grid-column: span 12;
   }
   .grid h5 {
     color: var(--clr-grey-3);
