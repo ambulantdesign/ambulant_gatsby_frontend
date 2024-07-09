@@ -84,8 +84,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     toPath: `/keywords/*`,
   })
   createRedirect({
-    fromPath: /^\/d{1,4}$/, // would match any username for the ID `12345`
+    fromPath: `/*`,
     toPath: `/`,
-    redirectInBrowser: true,
+    statusCode: 404,
   })
 }
