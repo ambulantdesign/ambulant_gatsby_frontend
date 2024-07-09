@@ -2,7 +2,7 @@ const path = require("path")
 
 // create pages dynamically
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
   const resultWorks = await graphql(`
     query Projects {
       works: allStrapiWork {
@@ -66,5 +66,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
       defer: false, // Defer page generation to the first user request? (DSG)
     })
+  })
+  createRedirect({
+    fromPath: `/gabriele-goetz`,
+    toPath: `/about`,
+  })
+  createRedirect({
+    fromPath: `/tag/artist`,
+    toPath: `/artists/holger-bunk`,
+  })
+  createRedirect({
+    fromPath: `/tag/publisher`,
+    toPath: `/`,
+  })
+  createRedirect({
+    fromPath: `/tag/*`,
+    toPath: `/keywords/*`,
   })
 }
