@@ -84,8 +84,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     toPath: `/keywords/*`,
   })
   createRedirect({
-    fromPath: `/*`,
+    fromPath: `/:id`,
     toPath: `/`,
-    statusCode: 404,
   })
 }
