@@ -72,7 +72,6 @@ function Seo({ description, image: og_thumbnail, title, pathname, children }) {
 
   return (
     <>
-      <meta name="robots" content="noindex, follow" />
       <meta
         name="google-site-verification"
         content={site.siteMetadata?.seo?.google || ``}
