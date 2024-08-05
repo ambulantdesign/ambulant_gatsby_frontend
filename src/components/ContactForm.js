@@ -41,7 +41,7 @@ const ContactForm = () => {
     //we have created our initailValues object in a format EmailJS accepts
     initialValues: {
       from_name: "", //user name
-      to_name: process.env.GATSBY_ADMIN_EMAIL, //email id of the admin
+      to_name: process.env.GATSBY_FORMIK_EMAIL, //email id of the admin
       subject: "", // subject of email
       reply_to: "", // user email
       message: "", // message of email
