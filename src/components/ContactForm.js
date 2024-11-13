@@ -17,12 +17,37 @@ const alertInitial = {
   msg: "",
 }
 
+const validationSchema = Yup.object({
+  from_name: Yup.string()
+    .min(3, "Your name is too short")
+    .required("Please enter your name"),
+  subject: Yup.string()
+    .min(5, "The subject is too short")
+    .required("Please enter a subject"),
+  reply_to: Yup.string()
+    .email("Invalid email address")
+    .required("Please enter your email"),
+  message: Yup.string()
+    .min(10, "Your message is too short")
+    .required("Please enter your message"),
+})
+
 const ContactForm = () => {
   const [alert, setAlert] = useState(alertInitial)
   const [fadeProp, setFadeProp] = useState({
     fade: "",
   })
   const contactForm = useRef()
+
+  useEffect(
+    () =>
+      emailjs.init({
+        publicKey: process.env.GATSBY_FORMIK_USER_ID,
+        // Do not allow headless browsers
+        blockHeadless: true,
+      }),
+    []
+  )
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -46,18 +71,7 @@ const ContactForm = () => {
       reply_to: "", // user email
       message: "", // message of email
     },
-    validationSchema: Yup.object({
-      from_name: Yup.string()
-        .min(3, "Your name is too short")
-        .required("Please enter your name"),
-      subject: Yup.string().required("Please enter a subject"),
-      reply_to: Yup.string()
-        .email("Invalid email address")
-        .required("Please enter your email"),
-      message: Yup.string()
-        .min(10, "Your message is too short")
-        .required("Please enter your message"),
-    }),
+    validationSchema: validationSchema,
     onSubmit: (values, actions) => {
       // Email JS code will go here
       emailjs
@@ -93,13 +107,13 @@ const ContactForm = () => {
       name="ambulant-design-contact"
       method="post"
       onSubmit={formik.handleSubmit}
-      // data-netlify={true}
-      // data-netlify-honeypot="bot-field"
+      data-netlify={true}
+      data-netlify-honeypot="bot-field"
     >
-      {/* <input type="hidden" name="form-name" value="ambulant-design-contact" />
+      <input type="hidden" name="form-name" value="ambulant-design-contact" />
       <div hidden>
         Don’t fill this out if you’re human: <input name="bot-field" />
-      </div> */}
+      </div>
       <div className="input-container mb-6">
         <label htmlFor="from_name">Name</label>
         <input
