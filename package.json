@@ -62,8 +62,7 @@
   "ajv-keywords": "3.5.2",
   "schema-utils": "2.7.1",
   "terser-webpack-plugin": "5.3.10",
-  "loader-utils": "2.0.2",
-  "url-loader": "4.1.1"
+  "loader-utils": "2.0.2"
 },
   "keywords": [
     "gatsby"
