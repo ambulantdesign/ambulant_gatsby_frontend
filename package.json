@@ -52,10 +52,7 @@
     "swiper": "^8.4.7",
     "underscore": "^1.12.1",
     "use-local-storage-state": "^17.3.0",
-    "yup": "^0.32.11",
-		"ajv": "6.12.6",
-    "ajv-keywords": "3.5.2",
-    "terser-webpack-plugin": "5.3.10"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
