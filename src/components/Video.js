@@ -13,11 +13,11 @@ const Video = ({
       className="video"
       src={`${videoServerUrl}${videoId}${urlParams}`}
       title={videoTitle}
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
       webkitallowfullscreen="true"
       mozallowfullscreen="true"
-      allowFullScreen
+      allowfullscreen
     />
   </Wrapper>
 )
