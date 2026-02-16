@@ -8,6 +8,7 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+const { populate } = require("dotenv")
 const queries = require("./src/utils/algolia")
 
 const strapiConfig = {
@@ -21,7 +22,7 @@ const strapiConfig = {
           meta: "*",
           artist: "*",
           keywords: "*",
-          gallery: "*",
+          institution: "*",
           Gallery: { populate: "*" },
           Weblink: "*",
           Videos: {
@@ -44,13 +45,16 @@ const strapiConfig = {
     },
     `keyword`,
     `artist`,
+    `institution`,
   ],
   singleTypes: [
     {
       singularName: `about`,
       queryParams: {
         populate: {
-          MarginalColumn: { populate: "*" },
+          MarginalColumn: {
+            populate: "*",
+          },
           streamingVideo: { populate: "*" },
           marginalTxt: { populate: "*" },
           seo: { populate: "*" },
@@ -76,16 +80,12 @@ const strapiConfig = {
         },
       },
     },
-    // {
-    //   singularName: `archive`,
-    //   queryParams: {
-    //     populate: {
-    //       seo: { populate: "*" },
-    //     },
-    //   },
-    // },
   ],
-  queryLimit: 5000,
+  // 🔑 THIS IS THE MISSING PIECE
+  media: {
+    download: true,
+  },
+  queryLimit: 1000,
 }
 
 module.exports = {
@@ -108,8 +108,13 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-postcss`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-strapi`,
       options: strapiConfig,
@@ -121,39 +126,20 @@ module.exports = {
         path: `${__dirname}/src/assets/images`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-web-font-loader`,
-    //   options: {
-    //     google: {
-    //       families: [`Karla:300,400,700`],
-    //     },
-    //   },
-    // },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        gatsbyRemarkPlugins: [
+        plugins: [
           {
             resolve: `gatsby-remark-embed-video`,
             options: {
               width: 800,
-              ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
-              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
-              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
-              loadingStrategy: "lazy", //Optional: Enable support for lazy-load offscreen iframes. Default is disabled.
-              urlOverrides: [
-                {
-                  id: "youtube",
-                  embedURL: videoId =>
-                    `https://www.youtube-nocookie.com/embed/${videoId}`,
-                },
-              ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
-              containerClass: "embedVideo-container", //Optional: Custom CSS class for iframe container, for multiple classes separate them by space
-              iframeId: false, //Optional: if true, iframe's id will be set to what is provided after 'video:' (YouTube IFrame player API requires iframe id)
-              sandbox: "allow-same-origin allow-scripts allow-presentation", // Optional: iframe sandbox options - Default: undefined
+              ratio: 1.77,
+              related: false,
+              noIframeBorder: true,
             },
           },
-          `gatsby-remark-responsive-iframe`, //Optional: Must be loaded after gatsby-remark-embed-video
+          `gatsby-remark-responsive-iframe`,
         ],
       },
     },
@@ -168,11 +154,11 @@ module.exports = {
         skipIndexing: process.env.BRANCH !== "main", // skip indexing except the main branch
       },
     },
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-react-leaflet`,
+    {
+      resolve: `gatsby-plugin-react-leaflet`,
+      options: {
+        linkStyles: true,
+      },
+    },
   ],
 }

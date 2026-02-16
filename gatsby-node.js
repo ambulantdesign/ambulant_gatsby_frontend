@@ -8,6 +8,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       works: allStrapiWork {
         nodes {
           slug
+          institution {
+            id
+          }
         }
       }
     }
@@ -34,15 +37,30 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   `)
 
   resultWorks.data.works.nodes.forEach(work => {
+    const hasInstitution = Boolean(work.institution && work.institution.id)
+
+    if (!work.slug) {
+      reporter.warn(`Skipping work with missing slug: ${work.id}`)
+      return
+    }
+
+    // Always create the page, even if institution is missing
     createPage({
       path: `/works/${work.slug}`,
       component: path.resolve(`src/templates/work-details.js`),
       context: {
         slug: work.slug,
+        // Ensure hasInstitution is always boolean
+        hasInstitution,
+        // Only pass a valid filter if institution exists
+        filter: hasInstitution
+          ? { id: { eq: work.institution.id } }
+          : undefined,
       },
-      defer: false, // defer page generation to the first user request? (DSG)
+      defer: false,
     })
   })
+
   resultArtists.data.artists.nodes.forEach(artist => {
     createPage({
       path: `/artists/${artist.slug}`,
@@ -86,5 +104,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   createRedirect({
     fromPath: `/:id`,
     toPath: `/`,
+  })
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    StrapiWork: {
+      institutionSortName: {
+        type: "String",
+        resolve: source => source.institution?.sortName || "",
+      },
+    },
   })
 }

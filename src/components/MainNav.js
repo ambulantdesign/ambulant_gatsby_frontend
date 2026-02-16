@@ -9,7 +9,7 @@ import CustomSearchBox from "../components/search/search-box"
 
 const query = graphql`
   query {
-    allStrapiArtist(sort: { fields: lastname, order: ASC }) {
+    allStrapiArtist(sort: { lastname: ASC }) {
       nodes {
         id
         lastname
@@ -18,7 +18,7 @@ const query = graphql`
         isInstitution
       }
     }
-    allStrapiKeyword(sort: { order: ASC, fields: name }) {
+    allStrapiKeyword(sort: { name: ASC }) {
       nodes {
         id
         name
@@ -47,7 +47,7 @@ const MainNav = ({ sideNav, toggleNav, closeMobileNav }) => {
     e => {
       setScrollY(e.target.scrollTop)
     },
-    [setScrollY]
+    [setScrollY],
   )
 
   useEffect(() => {
@@ -271,9 +271,11 @@ const Wrapper = styled.aside`
     bottom: 0;
     right: 0;
     z-index: 99;
-    -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    -webkit-box-shadow:
+      0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
       0 0 0 1px rgba(10, 10, 10, 0.02);
-    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
+    box-shadow:
+      0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1),
       0 0 0 1px rgba(10, 10, 10, 0.02);
     nav {
       margin-top: var(--space-3);

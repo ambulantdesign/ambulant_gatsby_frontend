@@ -17,10 +17,10 @@ import { randomGalleryItem, artGalleryListOrder } from "../utils/gallery-helper"
 import * as styles from "../assets/css/index.module.css"
 
 const AlmListPage = ({ data, pageContext }) => {
-  const { artists, keywords, galleries } = data
+  const { artists, keywords, institutions } = data
   const { title, contentType } = pageContext
   const [sliceLength, setSliceLength] = useState(
-    parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
+    parseInt(process.env.GATSBY_POSTS_FIRST_PAGE),
   )
 
   let projects
@@ -34,7 +34,7 @@ const AlmListPage = ({ data, pageContext }) => {
 
   // ************** //
 
-  projects = artGalleryListOrder(projects, galleries.nodes, "end")
+  projects = artGalleryListOrder(projects, institutions.nodes, "end")
 
   // ************** //
 
@@ -205,7 +205,7 @@ export const query = graphql`
   query ListView($slug: String!) {
     keywords: allStrapiWork(
       filter: { keywords: { elemMatch: { slug: { eq: $slug } } } }
-      sort: { order: DESC, fields: productionDate }
+      sort: { productionDate: DESC }
     ) {
       nodes {
         id
@@ -222,7 +222,7 @@ export const query = graphql`
           year
           id
         }
-        institution: gallery {
+        institution {
           id
           name
           sortName
@@ -245,7 +245,7 @@ export const query = graphql`
     }
     artists: allStrapiWork(
       filter: { artist: { slug: { eq: $slug } } }
-      sort: { order: [DESC, ASC], fields: [productionDate, slug] }
+      sort: [{ productionDate: DESC }, { slug: ASC }]
     ) {
       nodes {
         id
@@ -262,7 +262,7 @@ export const query = graphql`
           year
           id
         }
-        institution: gallery {
+        institution {
           id
           name
           sortName
@@ -283,7 +283,7 @@ export const query = graphql`
         }
       }
     }
-    galleries: allStrapiGallery(sort: { fields: sortName, order: ASC }) {
+    institutions: allStrapiInstitution(sort: { sortName: ASC }) {
       nodes {
         name
         sortName

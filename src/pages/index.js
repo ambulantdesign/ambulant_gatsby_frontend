@@ -18,7 +18,7 @@ const IndexPage = ({ data }) => {
   const gridRef = useRef()
   const {
     allStrapiWork: { nodes: projects },
-    galleries,
+    institutions,
   } = data
 
   useEffect(() => {
@@ -27,23 +27,23 @@ const IndexPage = ({ data }) => {
 
     let homeProjects = _.sampleSize(
       projects,
-      parseInt(process.env.GATSBY_POSTS_FIRST_PAGE)
+      parseInt(process.env.GATSBY_POSTS_FIRST_PAGE),
     )
 
     homeProjects = _.orderBy(
       homeProjects,
       ["productionDate", "slug"],
-      ["desc", "asc"]
+      ["desc", "asc"],
     )
 
     // ************** //
 
-    homeProjects = artGalleryListOrder(homeProjects, galleries.nodes, "end")
+    homeProjects = artGalleryListOrder(homeProjects, institutions.nodes, "end")
 
     // ************** //
 
     setRandomProjects(homeProjects)
-  }, [data, projects, galleries.nodes])
+  }, [data, projects, institutions.nodes])
 
   return (
     <>
@@ -92,9 +92,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
-    allStrapiWork(
-      sort: { order: [DESC, ASC], fields: [productionDate, slug] }
-    ) {
+    allStrapiWork(sort: [{ productionDate: DESC }, { slug: ASC }]) {
       nodes {
         id: strapi_id
         title
@@ -118,7 +116,7 @@ export const query = graphql`
           year
           id: strapi_id
         }
-        institution: gallery {
+        institution {
           id
           name
           sortName
@@ -139,7 +137,7 @@ export const query = graphql`
         }
       }
     }
-    galleries: allStrapiGallery(sort: { fields: sortName, order: ASC }) {
+    institutions: allStrapiInstitution(sort: { sortName: ASC }) {
       nodes {
         name
         sortName

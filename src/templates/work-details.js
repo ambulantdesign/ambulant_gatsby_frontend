@@ -1,6 +1,6 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { Script, withPrefix } from "gatsby"
 import styled from "styled-components"
 
@@ -10,16 +10,35 @@ import WorkContentNormal from "../components/WorkContentNormal"
 import WorkContentArchive from "../components/WorkContentArchive"
 
 const WorkDetails = ({ data }) => {
+  if (!data?.work)
+    return (
+      <>
+        <Layout>
+          <Wrapper className="portfolio" id="main">
+            <h2>Sorry, something went wrong …</h2>
+            <p>
+              <Link
+                className="text-center bg-transparent py-2.5 px-4 mr-4 border rounded nav-btn"
+                to="/"
+              >
+                Go back home
+              </Link>
+            </p>
+          </Wrapper>
+        </Layout>
+      </>
+    )
+
   let allRelatedWorks = null
   const { id, gallery, smallSlider, videos, institution } = data.work
-  const allGalleryWorks = data.allWorksForGallery.nodes
+  const allGalleryWorks = data.allWorksForGallery?.nodes ?? []
 
   if (institution) {
     allRelatedWorks = allGalleryWorks.filter(
       item =>
         item.institution !== null &&
         item.institution.name === institution.name &&
-        id !== item.id
+        id !== item.id,
     )
   }
 
@@ -31,7 +50,7 @@ const WorkDetails = ({ data }) => {
     videos.map(video =>
       video.addToSlider
         ? sliderVideos.push(video.file)
-        : extraVideos.push(video.file)
+        : extraVideos.push(video.file),
     )
   }
   if (sliderVideos.length > 0) {
@@ -113,7 +132,11 @@ export const query = graphql`
       }
     }
   }
-  query WorkDetails($slug: String!, $gallery: STRAPI_GALLERYFilterInput) {
+  query WorkDetails(
+    $slug: String!
+    $filter: STRAPI_INSTITUTIONFilterInput = null
+    $hasInstitution: Boolean!
+  ) {
     work: strapiWork(slug: { eq: $slug }) {
       id: strapi_id
       slug
@@ -150,7 +173,7 @@ export const query = graphql`
         url
         label
       }
-      institution: gallery {
+      institution {
         id
         name
         colorCode
@@ -197,21 +220,18 @@ export const query = graphql`
       }
     }
     allWorksForGallery: allStrapiWork(
-      sort: {
-        order: [ASC, DESC, ASC]
-        fields: [gallery___sortName, productionDate, slug]
-      }
-      filter: { gallery: $gallery }
-    ) {
+      filter: { institution: $filter }
+      sort: [{ productionDate: DESC }, { slug: ASC }]
+    ) @include(if: $hasInstitution) {
       nodes {
         id: strapi_id
         title
         slug
         productionDate
-        institution: gallery {
+        institution {
           id
           name
-          sortName
+          colorCode
         }
         Gallery {
           id
@@ -268,14 +288,14 @@ WorkContentArchive.propTypes = {
           caption: PropTypes.string,
           id: PropTypes.string.isRequired,
           localFile: PropTypes.object.isRequired,
-        })
+        }),
       ),
       smallSlider: PropTypes.bool,
       videos: PropTypes.arrayOf(
         PropTypes.shape({
           addToSlide: PropTypes.bool,
           file: PropTypes.object,
-        })
+        }),
       ),
     }),
   }),

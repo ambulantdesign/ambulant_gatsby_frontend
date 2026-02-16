@@ -17,6 +17,7 @@ const AboutPage = ({ data }) => {
       data: { content },
     },
     MarginalColumn,
+    seo,
   } = data.page
 
   return (
@@ -43,8 +44,8 @@ const AboutPage = ({ data }) => {
                 case "STRAPI__COMPONENT_MEDIA_SINGLE_IMAGE":
                   const {
                     id,
-                    image: { caption = null, localFile = null },
-                  } = item
+                    seo_image: { caption = null, localFile = null },
+                  } = seo
 
                   return (
                     <GatsbyImage
@@ -117,14 +118,7 @@ export const data = graphql`
   }
   fragment singleImageCont on STRAPI__COMPONENT_MEDIA_SINGLE_IMAGE {
     id
-    image {
-      localFile {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
-        }
-      }
-      caption
-    }
+    caption
   }
   fragment seoFields on STRAPI__COMPONENT_SEO_SEO_BASIC_FIELDS {
     seo_title
