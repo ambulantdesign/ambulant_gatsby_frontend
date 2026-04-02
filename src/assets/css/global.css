@@ -2,13 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+
+@font-face {
+  font-family: "Melbourne";
+  src: url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.eot");
+  src:
+    url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/ee45dc681fe9358c0526720833bb1fd1.svg#Melbourne")
+      format("svg");
+}
+
 /* karla-300 - latin_latin-ext */
 @font-face {
   font-display: swap;
   font-family: "Karla";
   font-style: normal;
   font-weight: 300;
-  src: url(/fonts/karla-v31-latin_latin-ext-300.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-300.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-300.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
@@ -19,7 +38,8 @@
   font-family: "Karla";
   font-style: italic;
   font-weight: 300;
-  src: url(/fonts/karla-v31-latin_latin-ext-300italic.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-300italic.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-300italic.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
@@ -30,7 +50,8 @@
   font-family: "Karla";
   font-style: normal;
   font-weight: 400;
-  src: url(/fonts/karla-v31-latin_latin-ext-regular.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-regular.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-regular.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
@@ -41,7 +62,8 @@
   font-family: "Karla";
   font-style: italic;
   font-weight: 400;
-  src: url(/fonts/karla-v31-latin_latin-ext-italic.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-italic.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-italic.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
@@ -52,7 +74,8 @@
   font-family: "Karla";
   font-style: normal;
   font-weight: 700;
-  src: url(/fonts/karla-v31-latin_latin-ext-700.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-700.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-700.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
@@ -63,7 +86,8 @@
   font-family: "Karla";
   font-style: italic;
   font-weight: 700;
-  src: url(/fonts/karla-v31-latin_latin-ext-700italic.woff2) format("woff2"),
+  src:
+    url(/fonts/karla-v31-latin_latin-ext-700italic.woff2) format("woff2"),
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
       url(/fonts/karla-v31-latin_latin-ext-700italic.ttf) format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
 }
